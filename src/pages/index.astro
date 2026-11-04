@@ -30,100 +30,155 @@ const brakeLines = projects[1];
         </div>
       </div>
 
-      <!-- Main Headline Block: User's Name as the Hero Centerpiece -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pt-12 pb-6 items-start">
-        <div class="lg:col-span-8 space-y-6">
+      <!-- Main Headline Block: User's Name as the Hero Centerpiece + Lok Ye Hanging Portrait on the Side -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 pt-10 pb-6 items-start">
+        <!-- Left: Editorial Typography & Bio -->
+        <div class="lg:col-span-7 space-y-6">
           <div class="inline-flex items-center gap-2 font-mono text-xs text-theme-celadon tracking-wider uppercase">
             <span>[DESIGN ATELIER & MECHANICAL LAB]</span>
             <span class="w-12 h-[1px] bg-theme-celadon/50"></span>
             <span>ITHACA, NY</span>
           </div>
 
-          <!-- Bold, elegant editorial name heading -->
-          <h1 class="text-5xl sm:text-7xl lg:text-8xl font-bold font-editorial text-theme-text tracking-tight leading-[0.98]">
+          <!-- Bold, elegant editorial name heading in Cormorant Garamond -->
+          <h1 class="text-5xl sm:text-7xl lg:text-8xl font-bold font-cormorant text-theme-text tracking-tight leading-[0.95]">
             {siteConfig.name}
           </h1>
 
-          <p class="text-xl sm:text-2xl font-editorial-garamond italic text-theme-rose font-medium leading-snug">
+          <p class="text-xl sm:text-2xl font-cormorant italic text-theme-rose font-medium leading-snug">
             Mechanical Engineer & Maker • Cornell University ('29)
           </p>
 
-          <p class="text-base sm:text-lg text-theme-text-muted leading-relaxed font-sans max-w-2xl">
-            Currently designing vehicle suspension linkages for <strong>Cornell Baja Racing</strong> (previously on the Brakes subteam), researching high-voltage pulsed power optoelectronics in applied physics, and creating award-winning work in fine art, woodworking, and handcrafted jewelry making.
+          <p class="text-base sm:text-lg text-theme-text-muted leading-relaxed font-figtree max-w-xl">
+            Designing vehicle suspension linkages for <strong>Cornell Baja Racing</strong> (previously on the Brakes subteam), researching high-voltage pulsed power optoelectronics in applied physics, and creating award-winning fine art, woodworking, and handcrafted jewelry.
           </p>
 
-          <!-- Action buttons with warm editorial styling -->
-          <div class="flex flex-wrap items-center gap-4 pt-3 font-sans text-xs">
+          <!-- Action buttons with playful shapes & warm editorial styling -->
+          <div class="flex flex-wrap items-center gap-3 pt-3 font-figtree text-xs">
             <a
               href="/projects"
-              class="px-6 py-3 rounded-full bg-theme-rose text-white font-semibold hover:bg-theme-rose-muted transition-all shadow-md hover:shadow-lg flex items-center gap-2"
+              class="px-6 py-3 rounded-full bg-theme-rose text-white font-medium hover:bg-theme-rose-muted transition-all shadow-md hover:shadow-lg flex items-center gap-2"
             >
-              <span>Explore Engineering Projects (04)</span>
+              <span>Explore Projects (04)</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
             </a>
 
             <a
               href="/cad-lab"
-              class="px-6 py-3 rounded-full bg-theme-surface border border-theme-border text-theme-text hover:border-theme-celadon hover:text-theme-celadon transition-all shadow-sm"
+              class="px-6 py-3 rounded-full bg-theme-surface border border-theme-border text-theme-text hover:border-theme-celadon hover:text-theme-celadon transition-all shadow-xs"
             >
               Interactive 3D CAD Lab →
             </a>
             
             <a
               href="/art"
-              class="px-6 py-3 rounded-full bg-theme-surface border border-theme-border text-theme-text hover:border-theme-copper hover:text-theme-copper transition-all shadow-sm"
+              class="px-6 py-3 rounded-full bg-theme-surface border border-theme-border text-theme-text hover:border-theme-copper hover:text-theme-copper transition-all shadow-xs"
             >
               Art & Play Gallery →
             </a>
           </div>
+
+          <!-- Creative Shape Badges -->
+          <div class="pt-4 flex flex-wrap gap-2 text-xs font-figtree text-theme-text-muted">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-theme-border bg-theme-surface/80">
+              <span class="w-1.5 h-1.5 rounded-full bg-theme-celadon"></span>
+              Suspension Kinematics
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-theme-border bg-theme-surface/80">
+              <span class="w-1.5 h-1.5 rounded-full bg-theme-copper"></span>
+              Pulsed Optoelectronics
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-theme-border bg-theme-surface/80">
+              <span class="w-1.5 h-1.5 rounded-full bg-theme-rose"></span>
+              Handcrafted Jewelry & Sculpture
+            </span>
+          </div>
         </div>
 
-        <!-- Right Side: Curated Editorial Dossier Card -->
-        <div class="lg:col-span-4 matting-frame shadow-xl">
-          <div class="matting-frame-inner p-6 space-y-4 font-sans text-xs bg-theme-surface">
-            <div class="flex items-center justify-between border-b border-theme-border pb-3">
-              <span class="font-bold text-theme-text text-sm font-editorial">Candidate Dossier</span>
-              <span class="px-2 py-0.5 rounded-full bg-theme-rose/10 text-theme-rose font-mono text-[11px] font-semibold">
-                #2029-ME
-              </span>
+        <!-- Right Side: Lok Ye Inspired Hanging Headshot + Architectural Candidate Dossier -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- Cute Arched Hanging Portrait Frame (from the side) -->
+          <div class="relative max-w-xs mx-auto lg:ml-auto group">
+            <!-- Top hanging cable accent line -->
+            <div class="flex flex-col items-center mb-0">
+              <div class="w-[1px] h-6 bg-theme-border-strong"></div>
+              <div class="w-2.5 h-2.5 rounded-full border border-theme-border-strong bg-theme-copper/40 -mt-0.5"></div>
             </div>
 
-            <div class="space-y-3 text-xs">
-              <div class="flex justify-between border-b border-theme-border/50 pb-2">
-                <span class="text-theme-text-muted">Education</span>
-                <span class="text-theme-text font-semibold text-right">Cornell University ('29)</span>
+            <!-- Arched Pill Frame holding real headshot -->
+            <div class="lokye-portrait-frame transition-transform duration-500 ease-out group-hover:rotate-1 group-hover:scale-[1.02]">
+              <div class="relative overflow-hidden rounded-b-[9999px] aspect-[3/4] bg-theme-surface-elevated border border-theme-border/60">
+                <img
+                  src="/images/headshot.jpeg"
+                  alt="Izzah Nishad"
+                  class="w-full h-full object-cover object-top"
+                  loading="eager"
+                />
+                <!-- Subtle vignette gradient -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none"></div>
               </div>
-              <div class="flex justify-between border-b border-theme-border/50 pb-2">
-                <span class="text-theme-text-muted">Racing Subteam</span>
-                <span class="text-theme-text font-semibold text-right">Suspension (Formerly Brakes)</span>
-              </div>
-              <div class="flex justify-between border-b border-theme-border/50 pb-2">
-                <span class="text-theme-text-muted">Primary CAD</span>
-                <span class="text-theme-text font-semibold text-right">SolidWorks 2026, Fusion 360</span>
-              </div>
-              <div class="flex justify-between border-b border-theme-border/50 pb-2">
-                <span class="text-theme-text-muted">FEA Simulation</span>
-                <span class="text-theme-text font-semibold text-right">Ansys Mechanical Structural</span>
-              </div>
-              <div class="flex justify-between border-b border-theme-border/50 pb-2">
-                <span class="text-theme-text-muted">Shop Capabilities</span>
-                <span class="text-theme-text font-semibold text-right">CNC Mill, Manual Lathe, TIG</span>
-              </div>
-              <div class="flex justify-between border-b border-theme-border/50 pb-2">
-                <span class="text-theme-text-muted">Robotics Record</span>
-                <span class="text-theme-text font-semibold text-right">51 Awards, VEX World Finalist</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-theme-text-muted">Creative Honors</span>
-                <span class="text-theme-copper font-semibold text-right">CT Silver Key • Best in Show</span>
-              </div>
-            </div>
 
-            <div class="pt-3 border-t border-theme-border flex items-center justify-between text-[11px] text-theme-text-muted">
-              <span>Status: Seeking Internship</span>
-              <span class="text-theme-celadon font-medium">Available Summer 2026</span>
+              <!-- Cute Handwritten / Serif Label underneath -->
+              <div class="text-center pt-2.5 pb-1">
+                <p class="font-cormorant italic text-sm text-theme-text font-medium">
+                  Izzah Nishad
+                </p>
+                <p class="font-figtree text-[11px] text-theme-text-muted lowercase tracking-wider">
+                  cornell mechanical engineering '29
+                </p>
+              </div>
             </div>
           </div>
+
+          <!-- Dossier Card with Asymmetric Architectural Corners and Floating Diamonds -->
+          <div class="relative shape-sculptural border border-theme-border bg-theme-surface p-6 shadow-lg">
+            <!-- Decorative corner diamonds -->
+            <span class="corner-diamond-tl"></span>
+            <span class="corner-diamond-br"></span>
+
+            <div class="space-y-3 font-figtree text-xs">
+              <div class="flex items-center justify-between border-b border-theme-border pb-2.5">
+                <span class="font-cormorant font-semibold text-theme-text text-base">Engineering Dossier</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-theme-rose/10 text-theme-rose font-mono text-[11px] font-semibold">
+                  #2029-ME
+                </span>
+              </div>
+
+              <div class="space-y-2 text-xs">
+                <div class="flex justify-between border-b border-theme-border/50 pb-1.5">
+                  <span class="text-theme-text-muted">Cornell Subteam</span>
+                  <span class="text-theme-text font-medium text-right">Suspension (Formerly Brakes)</span>
+                </div>
+                <div class="flex justify-between border-b border-theme-border/50 pb-1.5">
+                  <span class="text-theme-text-muted">Primary CAD</span>
+                  <span class="text-theme-text font-medium text-right">SolidWorks 2026, Fusion 360</span>
+                </div>
+                <div class="flex justify-between border-b border-theme-border/50 pb-1.5">
+                  <span class="text-theme-text-muted">FEA Simulation</span>
+                  <span class="text-theme-text font-medium text-right">Ansys Mechanical Structural</span>
+                </div>
+                <div class="flex justify-between border-b border-theme-border/50 pb-1.5">
+                  <span class="text-theme-text-muted">Shop Capabilities</span>
+                  <span class="text-theme-text font-medium text-right">CNC Mill, Manual Lathe & Mill, TIG</span>
+                </div>
+                <div class="flex justify-between border-b border-theme-border/50 pb-1.5">
+                  <span class="text-theme-text-muted">Robotics Record</span>
+                  <span class="text-theme-text font-medium text-right">51 Awards, VEX World Finalist</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-theme-text-muted">Creative Studio</span>
+                  <span class="text-theme-copper font-medium text-right">Fine Art, Hardwood, Wire Jewelry</span>
+                </div>
+              </div>
+
+              <div class="pt-2.5 border-t border-theme-border flex items-center justify-between text-[11px] text-theme-text-muted">
+                <span>Internship Status:</span>
+                <span class="text-theme-celadon font-medium">Available Summer 2026</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -156,137 +211,153 @@ const brakeLines = projects[1];
       </div>
 
       <!-- PROJECT 01: REAR SUSPENSION CONTROL ARMS -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center p-8 sm:p-10 bg-theme-surface border border-theme-border shadow-lg">
-        <div class="lg:col-span-7 space-y-5">
-          <div class="flex items-center gap-3">
-            <span class="font-editorial text-2xl font-bold text-theme-rose">Project 01</span>
-            <span class="w-8 h-[1px] bg-theme-border-strong"></span>
-            <span class="text-xs font-mono uppercase tracking-wider text-theme-text-muted">{rearControlArms.organization}</span>
+      <div class="relative shape-sculptural bg-theme-surface border border-theme-border p-8 sm:p-12 shadow-xl hover:shadow-2xl transition-all duration-300">
+        <!-- Decorative corner diamonds -->
+        <span class="corner-diamond-tl"></span>
+        <span class="corner-diamond-br"></span>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="flex items-center gap-3">
+              <span class="font-cormorant text-2xl font-bold text-theme-rose">Project 01</span>
+              <span class="w-8 h-[1px] bg-theme-border-strong"></span>
+              <span class="text-xs font-figtree uppercase tracking-wider text-theme-text-muted">{rearControlArms.organization}</span>
+              <span class="inline-block px-2.5 py-0.5 text-[11px] rounded-full border-[0.5px] border-theme-border font-figtree text-theme-text-muted ml-auto">
+                Kinematics & FEA
+              </span>
+            </div>
+
+            <h3 class="text-2xl sm:text-4xl font-bold font-cormorant text-theme-text">
+              <a href={`/projects/${rearControlArms.slug}`} class="hover:text-theme-rose transition-colors">
+                {rearControlArms.title}
+              </a>
+            </h3>
+
+            <p class="text-sm sm:text-base text-theme-text-muted leading-relaxed font-figtree">
+              {rearControlArms.summary}
+            </p>
+
+            <!-- Key highlights in geometric framed pill matrix -->
+            <div class="grid grid-cols-2 gap-4 py-3 border-y border-theme-border/60 font-figtree text-xs">
+              <div>
+                <span class="text-[11px] text-theme-text-faint block uppercase">Structural Materials</span>
+                <span class="font-medium text-theme-text">4130 Chromoly + 6061-T6 Aluminum</span>
+              </div>
+              <div>
+                <span class="text-[11px] text-theme-text-faint block uppercase">Stress Validation</span>
+                <span class="font-medium text-theme-celadon">Ansys FEA (FoS = 2.39 at 3G Bump)</span>
+              </div>
+              <div>
+                <span class="text-[11px] text-theme-text-faint block uppercase">Shop Fabrication</span>
+                <span class="font-medium text-theme-text">CNC Milling, Manual Lathe, TIG Fixture</span>
+              </div>
+              <div>
+                <span class="text-[11px] text-theme-text-faint block uppercase">Wheel Travel</span>
+                <span class="font-medium text-theme-copper">12 Inches Dynamic Articulation</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 pt-2 font-figtree">
+              <a
+                href={`/projects/${rearControlArms.slug}`}
+                class="px-5 py-2.5 rounded-full bg-theme-rose text-white text-xs font-medium hover:bg-theme-rose-muted transition-colors shadow-sm inline-flex items-center gap-2"
+              >
+                <span>Read Full Engineering Report</span>
+                <span>→</span>
+              </a>
+            </div>
           </div>
 
-          <h3 class="text-2xl sm:text-4xl font-bold font-editorial text-theme-text">
-            <a href={`/projects/${rearControlArms.slug}`} class="hover:text-theme-rose transition-colors">
-              {rearControlArms.title}
-            </a>
-          </h3>
-
-          <p class="text-sm sm:text-base text-theme-text-muted leading-relaxed font-sans">
-            {rearControlArms.summary}
-          </p>
-
-          <!-- Key highlights -->
-          <div class="grid grid-cols-2 gap-4 py-3 border-y border-theme-border font-sans text-xs">
-            <div>
-              <span class="text-[11px] text-theme-text-faint block uppercase">Structural Materials</span>
-              <span class="font-semibold text-theme-text">4130 Chromoly + 6061-T6 Aluminum</span>
-            </div>
-            <div>
-              <span class="text-[11px] text-theme-text-faint block uppercase">Stress Validation</span>
-              <span class="font-semibold text-theme-celadon">Ansys FEA (FoS = 2.39 at 3G Bump)</span>
-            </div>
-            <div>
-              <span class="text-[11px] text-theme-text-faint block uppercase">Shop Fabrication</span>
-              <span class="font-semibold text-theme-text">CNC Milling, Manual Lathe, TIG Fixture</span>
-            </div>
-            <div>
-              <span class="text-[11px] text-theme-text-faint block uppercase">Wheel Travel</span>
-              <span class="font-semibold text-theme-copper">12 Inches Dynamic Articulation</span>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-4 pt-2">
-            <a
-              href={`/projects/${rearControlArms.slug}`}
-              class="px-5 py-2.5 rounded-full bg-theme-rose text-white text-xs font-semibold hover:bg-theme-rose-muted transition-colors shadow-sm inline-flex items-center gap-2"
-            >
-              <span>Read Full Engineering Report</span>
-              <span>→</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="lg:col-span-5 matting-frame">
-          <div class="matting-frame-inner p-6 space-y-4 bg-theme-bg">
-            <div class="text-xs font-mono uppercase text-theme-rose font-bold">
+          <div class="lg:col-span-5 relative shape-arch-top overflow-hidden border border-theme-border bg-theme-surface-elevated p-6 shadow-md">
+            <div class="text-xs font-mono uppercase text-theme-rose font-bold mb-3">
               // FINITE ELEMENT ANALYSIS
             </div>
-            <div class="aspect-[4/3] bg-gradient-to-br from-blue-900/40 via-emerald-800/30 to-amber-900/30 border border-theme-border flex flex-col items-center justify-center p-6 text-center space-y-2">
-              <span class="font-editorial text-lg text-theme-text font-bold">Ansys Stress Contour Simulation</span>
-              <p class="text-xs text-theme-text-muted max-w-xs">
+            <div class="aspect-[4/3] rounded-xl bg-gradient-to-br from-blue-900/40 via-emerald-800/30 to-amber-900/30 border border-theme-border/70 flex flex-col items-center justify-center p-6 text-center space-y-2">
+              <span class="font-cormorant text-2xl text-theme-text font-bold">Ansys Stress Contour Simulation</span>
+              <p class="text-xs text-theme-text-muted max-w-xs font-figtree">
                 Quadratic tetrahedral mesh modeling combined 3G vertical bump and 2G lateral cornering forces.
               </p>
-              <div class="w-36 h-2 rounded-full bg-gradient-to-r from-blue-500 via-emerald-400 via-amber-400 to-red-500 mt-2"></div>
+              <div class="w-40 h-2.5 rounded-full bg-gradient-to-r from-blue-500 via-emerald-400 via-amber-400 to-red-500 mt-2 border border-black/20"></div>
               <span class="text-[10px] font-mono text-theme-text-muted">0 MPa → 182 MPa (Yield: 435 MPa)</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- PROJECT 02: TG22 BRAKE LINES ASSEMBLY (WITH 3D VIEWER) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center p-8 sm:p-10 bg-theme-surface border border-theme-border shadow-lg">
-        <div class="lg:col-span-7 space-y-5">
-          <div class="flex items-center gap-3">
-            <span class="font-editorial text-2xl font-bold text-theme-rose">Project 02</span>
-            <span class="w-8 h-[1px] bg-theme-border-strong"></span>
-            <span class="text-xs font-mono uppercase tracking-wider text-theme-text-muted">{brakeLines.organization}</span>
-            <span class="artisan-tag artisan-tag-rose ml-auto">Interactive 3D</span>
+      <!-- PROJECT 02: TG22 BRAKE LINES ASSEMBLY (WITH ALTERNATING LOK YE LAYOUT & 3D VIEWER) -->
+      <div class="relative shape-sculptural-alt bg-theme-surface border border-theme-border p-8 sm:p-12 shadow-xl hover:shadow-2xl transition-all duration-300">
+        <!-- Decorative corner diamonds -->
+        <span class="corner-diamond-tr"></span>
+        <span class="corner-diamond-bl"></span>
+
+        <!-- Alternating grid: 3D canvas on left for desktop, text on right -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-6 lg:order-2 space-y-5">
+            <div class="flex items-center gap-3">
+              <span class="font-cormorant text-2xl font-bold text-theme-rose">Project 02</span>
+              <span class="w-8 h-[1px] bg-theme-border-strong"></span>
+              <span class="text-xs font-figtree uppercase tracking-wider text-theme-text-muted">{brakeLines.organization}</span>
+              <span class="inline-block px-2.5 py-0.5 text-[11px] rounded-full border-[0.5px] border-theme-rose/50 bg-theme-rose/10 text-theme-rose font-figtree font-medium ml-auto">
+                Interactive 3D Assembly
+              </span>
+            </div>
+
+            <h3 class="text-2xl sm:text-4xl font-bold font-cormorant text-theme-text">
+              <a href={`/projects/${brakeLines.slug}`} class="hover:text-theme-rose transition-colors">
+                {brakeLines.title}
+              </a>
+            </h3>
+
+            <p class="text-sm sm:text-base text-theme-text-muted leading-relaxed font-figtree">
+              {brakeLines.summary}
+            </p>
+
+            <!-- Key highlights -->
+            <div class="grid grid-cols-2 gap-4 py-3 border-y border-theme-border/60 font-figtree text-xs">
+              <div>
+                <span class="text-[11px] text-theme-text-faint block uppercase">Working Pressure</span>
+                <span class="font-medium text-theme-text">1,200 PSI Nominal (DOT 4 Fluid)</span>
+              </div>
+              <div>
+                <span class="text-[11px] text-theme-text-faint block uppercase">Hardware Plumbing</span>
+                <span class="font-medium text-theme-text">3/16" Seamless 304 Stainless + Braided PTFE</span>
+              </div>
+              <div>
+                <span class="text-[11px] text-theme-text-faint block uppercase">Circuit Architecture</span>
+                <span class="font-medium text-theme-celadon">Dual Master Cylinders + 3 Calipers</span>
+              </div>
+              <div>
+                <span class="text-[11px] text-theme-text-faint block uppercase">Safety Regulation</span>
+                <span class="font-medium text-theme-copper">SAE Dynamic 4-Wheel Lockup Verified</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 pt-2 font-figtree">
+              <a
+                href={`/projects/${brakeLines.slug}`}
+                class="px-5 py-2.5 rounded-full bg-theme-rose text-white text-xs font-medium hover:bg-theme-rose-muted transition-colors shadow-sm inline-flex items-center gap-2"
+              >
+                <span>Read Full Case Study</span>
+                <span>→</span>
+              </a>
+              <a
+                href="/cad-lab"
+                class="px-5 py-2.5 rounded-full border border-theme-border text-xs font-medium text-theme-text hover:border-theme-rose hover:text-theme-rose transition-colors"
+              >
+                Fullscreen CAD Lab ↗
+              </a>
+            </div>
           </div>
 
-          <h3 class="text-2xl sm:text-4xl font-bold font-editorial text-theme-text">
-            <a href={`/projects/${brakeLines.slug}`} class="hover:text-theme-rose transition-colors">
-              {brakeLines.title}
-            </a>
-          </h3>
-
-          <p class="text-sm sm:text-base text-theme-text-muted leading-relaxed font-sans">
-            {brakeLines.summary}
-          </p>
-
-          <!-- Key highlights -->
-          <div class="grid grid-cols-2 gap-4 py-3 border-y border-theme-border font-sans text-xs">
-            <div>
-              <span class="text-[11px] text-theme-text-faint block uppercase">Working Pressure</span>
-              <span class="font-semibold text-theme-text">1,200 PSI Nominal (DOT 4 Fluid)</span>
+          <div class="lg:col-span-6 lg:order-1">
+            <!-- 3D Canvas in Sculptural Rounded Frame -->
+            <div class="rounded-2xl overflow-hidden border border-theme-border shadow-xl">
+              <CadViewer
+                modelUrl="/models/brake-lines/TG22_Brake_Lines_Assembly.glb"
+                title="SolidWorks TG22 Corner Assembly"
+                height="450px"
+              />
             </div>
-            <div>
-              <span class="text-[11px] text-theme-text-faint block uppercase">Hardware Plumbing</span>
-              <span class="font-semibold text-theme-text">3/16" Seamless 304 Stainless + Braided PTFE</span>
-            </div>
-            <div>
-              <span class="text-[11px] text-theme-text-faint block uppercase">Circuit Architecture</span>
-              <span class="font-semibold text-theme-celadon">Dual Master Cylinders + 3 Calipers</span>
-            </div>
-            <div>
-              <span class="text-[11px] text-theme-text-faint block uppercase">Safety Regulation</span>
-              <span class="font-semibold text-theme-copper">SAE Dynamic 4-Wheel Lockup Verified</span>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-4 pt-2">
-            <a
-              href={`/projects/${brakeLines.slug}`}
-              class="px-5 py-2.5 rounded-full bg-theme-rose text-white text-xs font-semibold hover:bg-theme-rose-muted transition-colors shadow-sm inline-flex items-center gap-2"
-            >
-              <span>Read Full Case Study</span>
-              <span>→</span>
-            </a>
-            <a
-              href="/cad-lab"
-              class="px-5 py-2.5 rounded-full border border-theme-border text-xs font-semibold text-theme-text hover:border-theme-rose hover:text-theme-rose transition-colors"
-            >
-              Fullscreen CAD Lab
-            </a>
-          </div>
-        </div>
-
-        <div class="lg:col-span-5">
-          <!-- Live 3D Canvas -->
-          <div class="matting-frame">
-            <CadViewer
-              modelUrl="/models/brake-lines/TG22_Brake_Lines_Assembly.gltf"
-              title="SolidWorks TG22 Corner Assembly"
-              height="440px"
-            />
           </div>
         </div>
       </div>

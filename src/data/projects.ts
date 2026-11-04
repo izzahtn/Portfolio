@@ -105,7 +105,7 @@ export const projects: Project[] = [
     role: "Mechanical Engineer — Brakes Subteam (Former Role)",
     summary: "Complete pneumatic/hydraulic braking system design and chassis packaging for Cornell's competitive Baja SAE off-road racer, connecting two master cylinders to 3 calipers and electronic pressure sensors for dynamic 4-wheel lockup.",
     has3dModel: true,
-    modelUrl: "/models/brake-lines/TG22_Brake_Lines_Assembly.gltf",
+    modelUrl: "/models/brake-lines/TG22_Brake_Lines_Assembly.glb",
     tags: ["SolidWorks", "Hydraulics", "Hard Lines", "Vehicle Packaging", "Machining"],
     specs: [
       { label: "Vehicle Platform", value: "Cornell TG22 Baja SAE" },

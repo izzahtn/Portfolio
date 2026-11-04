@@ -25,10 +25,12 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Figtree', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        figtree: ['Figtree', 'sans-serif'],
+        cormorant: ['"Cormorant Garamond"', 'Playfair Display', 'serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'Courier New', 'monospace'],
-        display: ['Space Grotesk', 'Inter', 'sans-serif'],
-        serif: ['Playfair Display', 'Georgia', 'serif'],
+        display: ['"Cormorant Garamond"', 'Space Grotesk', 'sans-serif'],
+        serif: ['"Cormorant Garamond"', 'Playfair Display', 'Georgia', 'serif'],
       },
       backgroundImage: {
         'blueprint-grid': "radial-gradient(circle, var(--grid-dot) 1px, transparent 1px)",

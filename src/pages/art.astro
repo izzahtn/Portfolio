@@ -9,47 +9,66 @@ import { artItems, artCategories } from '../data/art';
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
     <!-- Header -->
-    <div class="border-b border-theme-border pb-6">
-      <span class="text-xs font-mono uppercase tracking-widest text-theme-copper block mb-1">
-        STUDIO ATELIER & PLAY
-      </span>
-      <h1 class="text-4xl sm:text-6xl font-bold font-editorial text-theme-text tracking-tight">
+    <div class="border-b border-theme-border pb-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
+        <span class="text-xs font-mono uppercase tracking-widest text-theme-copper block">
+          STUDIO ATELIER & PLAY
+        </span>
+        
+        <!-- Lok Ye Shuffle Gallery Button -->
+        <button
+          id="shuffle-gallery-btn"
+          type="button"
+          class="px-5 py-2 rounded-full border border-theme-border bg-theme-surface/90 hover:bg-theme-surface hover:border-theme-copper transition-all shadow-xs flex items-center gap-2 font-figtree text-xs text-theme-text font-medium cursor-pointer"
+        >
+          <svg class="w-3.5 h-3.5 text-theme-copper animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          <span>Shuffle Gallery</span>
+        </button>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl font-bold font-cormorant text-theme-text tracking-tight">
         Material Craft & Visual Works
       </h1>
-      <p class="text-sm sm:text-base text-theme-text-muted font-sans mt-3 max-w-2xl leading-relaxed">
-        Inspired by the creative freedom of <a href="https://www.lokye.dev/" target="_blank" class="underline decoration-theme-copper hover:text-theme-copper">lokye.dev</a>: bridging industrial fabrication with tactile, fine-art expression across charcoal, hardwoods, handmade jewelry, and tailored canvas.
+      <p class="text-sm sm:text-base text-theme-text-muted font-figtree mt-3 max-w-2xl leading-relaxed">
+        Inspired by the creative freedom of <a href="https://www.lokye.dev/" target="_blank" class="underline decoration-theme-copper hover:text-theme-copper">lokye.dev</a>: bridging industrial fabrication with tactile, fine-art expression across charcoal, hardwoods, handmade wire jewelry, and tailored canvas.
       </p>
 
       <!-- Category Filter Pills -->
-      <div class="flex flex-wrap gap-2.5 pt-8 font-sans text-xs" id="art-filters">
+      <div class="flex flex-wrap gap-2 pt-6 font-figtree text-xs" id="art-filters">
         {artCategories.map((cat, idx) => (
           <button
             type="button"
             data-category={cat}
-            class={`art-filter-btn px-4 py-2 rounded-full border transition-all ${
+            class={`art-filter-btn px-4 py-1.5 rounded-full border transition-all lowercase ${
               idx === 0
-                ? 'border-theme-copper bg-theme-copper text-white font-semibold shadow-sm'
+                ? 'border-theme-copper bg-theme-copper text-white font-medium shadow-xs'
                 : 'border-theme-border bg-theme-surface text-theme-text-muted hover:border-theme-copper hover:text-theme-text'
             }`}
           >
-            {cat}
+            {cat.toLowerCase()}
           </button>
         ))}
       </div>
     </div>
 
-    <!-- Art Masonry Grid -->
+    <!-- Art Masonry Grid with Interesting Architectural Shapes -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="art-grid">
-      {artItems.map((item) => (
+      {artItems.map((item, idx) => (
         <article
-          class="art-card matting-frame group hover:border-theme-copper transition-all duration-300 shadow-md cursor-pointer"
+          class={`art-card relative group hover:scale-[1.02] ${idx % 2 === 0 ? 'hover:rotate-1 shape-sculptural' : 'hover:-rotate-1 shape-sculptural-alt'} border border-theme-border bg-theme-surface p-5 transition-all duration-300 shadow-md cursor-pointer`}
           data-category={item.category}
           data-item={JSON.stringify(item)}
         >
-          <div class="matting-frame-inner p-5 space-y-4 bg-theme-surface flex flex-col h-full justify-between">
+          <!-- Corner diamond accent -->
+          <span class="corner-diamond-tl"></span>
+          <span class="corner-diamond-br"></span>
+
+          <div class="space-y-4 flex flex-col h-full justify-between">
             <!-- Simulated High-Fidelity Artwork Showcase -->
             <div
-              class="relative w-full aspect-[4/3] rounded-sm overflow-hidden flex flex-col justify-end p-5 select-none text-white"
+              class="relative w-full aspect-[4/3] rounded-xl overflow-hidden flex flex-col justify-end p-5 select-none text-white border border-theme-border/50"
               style={`background-color: ${item.imagePlaceholderColor};`}
             >
               <!-- Atmospheric gradient -->
@@ -57,29 +76,29 @@ import { artItems, artCategories } from '../data/art';
               
               {item.award && (
                 <div class="absolute top-3 left-3 z-10">
-                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-sans bg-theme-rose text-white uppercase font-bold tracking-wider shadow">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-figtree bg-theme-rose text-white uppercase font-bold tracking-wider shadow">
                     ★ {item.award.split('•')[0]}
                   </span>
                 </div>
               )}
 
               <div class="relative z-10 space-y-1">
-                <span class="text-[10px] uppercase font-sans tracking-wider text-theme-copper block font-semibold">
+                <span class="text-[10px] uppercase font-figtree tracking-wider text-theme-copper block font-semibold">
                   {item.category} • {item.year}
                 </span>
-                <h2 class="text-xl font-bold font-editorial leading-tight group-hover:text-theme-copper transition-colors">
+                <h2 class="text-xl font-bold font-cormorant leading-tight group-hover:text-theme-copper transition-colors">
                   {item.title}
                 </h2>
               </div>
             </div>
 
             <!-- Description and Specs -->
-            <div class="space-y-3 flex-1 flex flex-col justify-between font-sans text-xs">
+            <div class="space-y-3 flex-1 flex flex-col justify-between font-figtree text-xs">
               <p class="text-xs text-theme-text-muted leading-relaxed line-clamp-3">
                 {item.description}
               </p>
 
-              <div class="pt-3 border-t border-theme-border space-y-1.5 text-xs">
+              <div class="pt-3 border-t border-theme-border/60 space-y-1.5 text-xs">
                 <div>
                   <span class="text-theme-text-faint uppercase text-[10px] block font-mono">Medium</span>
                   <span class="text-theme-text font-medium block">{item.medium}</span>
@@ -92,11 +111,11 @@ import { artItems, artCategories } from '../data/art';
                 )}
               </div>
 
-              <!-- Tags -->
+              <!-- Tags in Lok Ye pill style -->
               <div class="flex flex-wrap gap-1.5 pt-2">
                 {item.tags.map((t) => (
-                  <span class="px-2 py-0.5 text-[10px] rounded-full border border-theme-border bg-theme-bg text-theme-text-faint">
-                    #{t}
+                  <span class="px-2.5 py-0.5 text-[11px] rounded-full border border-theme-border/70 bg-theme-bg text-theme-text-muted">
+                    #{t.toLowerCase()}
                   </span>
                 ))}
               </div>
@@ -219,6 +238,20 @@ import { artItems, artCategories } from '../data/art';
       modal.classList.remove('hidden');
     });
   });
+
+  // Lok Ye Shuffle Gallery logic
+  const shuffleBtn = document.getElementById('shuffle-gallery-btn');
+  const artGrid = document.getElementById('art-grid');
+  if (shuffleBtn && artGrid) {
+    shuffleBtn.addEventListener('click', () => {
+      const cardArray = Array.from(artGrid.children);
+      // Fisher-Yates shuffle
+      for (let i = cardArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        artGrid.appendChild(cardArray[j]);
+      }
+    });
+  }
 
   if (modalClose && modal) {
     modalClose.addEventListener('click', () => modal.classList.add('hidden'));

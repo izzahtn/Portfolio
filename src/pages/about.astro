@@ -84,27 +84,31 @@ const honors = [
 
     <!-- Top Profile & Education Block -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      <div class="lg:col-span-8 p-8 sm:p-10 bg-theme-surface border border-theme-border space-y-6 shadow-sm rounded-sm">
-        <h2 class="text-2xl font-bold font-editorial text-theme-text">
-          Background & Philosophy
+      <div class="lg:col-span-8 p-8 sm:p-10 bg-theme-surface border border-theme-border shape-sculptural relative space-y-6 shadow-xl">
+        <!-- Floating corner diamonds -->
+        <span class="corner-diamond-tl"></span>
+        <span class="corner-diamond-br"></span>
+
+        <h2 class="text-3xl font-bold font-cormorant text-theme-text">
+          Background & Engineering Philosophy
         </h2>
-        <div class="space-y-4 text-sm sm:text-base text-theme-text-muted leading-relaxed font-sans">
+        <div class="space-y-4 text-sm sm:text-base text-theme-text-muted leading-relaxed font-figtree">
           <p>
-            I am currently a second-year Mechanical Engineering student at Cornell University, actively designing suspension linkages and brake hydraulics for <strong>Cornell Baja Racing</strong>. My journey in mechanical systems began over four years ago in competitive robotics, where I led the mechanical design, CAD modeling, and C++ autonomous programming for teams that earned over 50 regional and international awards.
+            I am a second-year Mechanical Engineering student at Cornell University, actively designing suspension linkages for <strong>Cornell Baja Racing</strong> (previously on the Brakes subteam). My journey in mechanical systems began over four years ago in competitive robotics, where I led the mechanical design, CAD modeling, and C++ autonomous pathing for teams that earned over 50 regional and international awards.
           </p>
           <p>
-            What distinguishes my approach to engineering is the direct bridge between computational rigor and physical hand-making. Whether calculating Von Mises stress concentrations in Ansys for a chromoly suspension arm, turning a custom bearing spacer on a manual lathe to ±0.0005" tolerance, or handcrafting unique jewelry pieces from mixed materials and metals, I believe tactile understanding of materials makes for vastly superior mechanical design.
+            What distinguishes my approach to engineering is the direct bridge between computational rigor and physical hand-making. Whether calculating Von Mises stress concentrations in Ansys for a chromoly suspension arm, turning a custom bearing spacer on a manual lathe to ±0.0005" tolerance, or handcrafting unique wearable jewelry pieces from formed wire and found mechanical objects, I believe tactile understanding of materials makes for vastly superior mechanical design.
           </p>
           <p>
-            I am currently seeking an engineering internship where I can contribute to hands-on mechanical design, rapid prototyping, and structural testing alongside passionate engineering teams.
+            I am currently seeking a mechanical engineering internship where I can contribute to hands-on mechanical design, rapid prototyping, and structural testing alongside passionate engineering teams.
           </p>
         </div>
 
-        <div class="pt-6 border-t border-theme-border flex flex-wrap gap-4 font-sans text-xs">
+        <div class="pt-6 border-t border-theme-border/60 flex flex-wrap gap-4 font-figtree text-xs">
           <a
             href={siteConfig.resumeUrl}
             target="_blank"
-            class="px-5 py-2.5 rounded-full bg-theme-rose text-white font-semibold hover:bg-theme-rose-muted transition-colors flex items-center gap-2 shadow-sm"
+            class="px-5 py-2.5 rounded-full bg-theme-rose text-white font-medium hover:bg-theme-rose-muted transition-colors flex items-center gap-2 shadow-sm"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
             <span>Download Official Resume (PDF)</span>
@@ -118,11 +122,33 @@ const honors = [
         </div>
       </div>
 
-      <!-- Right Education Ledger Card -->
-      <div class="lg:col-span-4 matting-frame shadow-xl">
-        <div class="matting-frame-inner p-6 space-y-5 bg-theme-surface font-sans text-xs">
+      <!-- Right Column: Hanging Portrait + Academic Credentials -->
+      <div class="lg:col-span-4 space-y-6">
+        <!-- Lok Ye Arched Portrait Frame -->
+        <div class="relative max-w-xs mx-auto">
+          <div class="flex flex-col items-center mb-0">
+            <div class="w-[1px] h-6 bg-theme-border-strong"></div>
+            <div class="w-2.5 h-2.5 rounded-full border border-theme-border-strong bg-theme-copper/40 -mt-0.5"></div>
+          </div>
+          <div class="lokye-portrait-frame shadow-xl">
+            <div class="relative overflow-hidden rounded-b-[9999px] aspect-[3/4] bg-theme-surface-elevated border border-theme-border/60">
+              <img
+                src="/images/headshot.jpeg"
+                alt="Izzah Nishad"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="text-center pt-2.5 pb-1">
+              <p class="font-cormorant italic text-sm text-theme-text font-medium">Izzah Nishad</p>
+              <p class="font-figtree text-[11px] text-theme-text-muted lowercase tracking-wider">cornell mechanical engineering '29</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Academic Credentials Card in Sculptural Shape -->
+        <div class="shape-sculptural border border-theme-border bg-theme-surface p-6 space-y-5 shadow-lg font-figtree text-xs">
           <div class="flex items-center justify-between border-b border-theme-border pb-3">
-            <span class="font-bold text-theme-text font-editorial text-sm">Academic Credentials</span>
+            <span class="font-bold text-theme-text font-cormorant text-base">Academic Credentials</span>
             <span class="text-theme-rose font-mono text-[11px] font-semibold">CORNELL</span>
           </div>
 

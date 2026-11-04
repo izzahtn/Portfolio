@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -132,6 +132,61 @@ body {
   background: rgba(186, 106, 70, 0.08);
   color: var(--color-copper);
 }
+
+.font-figtree {
+  font-family: 'Figtree', system-ui, sans-serif;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* Lok Ye Hanging Portrait Frame */
+.lokye-portrait-frame {
+  border: 0.5px solid var(--color-border-strong);
+  border-top: 0;
+  border-bottom-left-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  padding: 0.75rem;
+  padding-top: 0;
+  background: var(--color-surface);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+}
+
+/* Artistic Shape Containers */
+.shape-sculptural {
+  border-radius: 2.25rem 0.75rem 2.25rem 0.75rem;
+}
+
+.shape-sculptural-alt {
+  border-radius: 0.75rem 2.25rem 0.75rem 2.25rem;
+}
+
+.shape-arch-top {
+  border-radius: 2.5rem 2.5rem 0.75rem 0.75rem;
+}
+
+.shape-arch-pill {
+  border-radius: 9999px 9999px 1rem 1rem;
+}
+
+/* Decorative Geometric Diamond Corner Accents */
+.corner-diamond-tl,
+.corner-diamond-tr,
+.corner-diamond-bl,
+.corner-diamond-br {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-strong);
+  transform: rotate(45deg);
+  z-index: 10;
+}
+.corner-diamond-tl { top: -5px; left: -5px; }
+.corner-diamond-tr { top: -5px; right: -5px; }
+.corner-diamond-bl { bottom: -5px; left: -5px; }
+.corner-diamond-br { bottom: -5px; right: -5px; }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
