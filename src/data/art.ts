@@ -67,26 +67,26 @@ export const artItems: ArtItem[] = [
     tags: ["Woodturning", "Lathe", "Spalted Birch", "Brass Inlay"]
   },
   {
-    id: "lost-wax-cast-silver-ring",
-    title: "Kinematic Gear Ring in Sterling Silver",
+    id: "handcrafted-assemblage-ring",
+    title: "Sculptural Wire & Formed Hardware Ring",
     category: "Jewelry Design",
     year: "2025",
-    medium: ".925 Sterling Silver, Lost-Wax Investment Casting",
-    dimensions: "Size 7, 6mm Band",
-    description: "Carved from high-density jeweler's carving wax and cast using vacuum-assisted centrifugal investment casting. Inspired by planetary epicyclic gear trains, with hand-polished facets and oxidized recessed channels.",
+    medium: "Formed Brass & Steel Wire, Repurposed Mechanical Components",
+    dimensions: "Custom Band",
+    description: "Handcrafted wearable ring formed from coiled and cold-connected brass wire, integrating repurposed mechanical hardware into an architectural, tactile band.",
     imagePlaceholderColor: "#33383d",
-    tags: ["Jewelry", "Lost-Wax Casting", "Sterling Silver", "Hand Polished"]
+    tags: ["Jewelry Making", "Handcrafted", "Formed Wire", "Mixed Materials"]
   },
   {
-    id: "architectural-wire-necklace",
-    title: "Suspension Cable Collar with Raw Quartz",
+    id: "found-object-suspension-necklace",
+    title: "Suspension Wire & Raw Mineral Collar",
     category: "Jewelry Design",
     year: "2025",
-    medium: "Forged Brass Wire, Braided Steel Cable & Uncut Herkimer Diamond",
+    medium: "Hand-Bent Brass Wire, Braided Cord & Raw Mineral Stone",
     dimensions: "16\" Choker",
-    description: "Translating civil suspension cable mechanics into wearable jewelry. The tensioned brass armature supports a floating raw quartz crystal held purely through calibrated opposing wire compressive forces.",
+    description: "Translating mechanical tension into wearable jewelry: hand-formed brass wire structure holding a raw stone through calibrated opposing wire tension without soldering.",
     imagePlaceholderColor: "#42382c",
-    tags: ["Jewelry", "Wire Forging", "Tension Mechanics", "Raw Crystal"]
+    tags: ["Jewelry Making", "Wire Forming", "Raw Stone", "Tension Mechanics"]
   },
   {
     id: "tailored-structural-jacket",

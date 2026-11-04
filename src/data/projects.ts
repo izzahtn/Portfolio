@@ -86,7 +86,7 @@ export const projects: Project[] = [
       {
         title: "03. Machine Shop Fabrication & Tolerancing",
         subtitle: "From raw tube stock to heat-treated, race-proven suspension hardware",
-        content: "Manufactured the prototype components utilizing machine shop tools at Cornell: manual engine lathe for turning bearing cups and misalignment spacers to ±0.0005\" press-fit tolerance, CNC milling for shock clevises, and TIG welding within a rigid aluminum fixture jig to prevent thermal warping.",
+        content: "Manufactured the prototype components utilizing machine shop tools at Cornell: manual lathe for turning bearing cups and misalignment spacers to ±0.0005\" press-fit tolerance, CNC milling for shock clevises, and TIG welding within a rigid aluminum fixture jig to prevent thermal warping.",
         bulletPoints: [
           "Toleranced bearing bores checked with telescoping bore gauges and micrometers.",
           "Post-weld inspection for complete joint penetration before heat treatment and protective anodization."
