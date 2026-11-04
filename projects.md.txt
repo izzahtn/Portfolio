@@ -1,0 +1,7 @@
+<project name>, <organization name>, <description>, <available filenames and types>
+
+Rear Control Arms, Cornell Baja SAE, aluminum and steel vehicle control arms for a heavy duty suspension system connecting from the rear uprights to the roll cage and holding up the shock pistons, welded together and attached by spherical bearings, heat treated anodized for protection. Y:\( TG23\1 - SUSPENSION\3_LINKS\REAR_LINKS\LINKS
+
+Brake Lines, Cornell Baja SAE, pneumatic braking system connecting two master cylinders to 3 calipers and two pressure sensors for the brake lights. Y:\,TG22_Real\TG22\5_BRAKES\7 - Brake Lines 
+
+Pulse Amplifier, AEP 1100 Class, part of a system for a nitrogen laser a system that took a high and low voltage systems of circuits soldered together and wired between points taking a pulse from the pulse generator and making it stronger before sending it into the actual laser body. "C:\Users\izzah\OneDrive\Documents\physics cornell\lasers\AEP1100 Nitrogen Laser Lab Report.pdf"

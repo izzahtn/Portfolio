@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TechStamp from '../components/maximalist/TechStamp.astro';
+import RulerBar from '../components/maximalist/RulerBar.astro';
+import { siteConfig } from '../config/site';
+---
+
+<BaseLayout
+  title="Resume | Izzah Nishad"
+  description="Izzah Nishad's professional mechanical engineering resume, education, and technical experience."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10 space-y-8">
+    
+    <!-- Top Action Toolbar -->
+    <div class="flex flex-wrap items-center justify-between gap-4 p-4 bg-theme-surface border border-theme-border font-mono text-xs">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 bg-theme-rose"></span>
+        <span class="font-bold text-theme-text uppercase">OFFICIAL RESUME // IZZAH NISHAD</span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a
+          href={siteConfig.resumeUrl}
+          target="_blank"
+          download="Izzah_Nishad_Resume.pdf"
+          class="px-4 py-2 bg-theme-rose text-white font-semibold hover:bg-theme-rose-muted transition-colors flex items-center gap-2 shadow"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span>DOWNLOAD PDF</span>
+        </a>
+
+        <button
+          onclick="window.print()"
+          class="hidden sm:inline-flex px-3 py-2 bg-theme-bg border border-theme-border hover:border-theme-text text-theme-text transition-colors"
+        >
+          PRINT
+        </button>
+      </div>
+    </div>
+
+    <!-- Paper-Style Clean Resume Container -->
+    <div class="p-8 sm:p-12 bg-theme-surface border border-theme-border shadow-2xl space-y-8 font-sans text-sm text-theme-text print:border-none print:shadow-none">
+      
+      <!-- Resume Header -->
+      <div class="border-b-2 border-theme-text pb-6 text-center space-y-2">
+        <h1 class="text-3xl sm:text-4xl font-bold font-display text-theme-text tracking-tight uppercase">
+          {siteConfig.name}
+        </h1>
+        <div class="font-mono text-xs text-theme-text-muted flex flex-wrap justify-center gap-3">
+          <span>{siteConfig.phone}</span>
+          <span>•</span>
+          <a href={`mailto:${siteConfig.email}`} class="hover:text-theme-rose underline">{siteConfig.email}</a>
+          <span>•</span>
+          <a href={siteConfig.linkedin} target="_blank" class="hover:text-theme-rose underline">linkedin.com/in/izzah-nishad</a>
+        </div>
+      </div>
+
+      <!-- Education Section -->
+      <div class="space-y-3">
+        <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-theme-rose border-b border-theme-border pb-1">
+          EDUCATION
+        </h2>
+        <div class="flex flex-col sm:flex-row sm:items-baseline justify-between">
+          <div>
+            <span class="font-bold text-base">Cornell University</span>, Ithaca, NY
+            <div class="text-theme-text-muted">Mechanical Engineering, Bachelor of Science</div>
+          </div>
+          <div class="sm:text-right font-mono text-xs text-theme-text-muted">
+            <div>Aug. 2025 – Dec. 2029</div>
+            <div class="font-semibold text-theme-text">GPA: 3.077</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Relevant Coursework -->
+      <div class="space-y-2">
+        <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-theme-rose border-b border-theme-border pb-1">
+          RELEVANT COURSES
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-1.5 text-xs text-theme-text-muted">
+          <span>• Kinematics and Heat</span>
+          <span>• Electricity and Magnetism</span>
+          <span>• Statics and Mechanics</span>
+          <span>• Lasers and Photonics</span>
+          <span>• Dynamics</span>
+          <span>• Linear Algebra</span>
+          <span>• Differential Equations</span>
+          <span>• Thermodynamics</span>
+        </div>
+      </div>
+
+      <!-- Technical Experiences -->
+      <div class="space-y-6">
+        <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-theme-rose border-b border-theme-border pb-1">
+          TECHNICAL EXPERIENCES
+        </h2>
+
+        <!-- Role 1: Cornell Baja -->
+        <div class="space-y-2">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between">
+            <div>
+              <span class="font-bold text-base">Cornell Baja Racing</span> — <span class="italic text-theme-text-muted">Mechanical Engineer</span>
+            </div>
+            <div class="sm:text-right font-mono text-xs text-theme-text-muted">
+              Nov. 2025 – Present | Ithaca, NY
+            </div>
+          </div>
+          <ul class="list-disc list-outside pl-5 space-y-1 text-xs text-theme-text-muted leading-relaxed">
+            <li>Attend technical classes on automotive engineering basics, learning about all of the parts of the car.</li>
+            <li>Design parts for the car using CAD software SolidWorks, connected to its position on the whole car itself.</li>
+            <li>Designed the brake lines including materials, placement, and overall design.</li>
+            <li>Designing and testing suspension rear control arms using CAD, Ansys, and hand calculations.</li>
+            <li>Machining with a CNC, manual mill, and manual lathe.</li>
+            <li>Participate in assembly and repairs before and during competition.</li>
+          </ul>
+        </div>
+
+        <!-- Role 2: Danbury Grassroots -->
+        <div class="space-y-2">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between">
+            <div>
+              <span class="font-bold text-base">Danbury Grassroots Academy</span> — <span class="italic text-theme-text-muted">Lead Robotics Teacher</span>
+            </div>
+            <div class="sm:text-right font-mono text-xs text-theme-text-muted">
+              Jan. 2025 – Aug. 2025 | Danbury, CT
+            </div>
+          </div>
+          <ul class="list-disc list-outside pl-5 space-y-1 text-xs text-theme-text-muted leading-relaxed">
+            <li>Head Robotics Teacher for 7–8th graders at Danbury Grassroots Academy, leading a volunteer-driven STEM program.</li>
+            <li>Design and deliver lessons on LEGO robotics, mechanical design, and core engineering principles, including gear ratios, structural integrity, and sensor integration.</li>
+            <li>Teach fundamental programming with LEGO Mindstorms Robot Inventor, covering loops, conditionals, and motor control in both block code and Python.</li>
+            <li>Encourage collaboration and problem-solving through partner challenges and guided design iterations.</li>
+            <li>Manage class schedules, resources, and milestones, while mentoring a small team of volunteer instructors.</li>
+          </ul>
+        </div>
+
+        <!-- Role 3: Danbury Robotics -->
+        <div class="space-y-2">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between">
+            <div>
+              <span class="font-bold text-base">Danbury Robotics</span> — <span class="italic text-theme-text-muted">Lead Designer & Builder</span>
+            </div>
+            <div class="sm:text-right font-mono text-xs text-theme-text-muted">
+              Sep. 2021 – June 2025 | Danbury, CT
+            </div>
+          </div>
+          <ul class="list-disc list-outside pl-5 space-y-1 text-xs text-theme-text-muted leading-relaxed">
+            <li>Leading the design process and ensuring compliance with VEX standards through detailed documentation of design, build progress, and troubleshooting.</li>
+            <li>Creating hand-drawn design schematics, assisting with CAD implementations, tracking design iterations, and thoroughly documenting mechanical testing and system modifications for physical build and programming.</li>
+            <li>Collaborating on structural construction, focusing on drive base assembly and component alignment for match performance as well as scoring elements specific to the game elements.</li>
+            <li>Programming autonomous routines in C++ using Visual Studio Code, optimizing pathing and sensor input.</li>
+            <li>Aiding with strategic planning and match preparation, aligning design and code with alliance needs.</li>
+            <li>Earned 51 awards in categories of Design, Programming, and Competition Success.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Honors -->
+      <div class="space-y-2">
+        <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-theme-rose border-b border-theme-border pb-1">
+          HONORS & RECOGNITION
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-1.5 text-xs text-theme-text-muted">
+          <span>• CT Scholastic Silver Key (Jan 2024)</span>
+          <span>• Artist On the Rise, Best in Show, Brookfield, CT (Mar 2025)</span>
+          <span>• WAVE@WPI Champion, Danbury Robotics (Dec 2025)</span>
+          <span>• Connecticut State Champion, Danbury Robotics (Feb 2025)</span>
+          <span>• Vex Spirit Division Champion, Danbury Robotics (May 2025)</span>
+          <span>• Vex Robotics World Finalist, Danbury Robotics (May 2025)</span>
+        </div>
+      </div>
+
+      <!-- Skills & Interests -->
+      <div class="space-y-3 pt-2">
+        <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-theme-rose border-b border-theme-border pb-1">
+          SKILLS & INTERESTS
+        </h2>
+        <div class="space-y-1 text-xs text-theme-text-muted">
+          <div><span class="font-bold text-theme-text">Technical Skills:</span> SolidWorks, Fusion 360, MATLAB, Ansys, CNC Machining, Manual Machining (Lathe & Mill), Java, Python, C++, Welding (beginner)</div>
+          <div><span class="font-bold text-theme-text">Interests:</span> Drawing, woodworking, jewelry making, clothing design, cooking, travel</div>
+          <div><span class="font-bold text-theme-text">Languages:</span> Malayalam (Fluent), Spanish (Conversational)</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>

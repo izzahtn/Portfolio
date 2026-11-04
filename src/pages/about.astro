@@ -1,0 +1,235 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site';
+
+const coursework = [
+  "Kinematics and Heat",
+  "Statics and Mechanics",
+  "Dynamics",
+  "Differential Equations",
+  "Electricity and Magnetism",
+  "Lasers and Photonics (AEP 1100)",
+  "Linear Algebra",
+  "Thermodynamics"
+];
+
+const experiences = [
+  {
+    role: "Mechanical Engineer (Suspension Subteam, Formerly Brakes)",
+    org: "Cornell Baja Racing (SAE)",
+    timeline: "Nov 2024 – Present",
+    location: "Ithaca, NY",
+    bullets: [
+      "Currently designing and structurally validating TG23 suspension rear control arms using SolidWorks CAD, Ansys Mechanical FEA, and hand moment calculations.",
+      "Fabricate production suspension hardware in Cornell machine shops utilizing CNC mills, manual engine lathes, and vertical mills.",
+      "Previously engineered the TG22 pneumatic and hydraulic brake line system (2024–2025), specifying line materials, routing geometry, and chassis mount placement for 4-wheel dynamic lockup.",
+      "Attend technical lectures on automotive engineering principles and full-vehicle dynamic packaging.",
+      "Perform rapid pit lane diagnostics, trackside assembly, and mechanical repairs during official SAE endurance competitions."
+    ]
+  },
+  {
+    role: "Lead Robotics Teacher",
+    org: "Danbury Grassroots Academy",
+    timeline: "Jan 2025 – Aug 2025",
+    location: "Danbury, CT",
+    bullets: [
+      "Led STEM robotics education for 7th–8th grade students within a volunteer-driven academic empowerment initiative.",
+      "Developed and delivered comprehensive curriculum in LEGO Mindstorms robotics, mechanical design, gear train ratios, and sensor integration.",
+      "Taught core programming logic and algorithmic motor control across both graphical block code and introductory Python.",
+      "Mentored student teams through collaborative prototyping challenges, managing class schedules and materials."
+    ]
+  },
+  {
+    role: "Lead Designer & Builder",
+    org: "Danbury Robotics",
+    timeline: "Sep 2021 – June 2025",
+    location: "Danbury, CT",
+    bullets: [
+      "Spearheaded overall mechanical architecture and strict VEX competition rule compliance across four consecutive seasons.",
+      "Drafted hand-drawn design schematics, CAD models in Fusion 360/SolidWorks, and maintained extensive engineering notebooks.",
+      "Fabricated high-torque 6-motor drive bases and high-cycle game-scoring mechanisms with precision component alignment.",
+      "Programmed autonomous routines in C++ with closed-loop PID control and optical tracking odometry.",
+      "Earned 51 competitive awards in engineering design, autonomous programming, and tournament excellence."
+    ]
+  }
+];
+
+const honors = [
+  { title: "Artist On the Rise • Best in Show", place: "Brookfield, CT", date: "Mar 2025" },
+  { title: "VEX Robotics World Championship Finalist", place: "Dallas, TX", date: "May 2025" },
+  { title: "VEX Spirit Division Champion", place: "World Championship", date: "May 2025" },
+  { title: "Connecticut State Champion", place: "Danbury Robotics", date: "Feb 2025" },
+  { title: "WAVE@WPI Tournament Champion", place: "Worcester, MA", date: "Dec 2025" },
+  { title: "Connecticut Scholastic Silver Key Award", place: "Statewide Fine Art", date: "Jan 2024" },
+];
+---
+
+<BaseLayout
+  title="About & Background | Izzah Nishad"
+  description="Biographical background, Cornell engineering education, relevant coursework, technical machining experiences, and honors."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+    <!-- Header -->
+    <div class="border-b border-theme-border pb-6">
+      <span class="text-xs font-mono uppercase tracking-widest text-theme-rose block mb-1">
+        CURRICULUM VITAE & BIOGRAPHY
+      </span>
+      <h1 class="text-4xl sm:text-6xl font-bold font-editorial text-theme-text tracking-tight">
+        About Izzah Nishad
+      </h1>
+      <p class="text-sm sm:text-base text-theme-text-muted font-sans mt-3 max-w-2xl leading-relaxed">
+        Mechanical engineering student at Cornell University ('29) combining hands-on automotive racing engineering with precision craftsmanship and digital modeling.
+      </p>
+    </div>
+
+    <!-- Top Profile & Education Block -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div class="lg:col-span-8 p-8 sm:p-10 bg-theme-surface border border-theme-border space-y-6 shadow-sm rounded-sm">
+        <h2 class="text-2xl font-bold font-editorial text-theme-text">
+          Background & Philosophy
+        </h2>
+        <div class="space-y-4 text-sm sm:text-base text-theme-text-muted leading-relaxed font-sans">
+          <p>
+            I am currently a second-year Mechanical Engineering student at Cornell University, actively designing suspension linkages and brake hydraulics for <strong>Cornell Baja Racing</strong>. My journey in mechanical systems began over four years ago in competitive robotics, where I led the mechanical design, CAD modeling, and C++ autonomous programming for teams that earned over 50 regional and international awards.
+          </p>
+          <p>
+            What distinguishes my approach to engineering is the direct bridge between computational rigor and physical hand-making. Whether calculating Von Mises stress concentrations in Ansys for a chromoly suspension arm, turning a custom bearing spacer on an engine lathe to ±0.0005" tolerance, or carving lost-wax models for cast sterling silver jewelry, I believe tactile understanding of materials makes for vastly superior mechanical design.
+          </p>
+          <p>
+            I am currently seeking an engineering internship where I can contribute to hands-on mechanical design, rapid prototyping, and structural testing alongside passionate engineering teams.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-theme-border flex flex-wrap gap-4 font-sans text-xs">
+          <a
+            href={siteConfig.resumeUrl}
+            target="_blank"
+            class="px-5 py-2.5 rounded-full bg-theme-rose text-white font-semibold hover:bg-theme-rose-muted transition-colors flex items-center gap-2 shadow-sm"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <span>Download Official Resume (PDF)</span>
+          </a>
+          <a
+            href={`mailto:${siteConfig.email}`}
+            class="px-5 py-2.5 rounded-full bg-theme-surface border border-theme-border hover:border-theme-celadon hover:text-theme-celadon text-theme-text transition-colors font-medium"
+          >
+            Get in Touch via Email
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Education Ledger Card -->
+      <div class="lg:col-span-4 matting-frame shadow-xl">
+        <div class="matting-frame-inner p-6 space-y-5 bg-theme-surface font-sans text-xs">
+          <div class="flex items-center justify-between border-b border-theme-border pb-3">
+            <span class="font-bold text-theme-text font-editorial text-sm">Academic Credentials</span>
+            <span class="text-theme-rose font-mono text-[11px] font-semibold">CORNELL</span>
+          </div>
+
+          <div class="space-y-3">
+            <div>
+              <span class="text-theme-text-faint text-[10px] uppercase block">Institution</span>
+              <span class="text-theme-text font-bold text-sm block">Cornell University</span>
+              <span class="text-theme-text-muted text-xs block">College of Engineering • Ithaca, NY</span>
+            </div>
+
+            <div>
+              <span class="text-theme-text-faint text-[10px] uppercase block">Degree & Major</span>
+              <span class="text-theme-text font-semibold block">B.S. in Mechanical Engineering</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <div>
+                <span class="text-theme-text-faint text-[10px] uppercase block">Graduation</span>
+                <span class="text-theme-celadon font-bold block">December 2029</span>
+              </div>
+              <div>
+                <span class="text-theme-text-faint text-[10px] uppercase block">GPA</span>
+                <span class="text-theme-copper font-bold block">3.077 / 4.0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coursework Tags -->
+          <div class="space-y-2 pt-3 border-t border-theme-border">
+            <span class="text-[10px] text-theme-text-faint uppercase tracking-wider block font-semibold">
+              Relevant Coursework
+            </span>
+            <div class="flex flex-wrap gap-1.5">
+              {coursework.map((course) => (
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] border border-theme-border bg-theme-bg text-theme-text-muted">
+                  {course}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-theme-border text-[11px] text-theme-text-muted space-y-1">
+            <div><span class="text-theme-text-faint">Languages:</span> Malayalam (Fluent), Spanish (Conversational)</div>
+            <div><span class="text-theme-text-faint">Interests:</span> Drawing, woodworking, jewelry making, clothing design, cooking, travel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Experience Timeline -->
+    <div class="space-y-6">
+      <div class="border-b border-theme-border pb-3">
+        <h2 class="text-2xl font-bold font-editorial text-theme-text">
+          Experience Record
+        </h2>
+      </div>
+
+      <div class="space-y-6">
+        {experiences.map((exp) => (
+          <div class="p-8 bg-theme-surface border border-theme-border space-y-4 shadow-sm rounded-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-theme-border pb-4 font-sans">
+              <div>
+                <h3 class="text-xl font-bold font-editorial text-theme-text">
+                  {exp.role}
+                </h3>
+                <span class="text-xs text-theme-rose font-semibold block">
+                  {exp.org}
+                </span>
+              </div>
+              <div class="text-xs text-theme-text-muted sm:text-right">
+                <span class="block font-medium">{exp.timeline}</span>
+                <span class="text-theme-text-faint block">{exp.location}</span>
+              </div>
+            </div>
+
+            <ul class="space-y-2 text-sm text-theme-text-muted font-sans">
+              {exp.bullets.map((b) => (
+                <li class="flex items-start gap-2.5">
+                  <span class="text-theme-celadon font-bold mt-0.5">›</span>
+                  <span class="leading-relaxed">{b}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Honors & Recognition -->
+    <div class="space-y-6">
+      <div class="border-b border-theme-border pb-3 flex items-center justify-between">
+        <h2 class="text-2xl font-bold font-editorial text-theme-text">
+          Honors & Recognition
+        </h2>
+        <span class="text-xs font-mono text-theme-rose">51+ AWARDS</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {honors.map((h) => (
+          <div class="p-5 bg-theme-surface border border-theme-border space-y-2 font-sans text-xs shadow-sm rounded-sm">
+            <span class="text-[10px] text-theme-text-faint block uppercase font-mono">{h.date} • {h.place}</span>
+            <div class="font-bold text-theme-text text-sm font-editorial leading-tight">
+              {h.title}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

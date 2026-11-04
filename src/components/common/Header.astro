@@ -1,0 +1,103 @@
+---
+import { siteConfig } from '../../config/site';
+import ThemeSwitcher from './ThemeSwitcher.astro';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-40 w-full border-b border-theme-border bg-theme-bg/95 backdrop-blur-md transition-colors duration-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 sm:h-20">
+    <!-- Brand / Name with Artist-Engineer Monogram -->
+    <a href="/" class="flex items-center gap-3.5 group">
+      <div class="w-9 h-9 border border-theme-border-strong rounded-full flex items-center justify-center font-editorial font-bold text-sm bg-theme-surface group-hover:border-theme-rose group-hover:text-theme-rose transition-colors shadow-sm">
+        IN
+      </div>
+      <div class="flex flex-col">
+        <span class="font-editorial text-lg sm:text-xl font-bold tracking-tight text-theme-text group-hover:text-theme-rose transition-colors">
+          {siteConfig.name}
+        </span>
+        <span class="text-[11px] font-sans text-theme-text-muted tracking-wide">
+          Cornell Engineering '29 • Baja SAE
+        </span>
+      </div>
+    </a>
+
+    <!-- Navigation Links -->
+    <nav class="hidden md:flex items-center gap-1 font-sans text-sm">
+      {siteConfig.nav.map((item) => {
+        const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+        return (
+          <a
+            href={item.href}
+            class={`px-3.5 py-1.5 rounded-full transition-all text-xs font-medium tracking-wide ${
+              isActive
+                ? 'bg-theme-rose/10 text-theme-rose border border-theme-rose/40 font-semibold'
+                : 'text-theme-text-muted hover:text-theme-text hover:bg-theme-surface'
+            }`}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Right Controls: Theme Switcher + Resume Quick Link -->
+    <div class="flex items-center gap-3">
+      <ThemeSwitcher />
+      
+      <a
+        href={siteConfig.resumeUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-theme-border bg-theme-surface hover:border-theme-rose hover:text-theme-rose text-xs font-sans font-medium text-theme-text transition-colors shadow-sm"
+      >
+        <svg class="w-3.5 h-3.5 text-theme-rose" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        <span>Resume</span>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        class="md:hidden p-2 rounded-md border border-theme-border text-theme-text-muted hover:text-theme-text bg-theme-surface"
+        aria-label="Toggle navigation menu"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Collapsible Menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-theme-border bg-theme-surface px-4 py-3 space-y-2 font-sans text-sm">
+    {siteConfig.nav.map((item) => (
+      <a
+        href={item.href}
+        class="block px-3 py-2 rounded-md border border-theme-border/50 text-theme-text hover:border-theme-rose hover:text-theme-rose hover:bg-theme-surface-hover"
+      >
+        {item.label}
+      </a>
+    ))}
+    <a
+      href={siteConfig.resumeUrl}
+      target="_blank"
+      class="block px-3 py-2 rounded-md border border-theme-rose/50 bg-theme-rose/10 text-theme-rose font-semibold text-center text-xs"
+    >
+      Download Resume (PDF)
+    </a>
+  </div>
+</header>
+
+<script>
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (toggleBtn && mobileMenu) {
+    toggleBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+</script>

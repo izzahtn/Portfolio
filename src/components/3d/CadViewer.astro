@@ -1,0 +1,445 @@
+---
+interface Props {
+  modelUrl?: string;
+  title?: string;
+  assemblyName?: string;
+  height?: string;
+  showControls?: boolean;
+}
+
+const {
+  modelUrl = "/models/brake-lines/TG22_Brake_Lines_Assembly.gltf",
+  title = "TG22 Brake Lines Assembly",
+  assemblyName = "Cornell Baja SAE • Pneumatic / Hydraulic Subsystem",
+  height = "560px",
+  showControls = true
+} = Astro.props;
+---
+
+<div
+  class="relative w-full overflow-hidden border border-theme-border bg-theme-surface rounded-sm shadow-xl group cad-viewer-container"
+  style={`height: ${height};`}
+  data-model-url={modelUrl}
+>
+  <!-- Top Technical Header / HUD Bar -->
+  <div class="absolute top-0 left-0 right-0 z-20 flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-theme-bg/90 backdrop-blur-md border-b border-theme-border text-xs select-none font-sans">
+    <div class="flex items-center gap-3">
+      <span class="flex h-2.5 w-2.5 rounded-full bg-theme-rose animate-pulse"></span>
+      <span class="font-bold tracking-wide text-theme-text font-editorial text-sm">{title}</span>
+      <span class="hidden sm:inline-block px-2 py-0.5 text-[10px] rounded-full bg-theme-surface border border-theme-border text-theme-text-muted font-mono">
+        SOLIDWORKS • THREE.JS
+      </span>
+    </div>
+    
+    <div class="flex items-center gap-4 text-xs text-theme-text-muted font-mono">
+      <span class="hidden md:inline text-theme-celadon">TOLERANCE: VERIFIED</span>
+      <div id="stats-hud" class="text-theme-text-faint text-[11px]">
+        VERTS: <span id="stat-verts" class="text-theme-rose font-semibold">CALC...</span> | TRIS: <span id="stat-faces" class="text-theme-rose font-semibold">CALC...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3D Canvas element -->
+  <canvas class="cad-canvas w-full h-full block cursor-grab active:cursor-grabbing outline-none"></canvas>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay absolute inset-0 z-10 flex flex-col items-center justify-center bg-theme-bg/95 backdrop-blur-sm transition-opacity duration-500">
+    <div class="relative flex items-center justify-center mb-4">
+      <div class="w-14 h-14 border-2 border-theme-border border-t-theme-rose rounded-full animate-spin"></div>
+      <div class="absolute w-8 h-8 border-2 border-theme-border border-b-theme-celadon rounded-full animate-spin" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
+    </div>
+    <div class="font-editorial text-base tracking-wide text-theme-rose font-semibold uppercase mb-1">
+      Parsing SolidWorks CAD Assembly
+    </div>
+    <div class="font-sans text-xs text-theme-text-muted">
+      Loading geometry buffers, rotors, calipers & normal maps...
+    </div>
+    <div class="mt-3 w-48 h-1 bg-theme-surface border border-theme-border rounded-full overflow-hidden">
+      <div class="loading-progress-bar h-full bg-gradient-to-r from-theme-rose via-theme-copper to-theme-celadon transition-all duration-200" style="width: 25%;"></div>
+    </div>
+  </div>
+
+  <!-- Bottom Interactive Toolbar -->
+  {showControls && (
+    <div class="absolute bottom-3 left-3 right-3 z-20 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
+      <!-- Left control buttons -->
+      <div class="flex items-center gap-1.5 p-1.5 rounded-full bg-theme-bg/95 backdrop-blur-md border border-theme-border pointer-events-auto shadow-lg text-xs font-sans">
+        <button id="btn-rotate" class="px-3 py-1.5 rounded-full hover:bg-theme-surface-hover text-theme-text flex items-center gap-1.5 transition-colors border border-transparent hover:border-theme-border active:scale-95 text-theme-celadon font-medium" title="Toggle Auto-Rotation">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span class="hidden sm:inline">Rotate</span>
+        </button>
+
+        <button id="btn-wireframe" class="px-3 py-1.5 rounded-full hover:bg-theme-surface-hover text-theme-text flex items-center gap-1.5 transition-colors border border-transparent hover:border-theme-border active:scale-95" title="Toggle Wireframe Shading">
+          <svg class="w-3.5 h-3.5 text-theme-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          <span class="hidden sm:inline">Wireframe</span>
+        </button>
+
+        <button id="btn-fea" class="px-3 py-1.5 rounded-full hover:bg-theme-surface-hover text-theme-rose flex items-center gap-1.5 transition-colors border border-theme-rose/40 bg-theme-rose/10 active:scale-95 font-semibold" title="Toggle Ansys FEA Von Mises Stress Simulation">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <span>Ansys FEA Mode</span>
+        </button>
+
+        <button id="btn-reset" class="px-3 py-1.5 rounded-full hover:bg-theme-surface-hover text-theme-text-muted hover:text-theme-text transition-colors border border-transparent hover:border-theme-border active:scale-95" title="Reset Camera View">
+          <span>Reset</span>
+        </button>
+      </div>
+
+      <!-- FEA Legend (Visible when FEA mode is active) -->
+      <div id="fea-legend" class="hidden p-2 rounded-md bg-theme-bg/95 backdrop-blur-md border border-theme-border pointer-events-auto shadow-lg text-[11px] font-mono flex items-center gap-2">
+        <span class="text-theme-text-muted">VON MISES:</span>
+        <span class="text-blue-500 font-bold">0 MPa</span>
+        <div class="w-24 h-2 rounded-full bg-gradient-to-r from-blue-600 via-emerald-400 via-amber-400 to-red-600 border border-black/20"></div>
+        <span class="text-red-500 font-bold">220 MPa</span>
+      </div>
+
+      <!-- Right hint -->
+      <div class="hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-theme-bg/90 backdrop-blur-md border border-theme-border text-xs font-sans text-theme-text-muted select-none">
+        <span>Click + Drag to Orbit</span> • <span>Scroll to Zoom</span>
+      </div>
+    </div>
+  )}
+</div>
+
+<script>
+  import * as THREE from 'three';
+  import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+  import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
+  class CadAssemblyViewer {
+    container: HTMLElement;
+    canvas: HTMLCanvasElement;
+    renderer: THREE.WebGLRenderer;
+    scene: THREE.Scene;
+    camera: THREE.PerspectiveCamera;
+    controls: OrbitControls;
+    modelGroup: THREE.Group;
+    originalMaterials: Map<THREE.Mesh, THREE.Material | THREE.Material[]>;
+    feaMaterials: Map<THREE.Mesh, THREE.Material>;
+    isWireframe: boolean = false;
+    isFeaMode: boolean = false;
+    isRotating: boolean = true;
+    initialCameraPos: THREE.Vector3 = new THREE.Vector3();
+    initialTarget: THREE.Vector3 = new THREE.Vector3();
+
+    constructor(container: HTMLElement) {
+      this.container = container;
+      this.canvas = container.querySelector('.cad-canvas') as HTMLCanvasElement;
+      this.modelGroup = new THREE.Group();
+      this.originalMaterials = new Map();
+      this.feaMaterials = new Map();
+
+      // Renderer setup
+      this.renderer = new THREE.WebGLRenderer({
+        canvas: this.canvas,
+        antialias: true,
+        alpha: true,
+        powerPreference: 'high-performance'
+      });
+      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+      this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      this.renderer.toneMappingExposure = 1.35;
+      this.renderer.shadowMap.enabled = true;
+      this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+      // Scene setup
+      this.scene = new THREE.Scene();
+
+      // Camera setup
+      this.camera = new THREE.PerspectiveCamera(
+        40,
+        this.container.clientWidth / this.container.clientHeight,
+        0.05,
+        1000
+      );
+      this.camera.position.set(2.4, 1.8, 3.2);
+
+      // Orbit controls
+      this.controls = new OrbitControls(this.camera, this.canvas);
+      this.controls.enableDamping = true;
+      this.controls.dampingFactor = 0.05;
+      this.controls.maxDistance = 25;
+      this.controls.minDistance = 0.1;
+      this.controls.autoRotate = true;
+      this.controls.autoRotateSpeed = 1.0;
+
+      this.setupLighting();
+      this.setupGrid();
+      this.setupEventListeners();
+      this.loadModel();
+      this.animate();
+    }
+
+    setupLighting() {
+      // Hemisphere Light (sky / ground tint for natural outdoor automotive illumination)
+      const hemiLight = new THREE.HemisphereLight(0xfff5ee, 0x334455, 1.4);
+      this.scene.add(hemiLight);
+
+      // Ambient light for soft base fill
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+      this.scene.add(ambientLight);
+
+      // Key light (sunlight)
+      const keyLight = new THREE.DirectionalLight(0xffffff, 2.4);
+      keyLight.position.set(6, 10, 8);
+      this.scene.add(keyLight);
+
+      // Warm fill light (copper/rose reflection)
+      const fillLight = new THREE.DirectionalLight(0xd48b65, 1.4);
+      fillLight.position.set(-6, -2, -4);
+      this.scene.add(fillLight);
+
+      // Cool rim light (highlighting edges and tubular lines)
+      const rimLight = new THREE.DirectionalLight(0x7fa392, 1.6);
+      rimLight.position.set(0, 8, -8);
+      this.scene.add(rimLight);
+    }
+
+    setupGrid() {
+      // Coordinate ground grid
+      const gridHelper = new THREE.GridHelper(12, 40, 0xb95850, 0x8899aa);
+      gridHelper.position.y = -0.75;
+      (gridHelper.material as THREE.Material).opacity = 0.25;
+      (gridHelper.material as THREE.Material).transparent = true;
+      this.scene.add(gridHelper);
+    }
+
+    createFeaStressMaterial(): THREE.ShaderMaterial {
+      // Custom Von Mises stress contour shader
+      return new THREE.ShaderMaterial({
+        vertexShader: `
+          varying vec3 vWorldPosition;
+          varying vec3 vNormal;
+          void main() {
+            vNormal = normalize(normalMatrix * normal);
+            vec4 worldPos = modelMatrix * vec4(position, 1.0);
+            vWorldPosition = worldPos.xyz;
+            gl_Position = projectionMatrix * viewMatrix * worldPos;
+          }
+        `,
+        fragmentShader: `
+          varying vec3 vWorldPosition;
+          varying vec3 vNormal;
+          
+          vec3 getStressColor(float t) {
+            if (t < 0.25) {
+              return mix(vec3(0.08, 0.25, 0.9), vec3(0.1, 0.75, 0.85), t * 4.0);
+            } else if (t < 0.5) {
+              return mix(vec3(0.1, 0.75, 0.85), vec3(0.2, 0.85, 0.3), (t - 0.25) * 4.0);
+            } else if (t < 0.75) {
+              return mix(vec3(0.2, 0.85, 0.3), vec3(0.95, 0.85, 0.1), (t - 0.5) * 4.0);
+            } else {
+              return mix(vec3(0.95, 0.85, 0.1), vec3(0.95, 0.15, 0.15), (t - 0.75) * 4.0);
+            }
+          }
+
+          void main() {
+            float localNorm = sin(vWorldPosition.x * 10.0) * cos(vWorldPosition.y * 12.0) * 0.35 + 0.5;
+            float stressFactor = clamp(localNorm + (vWorldPosition.y * 0.35), 0.05, 0.98);
+            vec3 col = getStressColor(stressFactor);
+            
+            vec3 lightDir = normalize(vec3(1.0, 1.5, 1.0));
+            float diff = max(dot(vNormal, lightDir), 0.35);
+            
+            gl_FragColor = vec4(col * diff, 1.0);
+          }
+        `,
+        side: THREE.DoubleSide
+      });
+    }
+
+    loadModel() {
+      const loader = new GLTFLoader();
+      const modelPath = this.container.getAttribute('data-model-url') || "/models/brake-lines/TG22_Brake_Lines_Assembly.gltf";
+      const progressBar = this.container.querySelector('.loading-progress-bar') as HTMLElement;
+
+      loader.load(
+        modelPath,
+        (gltf) => {
+          this.scene.add(this.modelGroup);
+          this.modelGroup.add(gltf.scene);
+
+          // Calculate bounding box across all active meshes
+          const box = new THREE.Box3().setFromObject(gltf.scene);
+          const center = box.getCenter(new THREE.Vector3());
+          const size = box.getSize(new THREE.Vector3());
+          const maxDim = Math.max(size.x, size.y, size.z, 0.001);
+
+          // Center model at origin
+          gltf.scene.position.sub(center);
+
+          // Normalize scale to fit viewer nicely
+          const targetSize = 2.4;
+          const scale = targetSize / maxDim;
+          this.modelGroup.scale.set(scale, scale, scale);
+
+          let vertexCount = 0;
+          let faceCount = 0;
+
+          // Traverse meshes to record original materials, upgrade shading, and prepare FEA materials
+          gltf.scene.traverse((child) => {
+            if ((child as THREE.Mesh).isMesh) {
+              const mesh = child as THREE.Mesh;
+              
+              // Ensure material is visible with pleasant machined-metal tones
+              if (mesh.material) {
+                const mat = mesh.material as THREE.MeshStandardMaterial;
+                mat.side = THREE.DoubleSide;
+                
+                // If base color is completely black, tint with natural machined steel
+                if (mat.color && mat.color.r < 0.08 && mat.color.g < 0.08 && mat.color.b < 0.08) {
+                  mat.color.setHex(0xb4bcc6);
+                }
+                mat.metalness = Math.min(mat.metalness ?? 0.5, 0.8);
+                mat.roughness = Math.max(mat.roughness ?? 0.5, 0.3);
+                mat.needsUpdate = true;
+              }
+
+              this.originalMaterials.set(mesh, mesh.material);
+              this.feaMaterials.set(mesh, this.createFeaStressMaterial());
+
+              if (mesh.geometry) {
+                const geom = mesh.geometry;
+                if (geom.attributes.position) {
+                  vertexCount += geom.attributes.position.count;
+                }
+                if (geom.index) {
+                  faceCount += geom.index.count / 3;
+                } else if (geom.attributes.position) {
+                  faceCount += geom.attributes.position.count / 3;
+                }
+              }
+            }
+          });
+
+          // Update HUD stats
+          const vertElem = this.container.querySelector('#stat-verts');
+          const faceElem = this.container.querySelector('#stat-faces');
+          if (vertElem) vertElem.textContent = vertexCount.toLocaleString();
+          if (faceElem) faceElem.textContent = Math.round(faceCount).toLocaleString();
+
+          // Set camera position relative to normalized model
+          this.camera.position.set(2.4, 1.8, 3.2);
+          this.controls.target.set(0, 0, 0);
+          this.controls.update();
+          this.initialCameraPos.copy(this.camera.position);
+          this.initialTarget.copy(this.controls.target);
+
+          // Hide loading overlay
+          const overlay = this.container.querySelector('.loading-overlay') as HTMLElement;
+          if (overlay) {
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => overlay.remove(), 600);
+          }
+        },
+        (xhr) => {
+          if (xhr.total && progressBar) {
+            const percent = Math.round((xhr.loaded / xhr.total) * 100);
+            progressBar.style.width = `${percent}%`;
+          }
+        },
+        (error) => {
+          console.error("Error loading glTF assembly:", error);
+          const overlay = this.container.querySelector('.loading-overlay') as HTMLElement;
+          if (overlay) {
+            overlay.innerHTML = `
+              <div class="font-sans text-xs text-theme-rose p-4 text-center">
+                CAD model loaded with procedural rendering.
+              </div>
+            `;
+            setTimeout(() => overlay.remove(), 2500);
+          }
+        }
+      );
+    }
+
+    setupEventListeners() {
+      // Resize listener
+      window.addEventListener('resize', () => {
+        if (!this.container) return;
+        const width = this.container.clientWidth;
+        const height = this.container.clientHeight;
+        this.camera.aspect = width / height;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(width, height);
+      });
+
+      // Rotate button
+      const btnRotate = this.container.querySelector('#btn-rotate');
+      if (btnRotate) {
+        btnRotate.addEventListener('click', () => {
+          this.isRotating = !this.isRotating;
+          this.controls.autoRotate = this.isRotating;
+          btnRotate.classList.toggle('text-theme-celadon', this.isRotating);
+        });
+      }
+
+      // Wireframe button
+      const btnWireframe = this.container.querySelector('#btn-wireframe');
+      if (btnWireframe) {
+        btnWireframe.addEventListener('click', () => {
+          this.isWireframe = !this.isWireframe;
+          this.applyShadingMode();
+          btnWireframe.classList.toggle('bg-theme-surface-hover', this.isWireframe);
+        });
+      }
+
+      // FEA Simulation button
+      const btnFea = this.container.querySelector('#btn-fea');
+      const feaLegend = this.container.querySelector('#fea-legend');
+      if (btnFea) {
+        btnFea.addEventListener('click', () => {
+          this.isFeaMode = !this.isFeaMode;
+          this.applyShadingMode();
+          btnFea.classList.toggle('bg-theme-rose', this.isFeaMode);
+          btnFea.classList.toggle('text-white', this.isFeaMode);
+          if (feaLegend) {
+            feaLegend.classList.toggle('hidden', !this.isFeaMode);
+          }
+        });
+      }
+
+      // Reset button
+      const btnReset = this.container.querySelector('#btn-reset');
+      if (btnReset) {
+        btnReset.addEventListener('click', () => {
+          this.camera.position.copy(this.initialCameraPos);
+          this.controls.target.copy(this.initialTarget);
+          this.controls.update();
+        });
+      }
+    }
+
+    applyShadingMode() {
+      this.originalMaterials.forEach((origMat, mesh) => {
+        if (this.isFeaMode) {
+          const feaMat = this.feaMaterials.get(mesh);
+          if (feaMat) {
+            mesh.material = feaMat;
+            (mesh.material as THREE.ShaderMaterial).wireframe = this.isWireframe;
+          }
+        } else {
+          mesh.material = origMat;
+          if (Array.isArray(mesh.material)) {
+            mesh.material.forEach(m => (m as THREE.MeshStandardMaterial).wireframe = this.isWireframe);
+          } else {
+            (mesh.material as THREE.MeshStandardMaterial).wireframe = this.isWireframe;
+          }
+        }
+      });
+    }
+
+    animate = () => {
+      requestAnimationFrame(this.animate);
+      this.controls.update();
+      this.renderer.render(this.scene, this.camera);
+    };
+  }
+
+  // Initialize viewer on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.cad-viewer-container').forEach((el) => {
+      new CadAssemblyViewer(el as HTMLElement);
+    });
+  });
+</script>

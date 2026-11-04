@@ -1,0 +1,23 @@
+---
+interface Props {
+  variant?: 'rose' | 'celadon' | 'cyan' | 'copper' | 'default';
+  label: string;
+  value?: string;
+  class?: string;
+}
+
+const { variant = 'default', label, value, class: className = '' } = Astro.props;
+
+const variantClasses = {
+  default: 'border-theme-border text-theme-text-muted bg-theme-surface/80',
+  rose: 'border-theme-rose/40 text-theme-rose bg-theme-rose/10',
+  celadon: 'border-theme-celadon/40 text-theme-celadon bg-theme-celadon/10',
+  cyan: 'border-theme-cyan/40 text-theme-cyan bg-theme-cyan/10',
+  copper: 'border-theme-copper/40 text-theme-copper bg-theme-copper/10',
+};
+---
+
+<span class={`inline-flex items-center gap-1.5 px-2 py-0.5 border font-mono text-[10px] uppercase tracking-wider select-none ${variantClasses[variant]} ${className}`}>
+  <span class="opacity-75">{label}</span>
+  {value && <span class="font-bold opacity-100">{value}</span>}
+</span>

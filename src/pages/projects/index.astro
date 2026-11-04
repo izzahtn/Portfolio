@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { projects } from '../../data/projects';
+---
+
+<BaseLayout
+  title="Engineering Projects | Izzah Nishad"
+  description="Mechanical engineering projects across vehicle dynamics, structural FEA, pulsed power optoelectronics, and competitive robotics."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+    <!-- Header -->
+    <div class="border-b border-theme-border pb-6">
+      <span class="text-xs font-mono uppercase tracking-widest text-theme-rose block mb-1">
+        PORTFOLIO DOSSIER
+      </span>
+      <h1 class="text-4xl sm:text-6xl font-bold font-editorial text-theme-text tracking-tight">
+        Engineering Projects
+      </h1>
+      <p class="text-sm sm:text-base text-theme-text-muted font-sans mt-3 max-w-2xl leading-relaxed">
+        Mechanical design, structural finite element analysis (FEA), high-voltage pulsed power circuitry, and precision machine shop fabrication for Cornell Baja Racing, Cornell Applied Physics, and Danbury Robotics.
+      </p>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="space-y-12">
+      {projects.map((project) => (
+        <article class="matting-frame group hover:border-theme-rose transition-all duration-300 shadow-xl">
+          <div class="matting-frame-inner p-8 sm:p-10 bg-theme-surface grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Left Info Column -->
+            <div class="lg:col-span-8 space-y-4">
+              <div class="flex items-center gap-3">
+                <span class="font-editorial text-2xl font-bold text-theme-rose">
+                  Project {project.number}
+                </span>
+                <span class="w-8 h-[1px] bg-theme-border-strong"></span>
+                <span class="text-xs font-mono uppercase tracking-wider text-theme-text-muted">
+                  {project.organization}
+                </span>
+                {project.has3dModel && (
+                  <span class="artisan-tag artisan-tag-rose ml-auto">
+                    3D Model Live
+                  </span>
+                )}
+              </div>
+
+              <h2 class="text-2xl sm:text-3xl font-bold font-editorial text-theme-text group-hover:text-theme-rose transition-colors">
+                <a href={`/projects/${project.slug}`}>
+                  {project.title}
+                </a>
+              </h2>
+
+              <p class="text-sm sm:text-base text-theme-text-muted font-sans leading-relaxed">
+                {project.summary}
+              </p>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5 pt-2">
+                {project.tags.map((tag) => (
+                  <span class="px-2.5 py-0.5 rounded-full text-xs font-sans border border-theme-border bg-theme-bg text-theme-text-muted">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div class="pt-4 flex items-center gap-4">
+                <a
+                  href={`/projects/${project.slug}`}
+                  class="px-5 py-2.5 rounded-full bg-theme-rose text-white text-xs font-semibold hover:bg-theme-rose-muted transition-colors inline-flex items-center gap-2 shadow-sm"
+                >
+                  <span>Explore Project {project.number}</span>
+                  <span>→</span>
+                </a>
+                {project.has3dModel && (
+                  <a
+                    href="/cad-lab"
+                    class="px-4 py-2 rounded-full border border-theme-border text-xs font-medium text-theme-text hover:border-theme-rose hover:text-theme-rose transition-colors"
+                  >
+                    Open in 3D CAD Lab
+                  </a>
+                )}
+              </div>
+            </div>
+
+            <!-- Right Key Specs Card -->
+            <div class="lg:col-span-4 p-5 bg-theme-bg border border-theme-border space-y-3 font-sans text-xs">
+              <div class="font-editorial font-bold text-sm text-theme-text border-b border-theme-border pb-2">
+                Key Parameters
+              </div>
+              <div class="space-y-2 text-xs">
+                {project.specs.slice(0, 4).map((spec) => (
+                  <div>
+                    <span class="text-[10px] text-theme-text-faint uppercase block">{spec.label}</span>
+                    <span class="text-theme-text font-semibold block">{spec.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

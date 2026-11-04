@@ -1,0 +1,247 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CadViewer from '../../components/3d/CadViewer.astro';
+import { projects, type Project } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((p) => ({
+    params: { slug: p.slug },
+    props: { project: p },
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+// Find next and prev projects
+const currentIndex = projects.findIndex((p) => p.slug === project.slug);
+const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
+const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
+---
+
+<BaseLayout
+  title={`${project.title} | Izzah Nishad`}
+  description={project.summary}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+    <!-- Breadcrumb & Metadata -->
+    <div class="flex flex-wrap items-center justify-between gap-3 text-xs font-sans border-b border-theme-border pb-4">
+      <div class="flex items-center gap-2 text-theme-text-muted">
+        <a href="/projects" class="hover:text-theme-rose transition-colors">Engineering Projects</a>
+        <span>/</span>
+        <span class="text-theme-text font-bold">Project {project.number}</span>
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="artisan-tag artisan-tag-rose">{project.organization}</span>
+        <span class="artisan-tag artisan-tag-celadon">{project.role}</span>
+        <span class="artisan-tag artisan-tag-copper">{project.timeline}</span>
+      </div>
+    </div>
+
+    <!-- Hero Title Block -->
+    <div class="space-y-4 max-w-4xl">
+      <div class="flex items-center gap-3">
+        <span class="font-editorial text-3xl font-bold text-theme-rose">
+          Project {project.number}
+        </span>
+        <span class="w-12 h-[1px] bg-theme-border-strong"></span>
+        <span class="text-xs font-mono uppercase tracking-widest text-theme-celadon">
+          {project.category}
+        </span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl font-bold font-editorial text-theme-text tracking-tight leading-[1.08]">
+        {project.title}
+      </h1>
+
+      <p class="text-base sm:text-lg text-theme-text-muted font-sans leading-relaxed pt-2">
+        {project.summary}
+      </p>
+
+      <div class="flex flex-wrap gap-2 pt-2">
+        {project.tags.map((t) => (
+          <span class="px-3 py-1 rounded-full text-xs font-sans border border-theme-border bg-theme-surface text-theme-text-muted">
+            #{t}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Interactive 3D Model Stage (if project has 3D assets) -->
+    {project.has3dModel && (
+      <div class="space-y-3 pt-2">
+        <div class="flex items-center justify-between text-xs font-sans text-theme-rose">
+          <span class="font-bold tracking-wide uppercase">Interactive SolidWorks 3D Assembly</span>
+          <span class="text-theme-text-muted">Rotate, zoom & toggle Ansys FEA mode</span>
+        </div>
+        <div class="matting-frame shadow-xl">
+          <CadViewer
+            modelUrl={project.modelUrl}
+            title={project.shortTitle}
+            assemblyName={project.organization}
+            height="560px"
+          />
+        </div>
+      </div>
+    )}
+
+    <!-- Project Photographs & Laboratory Documentation -->
+    {project.images && project.images.length > 0 && (
+      <div class="space-y-6 pt-4">
+        <div class="border-b border-theme-border pb-3 flex items-center justify-between">
+          <h2 class="text-2xl sm:text-3xl font-bold font-editorial text-theme-text">
+            Laboratory Documentation & Experimental Plots
+          </h2>
+          <span class="text-xs font-mono text-theme-rose">
+            {project.images.length} FIGURES
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {project.images.map((img, i) => (
+            <div class="matting-frame shadow-md group">
+              <div class="matting-frame-inner p-4 bg-theme-surface space-y-3">
+                <div class="overflow-hidden rounded-sm border border-theme-border bg-black/5 aspect-[4/3] flex items-center justify-center">
+                  <img
+                    src={img.url}
+                    alt={img.caption}
+                    class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="space-y-1">
+                  <span class="font-mono text-[10px] text-theme-rose uppercase font-bold block">
+                    Figure {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <p class="text-xs text-theme-text-muted leading-relaxed font-sans">
+                    {img.caption}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Two-Column Layout: Narrative vs. Technical Specifications -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-6">
+      
+      <!-- Narrative Column -->
+      <div class="lg:col-span-8 space-y-10">
+        {project.sections.map((sec) => (
+          <section class="p-8 sm:p-10 bg-theme-surface border border-theme-border space-y-5 shadow-sm rounded-sm">
+            <div class="space-y-1.5 border-b border-theme-border pb-4">
+              <h2 class="text-2xl sm:text-3xl font-bold font-editorial text-theme-text">
+                {sec.title}
+              </h2>
+              {sec.subtitle && (
+                <p class="text-xs font-sans text-theme-rose font-medium">
+                  {sec.subtitle}
+                </p>
+              )}
+            </div>
+
+            <p class="text-sm sm:text-base text-theme-text-muted leading-relaxed font-sans">
+              {sec.content}
+            </p>
+
+            {sec.bulletPoints && sec.bulletPoints.length > 0 && (
+              <ul class="space-y-2.5 pt-2 text-sm text-theme-text font-sans">
+                {sec.bulletPoints.map((bp) => (
+                  <li class="flex items-start gap-2.5">
+                    <span class="text-theme-celadon font-bold mt-1">›</span>
+                    <span class="leading-relaxed">{bp}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {sec.callout && (
+              <div class="p-5 bg-theme-bg/80 border-l-4 border-theme-copper space-y-2 text-xs font-sans rounded-r-sm">
+                <div class="text-theme-copper font-bold uppercase tracking-wider text-[11px]">
+                  {sec.callout.title}
+                </div>
+                <div class="text-theme-text-muted leading-relaxed font-mono">
+                  {sec.callout.text}
+                </div>
+              </div>
+            )}
+          </section>
+        ))}
+      </div>
+
+      <!-- Specification Matrix Sidebar -->
+      <div class="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
+        <div class="matting-frame shadow-xl">
+          <div class="matting-frame-inner p-6 space-y-5 bg-theme-surface font-sans text-xs">
+            <div class="border-b border-theme-border pb-3 flex items-center justify-between">
+              <span class="font-bold text-theme-text uppercase font-editorial text-sm">Technical Specifications</span>
+              <span class="text-theme-rose font-mono text-[10px]">VERIFIED</span>
+            </div>
+
+            <div class="space-y-3.5 divide-y divide-theme-border/60">
+              {project.specs.map((spec) => (
+                <div class="pt-3 first:pt-0">
+                  <span class="text-theme-text-faint text-[10px] uppercase tracking-wider block mb-0.5">
+                    {spec.label}
+                  </span>
+                  <span class="text-theme-text font-semibold text-xs leading-snug block">
+                    {spec.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div class="pt-4 border-t border-theme-border">
+              <a
+                href={`mailto:izzahtn@gmail.com?subject=Regarding ${encodeURIComponent(project.title)}`}
+                class="block w-full text-center py-2.5 rounded-full bg-theme-rose text-white text-xs font-semibold hover:bg-theme-rose-muted transition-colors shadow-sm"
+              >
+                Inquire About This Work
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation between projects -->
+    <div class="pt-10 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between gap-4 font-sans text-xs">
+      <div>
+        {prevProject && (
+          <a
+            href={`/projects/${prevProject.slug}`}
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-theme-border bg-theme-surface hover:border-theme-rose text-theme-text transition-colors"
+          >
+            <span>← Project {prevProject.number}:</span>
+            <span class="font-bold text-theme-rose">{prevProject.shortTitle}</span>
+          </a>
+        )}
+      </div>
+
+      <a
+        href="/projects"
+        class="text-theme-text-muted hover:text-theme-text underline decoration-theme-border font-medium"
+      >
+        Back to All Projects (04)
+      </a>
+
+      <div>
+        {nextProject && (
+          <a
+            href={`/projects/${nextProject.slug}`}
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-theme-border bg-theme-surface hover:border-theme-rose text-theme-text transition-colors"
+          >
+            <span>Project {nextProject.number}:</span>
+            <span class="font-bold text-theme-rose">{nextProject.shortTitle}</span>
+            <span>→</span>
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

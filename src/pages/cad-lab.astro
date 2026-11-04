@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CadViewer from '../components/3d/CadViewer.astro';
+---
+
+<BaseLayout
+  title="3D CAD & FEA Lab | Izzah Nishad"
+  description="Interactive 3D Three.js CAD model and Ansys FEA stress viewer for Cornell Baja SAE TG22 Brake Lines Assembly."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+    <!-- Header -->
+    <div class="border-b border-theme-border pb-6">
+      <span class="text-xs font-mono uppercase tracking-widest text-theme-rose block mb-1">
+        DIGITAL PROTOTYPING & SIMULATION
+      </span>
+      <h1 class="text-4xl sm:text-6xl font-bold font-editorial text-theme-text tracking-tight">
+        Interactive 3D CAD & FEA Laboratory
+      </h1>
+      <p class="text-sm sm:text-base text-theme-text-muted font-sans mt-3 max-w-3xl leading-relaxed">
+        This stage renders production CAD data exported from SolidWorks 2025 as glTF/GLB with PBR material shaders, alongside an algorithmic Ansys FEA Von Mises stress simulation mode.
+      </p>
+    </div>
+
+    <!-- Live 3D Model Stage -->
+    <div class="space-y-4">
+      <div class="matting-frame shadow-2xl">
+        <CadViewer
+          modelUrl="/models/brake-lines/TG22_Brake_Lines_Assembly.gltf"
+          title="TG22 Front Corner & Brake Plumbing Assembly"
+          assemblyName="Cornell Baja Racing // SolidWorks Assembly"
+          height="620px"
+        />
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 p-4 bg-theme-surface border border-theme-border text-xs font-sans text-theme-text-muted rounded-sm">
+        <div class="flex items-center gap-3">
+          <span class="text-theme-rose font-bold">Interactions:</span>
+          <span>Rotate: [Click + Drag]</span>
+          <span>•</span>
+          <span>Pan: [Right-Click + Drag]</span>
+          <span>•</span>
+          <span>Zoom: [Scroll Wheel]</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="artisan-tag artisan-tag-rose">PBR Normal Maps</span>
+          <span class="artisan-tag artisan-tag-celadon">Von Mises Shader</span>
+          <span class="artisan-tag artisan-tag-copper">CAD Triangulation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subassembly Breakdown & Bill of Materials -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">
+      <div class="lg:col-span-8 space-y-6">
+        <div class="p-8 bg-theme-surface border border-theme-border space-y-5 shadow-sm rounded-sm">
+          <div class="border-b border-theme-border pb-3 flex items-center justify-between">
+            <h2 class="text-2xl font-bold font-editorial text-theme-text">
+              Assembly Components & Bill of Materials
+            </h2>
+            <span class="text-xs font-mono text-theme-text-faint">TG22_Brake_Lines_Assembly</span>
+          </div>
+
+          <p class="text-sm text-theme-text-muted font-sans leading-relaxed">
+            The active 3D model above captures the entire front-left hub packaging, including upright geometry, rotor mounting hardware, and hydraulic line integration:
+          </p>
+
+          <div class="divide-y divide-theme-border/60 font-sans text-xs">
+            <div class="py-3 flex items-center justify-between">
+              <div>
+                <span class="text-theme-text font-bold text-sm block">TG22 Front Rotor & Wave Disc Springs</span>
+                <span class="text-xs text-theme-text-muted">Floating rotor mount with 8x McMaster-Carr wave disc springs to accommodate thermal expansion</span>
+              </div>
+              <span class="font-mono text-xs font-bold text-theme-rose">410 Stainless</span>
+            </div>
+
+            <div class="py-3 flex items-center justify-between">
+              <div>
+                <span class="text-theme-text font-bold text-sm block">TG22 Left Front Upright</span>
+                <span class="text-xs text-theme-text-muted">Machined billet upright carrying upper/lower ball joints, tie-rod steering mount & brake caliper</span>
+              </div>
+              <span class="font-mono text-xs font-bold text-theme-celadon">7075-T6 Alum</span>
+            </div>
+
+            <div class="py-3 flex items-center justify-between">
+              <div>
+                <span class="text-theme-text font-bold text-sm block">Aurora COM-10T Spherical Bearings</span>
+                <span class="text-xs text-theme-text-muted">High-misalignment aircraft spherical bearings for multi-axis suspension compliance</span>
+              </div>
+              <span class="font-mono text-xs font-bold text-theme-copper">PTFE Lined</span>
+            </div>
+
+            <div class="py-3 flex items-center justify-between">
+              <div>
+                <span class="text-theme-text font-bold text-sm block">Hydraulic T-Block Splitter</span>
+                <span class="text-xs text-theme-text-muted">3-way manifold splitting master cylinder pressure to front-left and front-right calipers</span>
+              </div>
+              <span class="font-mono text-xs font-bold text-theme-gold">6061-T6 Anodized</span>
+            </div>
+
+            <div class="py-3 flex items-center justify-between">
+              <div>
+                <span class="text-theme-text font-bold text-sm block">Grade 9 Steel & 18-8 Stainless Fasteners</span>
+                <span class="text-xs text-theme-text-muted">Zinc yellow-chromate hex head bolts with nylon-insert flange locknuts</span>
+              </div>
+              <span class="font-mono text-xs font-bold text-theme-text">180 ksi Tensile</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: SolidWorks & Ansys Pipeline Explanation -->
+      <div class="lg:col-span-4 space-y-6">
+        <div class="matting-frame shadow-xl">
+          <div class="matting-frame-inner p-6 space-y-5 bg-theme-surface font-sans text-xs">
+            <div class="font-editorial text-sm font-bold text-theme-text border-b border-theme-border pb-3">
+              CAD & FEA Digital Pipeline
+            </div>
+
+            <div class="space-y-4 text-xs text-theme-text-muted">
+              <div>
+                <span class="font-bold text-theme-text block mb-1">01. SolidWorks Modeling</span>
+                <p class="leading-relaxed">
+                  Assemblies are modeled parametrically in SolidWorks, check-mated for packaging envelopes, and exported via GLTF/GLB preserving exact part coordinates, hierarchy, and normal maps.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-theme-text block mb-1">02. Ansys FEA Simulation</span>
+                <p class="leading-relaxed">
+                  Structural simulations in Ansys Mechanical calculate stress concentrations and deflection. Our Three.js custom vertex shader maps the resulting Von Mises contour gradients directly in-browser.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-theme-text block mb-1">03. In-Browser Inspection</span>
+                <p class="leading-relaxed">
+                  Using Three.js ACES Filmic tone mapping and directional studio lighting gives recruiters and engineers an instant, zero-plugin inspection experience.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

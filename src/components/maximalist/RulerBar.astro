@@ -1,0 +1,37 @@
+---
+interface Props {
+  orientation?: 'horizontal' | 'vertical';
+  class?: string;
+  ticks?: number;
+}
+
+const { orientation = 'horizontal', class: className = '', ticks = 16 } = Astro.props;
+---
+
+{orientation === 'horizontal' ? (
+  <div class={`w-full overflow-hidden flex items-center justify-between border-t border-theme-border py-1 select-none pointer-events-none opacity-40 ${className}`}>
+    <div class="flex items-center gap-2 font-mono text-[8px] text-theme-text-faint">
+      <span>0.00mm</span>
+      <span class="w-1.5 h-1.5 bg-theme-border"></span>
+    </div>
+    <div class="flex-1 flex justify-evenly items-end h-2 px-3">
+      {Array.from({ length: ticks }).map((_, i) => (
+        <span class={`w-[1px] bg-theme-border ${i % 4 === 0 ? 'h-2 bg-theme-text-muted' : 'h-1'}`}></span>
+      ))}
+    </div>
+    <div class="flex items-center gap-2 font-mono text-[8px] text-theme-text-faint">
+      <span class="w-1.5 h-1.5 bg-theme-border"></span>
+      <span>100.0mm</span>
+    </div>
+  </div>
+) : (
+  <div class={`h-full flex flex-col justify-between border-l border-theme-border px-1 select-none pointer-events-none opacity-40 ${className}`}>
+    <span class="font-mono text-[8px] text-theme-text-faint">0.0</span>
+    <div class="flex-1 flex flex-col justify-evenly items-start w-2 py-3">
+      {Array.from({ length: ticks }).map((_, i) => (
+        <span class={`h-[1px] bg-theme-border ${i % 4 === 0 ? 'w-2 bg-theme-text-muted' : 'w-1'}`}></span>
+      ))}
+    </div>
+    <span class="font-mono text-[8px] text-theme-text-faint">MAX</span>
+  </div>
+)}

@@ -1,0 +1,24 @@
+# Build outputs
+dist/
+.astro/
+
+# Dependency directories
+node_modules/
+
+# Raw local CAD source export (production models live in public/models/)
+TG22_Brake_Lines_Assembly/
+
+# Environment files
+.env
+.env.production
+.env.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db

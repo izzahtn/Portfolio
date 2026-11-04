@@ -1,0 +1,229 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { artItems, artCategories } from '../data/art';
+---
+
+<BaseLayout
+  title="Art & Play Atelier | Izzah Nishad"
+  description="Creative studio portfolio: fine art drawings, hand-cut woodworking, lost-wax jewelry casting, and structural garment tailoring."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+    <!-- Header -->
+    <div class="border-b border-theme-border pb-6">
+      <span class="text-xs font-mono uppercase tracking-widest text-theme-copper block mb-1">
+        STUDIO ATELIER & PLAY
+      </span>
+      <h1 class="text-4xl sm:text-6xl font-bold font-editorial text-theme-text tracking-tight">
+        Material Craft & Visual Works
+      </h1>
+      <p class="text-sm sm:text-base text-theme-text-muted font-sans mt-3 max-w-2xl leading-relaxed">
+        Inspired by the creative freedom of <a href="https://www.lokye.dev/" target="_blank" class="underline decoration-theme-copper hover:text-theme-copper">lokye.dev</a>: bridging industrial fabrication with tactile, fine-art expression across charcoal, hardwoods, cast silver, and tailored canvas.
+      </p>
+
+      <!-- Category Filter Pills -->
+      <div class="flex flex-wrap gap-2.5 pt-8 font-sans text-xs" id="art-filters">
+        {artCategories.map((cat, idx) => (
+          <button
+            type="button"
+            data-category={cat}
+            class={`art-filter-btn px-4 py-2 rounded-full border transition-all ${
+              idx === 0
+                ? 'border-theme-copper bg-theme-copper text-white font-semibold shadow-sm'
+                : 'border-theme-border bg-theme-surface text-theme-text-muted hover:border-theme-copper hover:text-theme-text'
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Art Masonry Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="art-grid">
+      {artItems.map((item) => (
+        <article
+          class="art-card matting-frame group hover:border-theme-copper transition-all duration-300 shadow-md cursor-pointer"
+          data-category={item.category}
+          data-item={JSON.stringify(item)}
+        >
+          <div class="matting-frame-inner p-5 space-y-4 bg-theme-surface flex flex-col h-full justify-between">
+            <!-- Simulated High-Fidelity Artwork Showcase -->
+            <div
+              class="relative w-full aspect-[4/3] rounded-sm overflow-hidden flex flex-col justify-end p-5 select-none text-white"
+              style={`background-color: ${item.imagePlaceholderColor};`}
+            >
+              <!-- Atmospheric gradient -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+              
+              {item.award && (
+                <div class="absolute top-3 left-3 z-10">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-sans bg-theme-rose text-white uppercase font-bold tracking-wider shadow">
+                    ★ {item.award.split('•')[0]}
+                  </span>
+                </div>
+              )}
+
+              <div class="relative z-10 space-y-1">
+                <span class="text-[10px] uppercase font-sans tracking-wider text-theme-copper block font-semibold">
+                  {item.category} • {item.year}
+                </span>
+                <h2 class="text-xl font-bold font-editorial leading-tight group-hover:text-theme-copper transition-colors">
+                  {item.title}
+                </h2>
+              </div>
+            </div>
+
+            <!-- Description and Specs -->
+            <div class="space-y-3 flex-1 flex flex-col justify-between font-sans text-xs">
+              <p class="text-xs text-theme-text-muted leading-relaxed line-clamp-3">
+                {item.description}
+              </p>
+
+              <div class="pt-3 border-t border-theme-border space-y-1.5 text-xs">
+                <div>
+                  <span class="text-theme-text-faint uppercase text-[10px] block font-mono">Medium</span>
+                  <span class="text-theme-text font-medium block">{item.medium}</span>
+                </div>
+                {item.dimensions && (
+                  <div>
+                    <span class="text-theme-text-faint uppercase text-[10px] block font-mono">Dimensions</span>
+                    <span class="text-theme-text font-medium block">{item.dimensions}</span>
+                  </div>
+                )}
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5 pt-2">
+                {item.tags.map((t) => (
+                  <span class="px-2 py-0.5 text-[10px] rounded-full border border-theme-border bg-theme-bg text-theme-text-faint">
+                    #{t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Interactive Lightbox Modal -->
+    <div id="art-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6">
+      <div class="relative w-full max-w-3xl matting-frame shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div class="matting-frame-inner p-6 sm:p-8 space-y-6 bg-theme-surface">
+          <!-- Close Button -->
+          <button id="modal-close" class="absolute top-4 right-4 px-3 py-1.5 rounded-full text-theme-text-muted hover:text-white bg-theme-bg border border-theme-border font-sans text-xs font-medium">
+            ✕ Close
+          </button>
+
+          <div id="modal-image-container" class="w-full aspect-[16/10] rounded-sm border border-theme-border flex items-center justify-center relative p-6 text-white text-center">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <div id="modal-preview-text" class="relative z-10 font-editorial text-2xl sm:text-3xl font-bold"></div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-theme-border pb-3">
+              <div>
+                <span id="modal-category" class="text-xs font-sans text-theme-copper uppercase tracking-wider block font-semibold"></span>
+                <h2 id="modal-title" class="text-2xl sm:text-3xl font-bold font-editorial text-theme-text"></h2>
+              </div>
+              <span id="modal-year" class="text-xs font-mono text-theme-text-faint"></span>
+            </div>
+
+            <div id="modal-award" class="hidden p-3 rounded-md bg-theme-rose/10 border border-theme-rose/40 text-theme-rose font-sans text-xs font-semibold"></div>
+
+            <p id="modal-desc" class="text-sm text-theme-text-muted leading-relaxed font-sans"></p>
+
+            <div class="grid grid-cols-2 gap-4 p-4 bg-theme-bg border border-theme-border font-sans text-xs rounded-sm">
+              <div>
+                <span class="text-theme-text-faint uppercase text-[10px] block font-mono">Medium</span>
+                <span id="modal-medium" class="text-theme-text font-medium block"></span>
+              </div>
+              <div>
+                <span class="text-theme-text-faint uppercase text-[10px] block font-mono">Dimensions</span>
+                <span id="modal-dimensions" class="text-theme-text font-medium block"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Filter functionality
+  const filterBtns = document.querySelectorAll('.art-filter-btn');
+  const cards = document.querySelectorAll('.art-card');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('border-theme-copper', 'bg-theme-copper', 'text-white', 'font-semibold', 'shadow-sm');
+        b.classList.add('border-theme-border', 'bg-theme-surface', 'text-theme-text-muted');
+      });
+      btn.classList.add('border-theme-copper', 'bg-theme-copper', 'text-white', 'font-semibold', 'shadow-sm');
+      btn.classList.remove('border-theme-border', 'bg-theme-surface', 'text-theme-text-muted');
+
+      const selectedCat = btn.getAttribute('data-category');
+      cards.forEach((card) => {
+        const cardCat = card.getAttribute('data-category');
+        if (selectedCat === 'All' || cardCat === selectedCat) {
+          (card as HTMLElement).style.display = 'block';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Lightbox Modal
+  const modal = document.getElementById('art-modal');
+  const modalClose = document.getElementById('modal-close');
+  const modalTitle = document.getElementById('modal-title');
+  const modalCat = document.getElementById('modal-category');
+  const modalYear = document.getElementById('modal-year');
+  const modalDesc = document.getElementById('modal-desc');
+  const modalMedium = document.getElementById('modal-medium');
+  const modalDimensions = document.getElementById('modal-dimensions');
+  const modalAward = document.getElementById('modal-award');
+  const modalContainer = document.getElementById('modal-image-container');
+  const modalPreviewText = document.getElementById('modal-preview-text');
+
+  cards.forEach((card) => {
+    card.addEventListener('click', () => {
+      const dataStr = card.getAttribute('data-item');
+      if (!dataStr || !modal) return;
+      const data = JSON.parse(dataStr);
+
+      if (modalTitle) modalTitle.textContent = data.title;
+      if (modalCat) modalCat.textContent = data.category;
+      if (modalYear) modalYear.textContent = data.year;
+      if (modalDesc) modalDesc.textContent = data.description;
+      if (modalMedium) modalMedium.textContent = data.medium;
+      if (modalDimensions) modalDimensions.textContent = data.dimensions || 'N/A';
+      if (modalPreviewText) modalPreviewText.textContent = data.title;
+
+      if (modalContainer) {
+        modalContainer.style.backgroundColor = data.imagePlaceholderColor || '#222';
+      }
+
+      if (modalAward) {
+        if (data.award) {
+          modalAward.textContent = `★ ${data.award}`;
+          modalAward.classList.remove('hidden');
+        } else {
+          modalAward.classList.add('hidden');
+        }
+      }
+
+      modal.classList.remove('hidden');
+    });
+  });
+
+  if (modalClose && modal) {
+    modalClose.addEventListener('click', () => modal.classList.add('hidden'));
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.add('hidden');
+    });
+  }
+</script>

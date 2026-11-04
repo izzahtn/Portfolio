@@ -1,0 +1,75 @@
+---
+import { siteConfig } from '../../config/site';
+---
+
+<footer class="w-full border-t border-theme-border bg-theme-surface/80 mt-24 transition-colors duration-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+      
+      <!-- Brand & Mission Column -->
+      <div class="md:col-span-5 space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="w-7 h-7 rounded-full border border-theme-border-strong flex items-center justify-center font-editorial text-xs font-bold text-theme-rose">
+            IN
+          </div>
+          <span class="font-editorial font-bold text-xl text-theme-text tracking-tight">
+            {siteConfig.name}
+          </span>
+          <span class="text-xs text-theme-text-muted">({siteConfig.pronouns})</span>
+        </div>
+        <p class="text-sm text-theme-text-muted leading-relaxed font-sans max-w-sm">
+          {siteConfig.bio}
+        </p>
+        <div class="pt-2 flex flex-wrap gap-2 text-xs font-medium">
+          <span class="px-2.5 py-1 rounded-full border border-theme-rose/30 bg-theme-rose/10 text-theme-rose">
+            Cornell Engineering '29
+          </span>
+          <span class="px-2.5 py-1 rounded-full border border-theme-celadon/30 bg-theme-celadon/10 text-theme-celadon">
+            Baja SAE Racing #22
+          </span>
+          <span class="px-2.5 py-1 rounded-full border border-theme-copper/30 bg-theme-copper/10 text-theme-copper">
+            Fine Art & Metalcraft
+          </span>
+        </div>
+      </div>
+
+      <!-- Navigation Column -->
+      <div class="md:col-span-3 space-y-3 font-sans text-sm">
+        <div class="text-xs font-bold text-theme-text uppercase tracking-wider">
+          Portfolio Index
+        </div>
+        <ul class="space-y-2 text-theme-text-muted text-xs">
+          <li><a href="/projects" class="hover:text-theme-rose transition-colors">Engineering Projects (04)</a></li>
+          <li><a href="/cad-lab" class="hover:text-theme-rose transition-colors">Interactive 3D CAD & FEA Lab</a></li>
+          <li><a href="/art" class="hover:text-theme-rose transition-colors">Art & Play Gallery</a></li>
+          <li><a href="/about" class="hover:text-theme-rose transition-colors">About & Cornell Coursework</a></li>
+          <li><a href="/resume" class="hover:text-theme-rose transition-colors">Curriculum Vitae & Resume</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact & Telemetry Column -->
+      <div class="md:col-span-4 space-y-3 font-sans text-sm">
+        <div class="text-xs font-bold text-theme-text uppercase tracking-wider">
+          Get in Touch
+        </div>
+        <div class="space-y-2 text-xs text-theme-text-muted">
+          <div>Email: <a href={`mailto:${siteConfig.email}`} class="text-theme-text hover:text-theme-rose underline decoration-theme-border font-medium">{siteConfig.email}</a></div>
+          <div>Phone: <span class="text-theme-text font-medium">{siteConfig.phone}</span></div>
+          <div>LinkedIn: <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" class="text-theme-text hover:text-theme-rose underline decoration-theme-border font-medium">linkedin.com/in/izzah-nishad</a></div>
+          <div>Location: <span class="text-theme-text">Cornell University • Ithaca, NY</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Sign-off -->
+    <div class="mt-12 pt-6 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-theme-text-faint font-sans">
+      <div>
+        © 2026 Izzah Nishad. Designed with artistic maximalism, Astro & Three.js.
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-theme-celadon"></span>
+        <span class="text-theme-text-muted">Cornell College of Engineering • Class of December 2029</span>
+      </div>
+    </div>
+  </div>
+</footer>
