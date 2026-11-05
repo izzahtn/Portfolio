@@ -74,11 +74,6 @@ const {
           <span class="hidden sm:inline">Wireframe</span>
         </button>
 
-        <button id="btn-fea" class="px-3 py-1.5 rounded-full hover:bg-theme-surface-hover text-theme-rose flex items-center gap-1.5 transition-colors border border-theme-rose/40 bg-theme-rose/10 active:scale-95 font-semibold" title="Toggle Ansys FEA Von Mises Stress Simulation">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-          <span>Ansys FEA Mode</span>
-        </button>
-
         <button id="btn-shocks" class="px-3 py-1.5 rounded-full hover:bg-theme-surface-hover text-theme-copper flex items-center gap-1.5 transition-colors border border-theme-copper/40 bg-theme-copper/10 active:scale-95 font-medium" title="Toggle Shock Absorber and Spring Assembly Visibility">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/></svg>
           <span id="shocks-btn-label">Shocks: Suppressed</span>
@@ -87,14 +82,6 @@ const {
         <button id="btn-reset" class="px-3 py-1.5 rounded-full hover:bg-theme-surface-hover text-theme-text-muted hover:text-theme-text transition-colors border border-transparent hover:border-theme-border active:scale-95" title="Reset Camera View">
           <span>Reset</span>
         </button>
-      </div>
-
-      <!-- FEA Legend (Visible when FEA mode is active) -->
-      <div id="fea-legend" class="hidden p-2 rounded-md bg-theme-bg/95 backdrop-blur-md border border-theme-border pointer-events-auto shadow-lg text-[11px] font-mono flex items-center gap-2">
-        <span class="text-theme-text-muted">VON MISES:</span>
-        <span class="text-blue-500 font-bold">0 MPa</span>
-        <div class="w-24 h-2 rounded-full bg-gradient-to-r from-blue-600 via-emerald-400 via-amber-400 to-red-600 border border-black/20"></div>
-        <span class="text-red-500 font-bold">220 MPa</span>
       </div>
 
       <!-- Right hint -->
