@@ -5,65 +5,65 @@
 @tailwind utilities;
 
 :root {
-  /* User Custom Palette: Ivory, Sweet Peony, Pacific Cyan, Dusty Grape, Yellow Green */
-  --color-bg: #f5fbef; /* Ivory */
+  /* User Custom Palette: Mint Cream, Taupe Grey, Rosewood, Muted Teal, Light Gold */
+  --color-bg: #f1f7ed; /* Mint Cream */
   --color-surface: #FFFFFF;
-  --color-surface-elevated: #ebf5e3;
-  --color-surface-hover: #e0eed6;
-  --color-border: rgba(99, 69, 138, 0.16); /* Dusty Grape subtle border */
-  --color-border-strong: rgba(99, 69, 138, 0.35);
-  --color-text: #241830; /* Deep Dusty Grape text */
-  --color-text-muted: #5e506d;
-  --color-text-faint: #8a7a9c;
-  --color-rose: #e06c9f; /* Sweet Peony */
-  --color-rose-muted: #c9578b;
-  --color-celadon: #3891a6; /* Pacific Cyan */
-  --color-celadon-muted: #2c7789;
-  --color-copper: #84c318; /* Yellow Green */
-  --color-gold: #84c318;
-  --color-grape: #63458a; /* Dusty Grape */
-  --paper-tint: rgba(224, 108, 159, 0.05);
+  --color-surface-elevated: #e6efe1;
+  --color-surface-hover: #dbe7d5;
+  --color-border: rgba(84, 73, 75, 0.16); /* Taupe Grey subtle border */
+  --color-border-strong: rgba(84, 73, 75, 0.35);
+  --color-text: #322b2d; /* Deep Taupe Grey text */
+  --color-text-muted: #685c5f;
+  --color-text-faint: #96898d;
+  --color-rose: #b33951; /* Rosewood */
+  --color-rose-muted: #8e2d40;
+  --color-celadon: #3f7863; /* Muted Teal (Contrast optimized for text) */
+  --color-celadon-muted: #91c7b1; /* Muted Teal */
+  --color-copper: #9b7a24; /* Antique Gold (Contrast text) */
+  --color-gold: #e3d081; /* Light Gold */
+  --color-grape: #54494b; /* Taupe Grey */
+  --paper-tint: rgba(179, 57, 81, 0.04);
 }
 
 html[data-theme="heritageDark"],
 html[data-theme="grapeDark"] {
-  --color-bg: #140f1c; /* Deep Dusty Grape Night */
-  --color-surface: #1e172a;
-  --color-surface-elevated: #281f36;
-  --color-surface-hover: #332845;
-  --color-border: rgba(245, 251, 239, 0.14);
-  --color-border-strong: rgba(245, 251, 239, 0.28);
-  --color-text: #f5fbef; /* Ivory */
-  --color-text-muted: #b9adcb;
-  --color-text-faint: #7e7191;
-  --color-rose: #e06c9f; /* Sweet Peony */
-  --color-rose-muted: #b84a7c;
-  --color-celadon: #3891a6; /* Pacific Cyan */
-  --color-celadon-muted: #2b7485;
-  --color-copper: #84c318; /* Yellow Green */
-  --color-gold: #84c318;
-  --color-grape: #9b7cc7;
-  --paper-tint: rgba(224, 108, 159, 0.08);
+  --color-bg: #1f1a1c; /* Deep Taupe Velvet Night */
+  --color-surface: #2b2326;
+  --color-surface-elevated: #382e32;
+  --color-surface-hover: #463b40;
+  --color-border: rgba(241, 247, 237, 0.12); /* Mint Cream border */
+  --color-border-strong: rgba(241, 247, 237, 0.25);
+  --color-text: #f1f7ed; /* Mint Cream */
+  --color-text-muted: #baaeb1;
+  --color-text-faint: #7f7376;
+  --color-rose: #d65b73; /* Radiant Rosewood */
+  --color-rose-muted: #b33951;
+  --color-celadon: #91c7b1; /* Muted Teal */
+  --color-celadon-muted: #6ea993;
+  --color-copper: #e3d081; /* Light Gold */
+  --color-gold: #e3d081;
+  --color-grape: #b3a5a9;
+  --paper-tint: rgba(179, 57, 81, 0.07);
 }
 
 html[data-theme="botanicalSage"] {
-  --color-bg: #f5fbef;
+  --color-bg: #f1f7ed;
   --color-surface: #FFFFFF;
-  --color-surface-elevated: #ebf5e3;
-  --color-surface-hover: #e0eed6;
-  --color-border: rgba(56, 145, 166, 0.18);
-  --color-border-strong: rgba(56, 145, 166, 0.38);
-  --color-text: #1d2b30;
-  --color-text-muted: #48616a;
-  --color-text-faint: #728c94;
-  --color-rose: #e06c9f;
-  --color-rose-muted: #c9578b;
-  --color-celadon: #3891a6;
-  --color-celadon-muted: #2c7789;
-  --color-copper: #84c318;
-  --color-gold: #84c318;
-  --color-grape: #63458a;
-  --paper-tint: rgba(56, 145, 166, 0.06);
+  --color-surface-elevated: #e6efe1;
+  --color-surface-hover: #dbe7d5;
+  --color-border: rgba(84, 73, 75, 0.16);
+  --color-border-strong: rgba(84, 73, 75, 0.35);
+  --color-text: #322b2d;
+  --color-text-muted: #685c5f;
+  --color-text-faint: #96898d;
+  --color-rose: #b33951;
+  --color-rose-muted: #8e2d40;
+  --color-celadon: #3f7863;
+  --color-celadon-muted: #91c7b1;
+  --color-copper: #9b7a24;
+  --color-gold: #e3d081;
+  --color-grape: #54494b;
+  --paper-tint: rgba(145, 199, 177, 0.06);
 }
 
 body {
