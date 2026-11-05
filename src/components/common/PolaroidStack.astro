@@ -3,12 +3,18 @@ interface PhotoItem {
   id: string;
   src: string;
   alt: string;
+  imageClass?: string;
 }
 
 const photos: PhotoItem[] = [
   { id: "headshot", src: "/images/headshot.jpeg", alt: "Izzah Nishad" },
   { id: "travel", src: "/images/fun-photos/travel.jpeg", alt: "Travel and exploring" },
-  { id: "travel-2", src: "/images/fun-photos/travel-pt2.jpeg", alt: "Adventures abroad" },
+  {
+    id: "travel-2",
+    src: "/images/fun-photos/travel-pt2.jpeg",
+    alt: "Suspension bridge",
+    imageClass: "scale-[1.38] origin-center"
+  },
   { id: "kayaking", src: "/images/fun-photos/Kayaking.jpeg", alt: "Kayaking outdoors" },
   { id: "halloween", src: "/images/fun-photos/halloween-walle.jpg", alt: "Handmade Wall-E" }
 ];
@@ -38,7 +44,7 @@ const photos: PhotoItem[] = [
             <img
               src={photo.src}
               alt={photo.alt}
-              class="w-full h-full object-cover object-center filter brightness-[1.02] contrast-[1.02]"
+              class={`w-full h-full object-cover object-center filter brightness-[1.02] contrast-[1.02] ${photo.imageClass || ''}`}
               loading={index === 0 ? "eager" : "lazy"}
             />
             <!-- Subtle photographic sheen -->
