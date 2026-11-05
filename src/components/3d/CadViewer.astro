@@ -106,9 +106,7 @@ const {
     controls: OrbitControls;
     modelGroup: THREE.Group;
     originalMaterials: Map<THREE.Mesh, THREE.Material | THREE.Material[]>;
-    feaMaterials: Map<THREE.Mesh, THREE.Material>;
     isWireframe: boolean = false;
-    isFeaMode: boolean = false;
     isRotating: boolean = true;
     isShocksSuppressed: boolean = true;
     shockNodes: THREE.Object3D[] = [];
@@ -120,7 +118,6 @@ const {
       this.canvas = container.querySelector('.cad-canvas') as HTMLCanvasElement;
       this.modelGroup = new THREE.Group();
       this.originalMaterials = new Map();
-      this.feaMaterials = new Map();
 
       // Renderer setup
       this.renderer = new THREE.WebGLRenderer({
