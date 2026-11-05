@@ -195,50 +195,6 @@ const {
       this.scene.add(gridHelper);
     }
 
-    createFeaStressMaterial(): THREE.ShaderMaterial {
-      // Custom Von Mises stress contour shader
-      return new THREE.ShaderMaterial({
-        vertexShader: `
-          varying vec3 vWorldPosition;
-          varying vec3 vNormal;
-          void main() {
-            vNormal = normalize(normalMatrix * normal);
-            vec4 worldPos = modelMatrix * vec4(position, 1.0);
-            vWorldPosition = worldPos.xyz;
-            gl_Position = projectionMatrix * viewMatrix * worldPos;
-          }
-        `,
-        fragmentShader: `
-          varying vec3 vWorldPosition;
-          varying vec3 vNormal;
-          
-          vec3 getStressColor(float t) {
-            if (t < 0.25) {
-              return mix(vec3(0.08, 0.25, 0.9), vec3(0.1, 0.75, 0.85), t * 4.0);
-            } else if (t < 0.5) {
-              return mix(vec3(0.1, 0.75, 0.85), vec3(0.2, 0.85, 0.3), (t - 0.25) * 4.0);
-            } else if (t < 0.75) {
-              return mix(vec3(0.2, 0.85, 0.3), vec3(0.95, 0.85, 0.1), (t - 0.5) * 4.0);
-            } else {
-              return mix(vec3(0.95, 0.85, 0.1), vec3(0.95, 0.15, 0.15), (t - 0.75) * 4.0);
-            }
-          }
-
-          void main() {
-            float localNorm = sin(vWorldPosition.x * 10.0) * cos(vWorldPosition.y * 12.0) * 0.35 + 0.5;
-            float stressFactor = clamp(localNorm + (vWorldPosition.y * 0.35), 0.05, 0.98);
-            vec3 col = getStressColor(stressFactor);
-            
-            vec3 lightDir = normalize(vec3(1.0, 1.5, 1.0));
-            float diff = max(dot(vNormal, lightDir), 0.35);
-            
-            gl_FragColor = vec4(col * diff, 1.0);
-          }
-        `,
-        side: THREE.DoubleSide
-      });
-    }
-
     loadModel() {
       const loader = new GLTFLoader();
       const modelPath = this.container.getAttribute('data-model-url') || "/models/brake-lines/TG22_Brake_Lines_Assembly.glb";
@@ -253,7 +209,6 @@ const {
             const mesh = child as THREE.Mesh;
             if (mesh.material) {
               this.originalMaterials.set(mesh, mesh.material);
-              this.feaMaterials.set(mesh, this.createFeaStressMaterial());
             }
             if (mesh.geometry) {
               const geom = mesh.geometry;
@@ -463,21 +418,6 @@ const {
         });
       }
 
-      // FEA Simulation button
-      const btnFea = this.container.querySelector('#btn-fea');
-      const feaLegend = this.container.querySelector('#fea-legend');
-      if (btnFea) {
-        btnFea.addEventListener('click', () => {
-          this.isFeaMode = !this.isFeaMode;
-          this.applyShadingMode();
-          btnFea.classList.toggle('bg-theme-rose', this.isFeaMode);
-          btnFea.classList.toggle('text-white', this.isFeaMode);
-          if (feaLegend) {
-            feaLegend.classList.toggle('hidden', !this.isFeaMode);
-          }
-        });
-      }
-
       // Shocks toggle button
       const btnShocks = this.container.querySelector('#btn-shocks');
       if (btnShocks) {
@@ -517,19 +457,11 @@ const {
 
     applyShadingMode() {
       this.originalMaterials.forEach((origMat, mesh) => {
-        if (this.isFeaMode) {
-          const feaMat = this.feaMaterials.get(mesh);
-          if (feaMat) {
-            mesh.material = feaMat;
-            (mesh.material as THREE.ShaderMaterial).wireframe = this.isWireframe;
-          }
+        mesh.material = origMat;
+        if (Array.isArray(mesh.material)) {
+          mesh.material.forEach(m => (m as THREE.MeshStandardMaterial).wireframe = this.isWireframe);
         } else {
-          mesh.material = origMat;
-          if (Array.isArray(mesh.material)) {
-            mesh.material.forEach(m => (m as THREE.MeshStandardMaterial).wireframe = this.isWireframe);
-          } else {
-            (mesh.material as THREE.MeshStandardMaterial).wireframe = this.isWireframe;
-          }
+          (mesh.material as THREE.MeshStandardMaterial).wireframe = this.isWireframe;
         }
       });
     }
