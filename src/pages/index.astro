@@ -32,11 +32,65 @@ const brakeLines = projects[1];
           </p>
         </div>
 
-        <!-- Right Side: Authentic Polaroid Headshot -->
-        <div class="lg:col-span-5 flex justify-center lg:justify-end">
+        <!-- Right Side: Authentic Polaroid Headshot + Hanging Decor Charms -->
+        <div class="lg:col-span-5 flex flex-col items-center lg:items-end justify-center relative pt-8 sm:pt-10">
+          
+          <!-- Hanging Charms Mobile / Dangling Decor (Leaves, Stars, Gears, Wrenches) -->
+          <div class="flex items-start justify-center gap-6 sm:gap-7 mb-[-6px] pointer-events-none select-none z-10 w-full max-w-[270px] px-4">
+            <!-- Charm 1: Botanical Leaf (sways gently) -->
+            <div class="flex flex-col items-center animate-sway">
+              <span class="w-[1.5px] h-9 bg-theme-border-strong/70"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-theme-celadon -mt-0.5"></span>
+              <span class="text-sm -mt-0.5" title="Plant Lover">🌿</span>
+            </div>
+
+            <!-- Charm 2: Sparkle Star (sways slow) -->
+            <div class="flex flex-col items-center animate-sway-slow">
+              <span class="w-[1.5px] h-12 bg-theme-border-strong/70"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-theme-copper -mt-0.5"></span>
+              <span class="text-xs text-theme-copper font-serif font-bold -mt-0.5">✦</span>
+            </div>
+
+            <!-- Charm 3: Mechanical Gear (slow spin + sway) -->
+            <div class="flex flex-col items-center animate-sway">
+              <span class="w-[1.5px] h-8 bg-theme-border-strong/70"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-theme-rose -mt-0.5"></span>
+              <svg class="w-4 h-4 text-theme-rose animate-spin-slow -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+              </svg>
+            </div>
+
+            <!-- Charm 4: Tiny Wrench / Tool charm -->
+            <div class="flex flex-col items-center animate-sway-slow">
+              <span class="w-[1.5px] h-11 bg-theme-border-strong/70"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-theme-celadon -mt-0.5"></span>
+              <svg class="w-3.5 h-3.5 text-theme-celadon -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Relative Container for Polaroid and Subtle Floating Pills -->
           <div class="relative group select-none">
             <!-- Translucent Washi Tape Strip on Top -->
             <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 w-20 h-6 bg-[#e3d081]/60 backdrop-blur-xs rotate-[-3deg] z-20 shadow-xs border-y border-white/30 pointer-events-none"></div>
+
+            <!-- Subtle Floating Personality Pill 1: Top Right (Plant Lover) -->
+            <div class="absolute -top-3 -right-6 sm:-right-8 z-20 pointer-events-none rotate-3">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-figtree font-medium bg-[#cbe896] text-[#32292f] shadow-md border border-[#32292f]/20">
+                <span>🌱</span>
+                <span>plant lover</span>
+              </span>
+            </div>
+
+            <!-- Subtle Floating Personality Pill 2: Bottom Left (Scrap Sewing) -->
+            <div class="absolute -bottom-2 -left-6 sm:-left-8 z-20 pointer-events-none -rotate-3">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-figtree font-medium bg-[#f4b886] text-[#32292f] shadow-md border border-[#32292f]/20">
+                <span>🧵</span>
+                <span>scrap sewing</span>
+              </span>
+            </div>
 
             <!-- Polaroid Photo Frame -->
             <div class="relative bg-[#ffffff] dark:bg-[#fbfbf9] text-[#2b2426] p-3.5 pb-6 rounded-xs shadow-[0_15px_35px_-5px_rgba(0,0,0,0.22),0_6px_15px_rgba(0,0,0,0.08)] border border-[#e5dfd8] -rotate-2 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300 ease-out cursor-pointer max-w-[270px]">
@@ -67,32 +121,59 @@ const brakeLines = projects[1];
         </div>
       </div>
     </div>
+
+    <!-- Circular Section-Crossing Scroll Badge (Inspired by Han Nguyen Inspo) -->
+    <div class="absolute -bottom-7 sm:-bottom-8 left-1/2 -translate-x-1/2 z-20">
+      <a
+        href="#projects"
+        class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#f4b886] hover:bg-[#cbe896] text-[#32292f] border-2 border-[#32292f]/25 shadow-lg flex flex-col items-center justify-center transition-all duration-300 hover:scale-110 group cursor-pointer"
+        title="Scroll down to projects"
+      >
+        <span class="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider leading-none">explore</span>
+        <span class="text-xs group-hover:translate-y-0.5 transition-transform duration-200 mt-0.5">↓</span>
+      </a>
+    </div>
   </section>
 
   <!-- FEATURED ENGINEERING PROJECTS: PROJECT 01 (REAR CONTROL ARMS) & PROJECT 02 (BRAKE LINES + 3D) -->
-  <section class="py-20 border-b border-theme-border">
+  <section id="projects" class="py-20 border-b border-theme-border relative overflow-hidden">
+    <!-- Subtle Wireframe Outline Background Typography -->
+    <div class="absolute right-4 top-8 text-8xl sm:text-9xl font-editorial font-bold wireframe-text-faint opacity-15 select-none pointer-events-none -mr-4">
+      WORKS
+    </div>
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       
       <!-- Section Header -->
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-theme-border pb-6">
-        <div>
-          <span class="text-xs font-mono uppercase tracking-widest text-theme-rose block mb-1">
-            SELECTED WORKS
-          </span>
-          <h2 class="text-3xl sm:text-5xl font-bold font-cormorant text-theme-text tracking-tight">
-            Engineering Projects
-          </h2>
-          <p class="text-sm text-theme-text-muted font-figtree mt-2 max-w-xl">
-            A collection of mechanical systems I've designed, simulated, and built by hand—from Cornell Baja racing components to laser amplifiers and competition robots.
-          </p>
+      <div class="border-b border-theme-border pb-6">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1.5">
+              <svg class="w-4 h-4 text-theme-rose animate-spin-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+              </svg>
+              <span class="text-xs font-mono uppercase tracking-widest text-theme-rose font-semibold">
+                SELECTED WORKS ✦ 2026
+              </span>
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-bold font-cormorant text-theme-text tracking-tight">
+              Engineering Projects
+            </h2>
+            <p class="text-sm text-theme-text-muted font-figtree mt-2 max-w-xl">
+              A collection of mechanical systems I've designed, simulated, and built by hand—from Cornell Baja racing components to laser amplifiers and competition robots.
+            </p>
+          </div>
+          <a
+            href="/projects"
+            class="inline-flex items-center gap-1.5 text-xs font-medium text-theme-rose hover:text-theme-rose-muted transition-colors font-figtree"
+          >
+            <span>View All 4 Projects</span>
+            <span>→</span>
+          </a>
         </div>
-        <a
-          href="/projects"
-          class="inline-flex items-center gap-1.5 text-xs font-medium text-theme-rose hover:text-theme-rose-muted transition-colors font-figtree"
-        >
-          <span>View All 4 Projects</span>
-          <span>→</span>
-        </a>
+        <!-- Running Stitch Divider Line -->
+        <div class="running-stitch w-full mt-5"></div>
       </div>
 
       <!-- PROJECT 01: REAR SUSPENSION CONTROL ARMS -->

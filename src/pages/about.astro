@@ -9,17 +9,25 @@ import { siteConfig } from '../config/site';
   description="Personal biography, engineering philosophy, creative studio craft, and passions outside the machine shop."
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
-    <!-- Header -->
-    <div class="border-b border-theme-border pb-6">
-      <span class="text-xs font-mono uppercase tracking-widest text-theme-rose block mb-1">
-        BIOGRAPHY & STUDIO ATELIER
-      </span>
-      <h1 class="text-5xl sm:text-7xl font-normal font-story text-theme-text tracking-normal">
-        About Izzah Nishad
-      </h1>
-      <p class="text-sm sm:text-base text-theme-text-muted font-sans mt-3 max-w-2xl leading-relaxed">
-        Mechanical engineering student at Cornell University ('29) combining automotive racing engineering with precision fine art, woodworking, and tactile craftsmanship.
-      </p>
+    <!-- Header with Wireframe Accent -->
+    <div class="relative overflow-hidden border-b border-theme-border pb-6">
+      <div class="absolute right-0 -top-4 text-7xl sm:text-9xl font-editorial font-bold wireframe-text-faint opacity-15 select-none pointer-events-none">
+        ATELIER
+      </div>
+
+      <div class="relative z-10 space-y-2">
+        <span class="text-xs font-mono uppercase tracking-widest text-theme-rose block mb-1">
+          BIOGRAPHY & STUDIO ATELIER ✦ CORNELL '29
+        </span>
+        <h1 class="text-5xl sm:text-7xl font-normal font-story text-theme-text tracking-normal">
+          About Izzah Nishad
+        </h1>
+        <p class="text-sm sm:text-base text-theme-text-muted font-sans mt-3 max-w-2xl leading-relaxed">
+          Mechanical engineering student at Cornell University ('29) combining automotive racing engineering with precision fine art, woodworking, and tactile craftsmanship.
+        </p>
+      </div>
+
+      <div class="running-stitch w-full mt-6"></div>
     </div>
 
     <!-- Main Content Grid: Story on Left, Interactive Polaroid Stack on Right -->
@@ -66,23 +74,33 @@ import { siteConfig } from '../config/site';
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
               <div class="p-4 rounded-xl bg-theme-surface-elevated border border-theme-border/60 space-y-1">
-                <span class="text-sm font-semibold text-theme-text block font-sans">Fine Art & Painting</span>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-sm">🎨</span>
+                  <span class="text-sm font-semibold text-theme-text block font-sans">Fine Art & Painting</span>
+                </div>
                 <span class="text-xs text-theme-text-muted block">Watercolor portraits, high-contrast chiaroscuro, and technical ink drawings.</span>
               </div>
 
               <div class="p-4 rounded-xl bg-theme-surface-elevated border border-theme-border/60 space-y-1">
-                <span class="text-sm font-semibold text-theme-text block font-sans">Clothing Design & Crafting</span>
-                <span class="text-xs text-theme-text-muted block">Overall clothing design, garment tailoring, leather crafting, and hand joinery.</span>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-sm">🧵</span>
+                  <span class="text-sm font-semibold text-theme-text block font-sans">Clothing Design & Craft</span>
+                </div>
+                <span class="text-xs text-theme-text-muted block">Overall clothing design, scrap & waste fabric garment sewing, and handcrafted leather.</span>
               </div>
 
               <div class="p-4 rounded-xl bg-theme-surface-elevated border border-theme-border/60 space-y-1">
-                <span class="text-sm font-semibold text-theme-text block font-sans">Outdoors & Travel</span>
-                <span class="text-xs text-theme-text-muted block">I love being outdoors, traveling to different countries, exploring new places, and trying new activities.</span>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-sm">🌍</span>
+                  <span class="text-sm font-semibold text-theme-text block font-sans">Outdoors & Travel</span>
+                </div>
+                <span class="text-xs text-theme-text-muted block">Loving the outdoors, trying new activities, and a lifelong goal to explore all 7 continents.</span>
               </div>
             </div>
 
-            <div class="pt-3 text-xs text-theme-text-faint space-y-1 border-t border-theme-border/60">
+            <div class="pt-3 text-xs text-theme-text-faint flex flex-wrap items-center justify-between gap-2 border-t border-theme-border/60">
               <p><strong>Languages:</strong> Fluent in Malayalam • Conversational Spanish</p>
+              <p><strong>Next Skills on Radar:</strong> TIG Welding • Photography</p>
             </div>
           </div>
         </div>
