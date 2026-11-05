@@ -1,0 +1,237 @@
+---
+interface PolaroidItem {
+  id: string;
+  src: string;
+  caption: string;
+  subtitle: string;
+  rotation: string;
+}
+
+const photos: PolaroidItem[] = [
+  {
+    id: "headshot",
+    src: "/images/headshot.jpeg",
+    caption: "Izzah Nishad",
+    subtitle: "cornell '29",
+    rotation: "-rotate-2"
+  },
+  {
+    id: "halloween",
+    src: "/images/fun-photos/halloween-walle.jpg",
+    caption: "wall-e costume",
+    subtitle: "halloween build 🤖",
+    rotation: "rotate-3"
+  },
+  {
+    id: "kayaking",
+    src: "/images/fun-photos/Kayaking.jpeg",
+    caption: "on the water",
+    subtitle: "kayaking afternoon 🚣",
+    rotation: "-rotate-3"
+  },
+  {
+    id: "fifa",
+    src: "/images/fun-photos/fifa.jpeg",
+    caption: "fifa match night",
+    subtitle: "always competitive ⚽",
+    rotation: "rotate-2"
+  },
+  {
+    id: "travel-1",
+    src: "/images/fun-photos/travel.jpeg",
+    caption: "travel explorations",
+    subtitle: "new horizons & walks ✈️",
+    rotation: "-rotate-1"
+  },
+  {
+    id: "travel-2",
+    src: "/images/fun-photos/travel-pt2.jpeg",
+    caption: "adventures pt. 2",
+    subtitle: "out in the world 🌍",
+    rotation: "rotate-3"
+  }
+];
+---
+
+<div class="polaroid-stack-container relative select-none w-full max-w-[310px] mx-auto py-4">
+  <!-- Washi Tape strip on top -->
+  <div class="absolute -top-1 left-1/2 -translate-x-1/2 w-24 h-7 bg-[#e3d081]/60 backdrop-blur-xs rotate-[-3deg] z-30 shadow-xs border-y border-white/30 pointer-events-none"></div>
+
+  <!-- Interactive Polaroid Stack Frame -->
+  <div
+    id="polaroid-stack"
+    class="relative w-full aspect-[4/5] min-h-[380px] cursor-pointer group"
+    title="Click to flip to next photo"
+  >
+    {photos.map((photo, index) => {
+      const isTop = index === 0;
+      // Pre-assigned subtle fan angles
+      const fanAngles = [-2, 3, -3, 2, -1, 4];
+      const angle = fanAngles[index % fanAngles.length];
+      
+      return (
+        <div
+          class={`polaroid-card absolute inset-0 bg-[#ffffff] dark:bg-[#fbfbf9] text-[#2b2426] p-3.5 pb-6 rounded-xs shadow-[0_15px_35px_-5px_rgba(0,0,0,0.22),0_6px_15px_rgba(0,0,0,0.08)] border border-[#e5dfd8] transition-all duration-500 ease-out origin-bottom ${
+            isTop ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'
+          }`}
+          data-index={index}
+          style={`transform: rotate(${angle}deg); z-index: ${photos.length - index};`}
+        >
+          <!-- Photo Container -->
+          <div class="relative w-full aspect-[4/5] overflow-hidden bg-[#241c1e] rounded-[1px] shadow-inner border border-black/10">
+            <img
+              src={photo.src}
+              alt={photo.caption}
+              class="w-full h-full object-cover object-center filter brightness-[1.02] contrast-[1.03]"
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+            <!-- Photographic sheen -->
+            <div class="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/10 pointer-events-none"></div>
+          </div>
+
+          <!-- Bottom Chin Label in Story Script -->
+          <div class="pt-3 text-center">
+            <p class="font-story text-2xl text-[#2b2426] font-normal leading-tight">
+              {photo.caption}
+            </p>
+            <p class="font-figtree text-[11px] text-[#786a6e] lowercase tracking-wider mt-0.5">
+              {photo.subtitle}
+            </p>
+          </div>
+        </div>
+      );
+    })}
+
+    <!-- Background card silhouettes to give physical stacked look -->
+    <div
+      class="stack-under-1 absolute inset-0 bg-[#f7f5f0] dark:bg-[#2c2426] rounded-xs border border-[#e5dfd8] shadow-md pointer-events-none -z-10"
+      style="transform: rotate(3deg) translateY(4px);"
+    ></div>
+    <div
+      class="stack-under-2 absolute inset-0 bg-[#f2efe8] dark:bg-[#251e20] rounded-xs border border-[#e5dfd8] shadow-sm pointer-events-none -z-20"
+      style="transform: rotate(-4deg) translateY(8px);"
+    ></div>
+  </div>
+
+  <!-- Interactive Controls & Counter Pill -->
+  <div class="flex items-center justify-between gap-3 pt-5 font-figtree text-xs text-theme-text-muted">
+    <button
+      id="prev-polaroid-btn"
+      type="button"
+      class="px-3 py-1.5 rounded-full border border-theme-border bg-theme-surface hover:border-theme-rose hover:text-theme-rose transition-colors flex items-center gap-1 cursor-pointer"
+      title="Previous photo"
+    >
+      <span>←</span>
+      <span class="text-[11px]">prev</span>
+    </button>
+
+    <div class="flex items-center gap-1.5 px-3 py-1 rounded-full border border-theme-border/60 bg-theme-surface text-[11px]">
+      <span class="w-1.5 h-1.5 rounded-full bg-theme-rose animate-pulse"></span>
+      <span id="polaroid-counter">photo 1 of {photos.length}</span>
+    </div>
+
+    <button
+      id="next-polaroid-btn"
+      type="button"
+      class="px-3 py-1.5 rounded-full border border-theme-border bg-theme-surface hover:border-theme-rose hover:text-theme-rose transition-colors flex items-center gap-1 cursor-pointer font-medium"
+      title="Next photo"
+    >
+      <span class="text-[11px]">shuffle ↷</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  function setupPolaroidStack() {
+    const stack = document.getElementById('polaroid-stack');
+    const cards = document.querySelectorAll<HTMLElement>('.polaroid-card');
+    const prevBtn = document.getElementById('prev-polaroid-btn');
+    const nextBtn = document.getElementById('next-polaroid-btn');
+    const counter = document.getElementById('polaroid-counter');
+
+    if (!cards.length) return;
+
+    let currentIndex = 0;
+    const total = cards.length;
+    const angles = [-2, 3, -3, 2, -1, 4];
+
+    function updateStack(direction: 'next' | 'prev' = 'next') {
+      cards.forEach((card, i) => {
+        const offset = (i - currentIndex + total) % total;
+        const angle = angles[i % angles.length];
+
+        if (offset === 0) {
+          // Active top card
+          card.style.zIndex = '20';
+          card.style.opacity = '1';
+          card.style.pointerEvents = 'auto';
+          card.style.transform = `rotate(${angle}deg) scale(1) translateY(0)`;
+        } else if (offset === 1) {
+          // Card immediately underneath
+          card.style.zIndex = '15';
+          card.style.opacity = '0.9';
+          card.style.pointerEvents = 'none';
+          card.style.transform = `rotate(${angle + 2}deg) scale(0.97) translateY(4px)`;
+        } else if (offset === 2) {
+          // Two cards down
+          card.style.zIndex = '10';
+          card.style.opacity = '0.7';
+          card.style.pointerEvents = 'none';
+          card.style.transform = `rotate(${angle - 3}deg) scale(0.94) translateY(8px)`;
+        } else {
+          // Hidden back cards
+          card.style.zIndex = '5';
+          card.style.opacity = '0';
+          card.style.pointerEvents = 'none';
+          card.style.transform = `rotate(${angle}deg) scale(0.9) translateY(12px)`;
+        }
+      });
+
+      if (counter) {
+        counter.textContent = `photo ${currentIndex + 1} of ${total}`;
+      }
+    }
+
+    function nextPhoto() {
+      // Swipe animation on active card
+      const activeCard = cards[currentIndex];
+      if (activeCard) {
+        activeCard.style.transform = 'translateY(-40px) rotate(-8deg) scale(1.05)';
+        activeCard.style.opacity = '0';
+      }
+
+      setTimeout(() => {
+        currentIndex = (currentIndex + 1) % total;
+        updateStack('next');
+      }, 150);
+    }
+
+    function prevPhoto() {
+      currentIndex = (currentIndex - 1 + total) % total;
+      updateStack('prev');
+    }
+
+    // Click on stack advances photo
+    stack?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextPhoto();
+    });
+
+    nextBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextPhoto();
+    });
+
+    prevBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevPhoto();
+    });
+
+    // Initialize initial arrangement
+    updateStack();
+  }
+
+  // Setup on page load
+  setupPolaroidStack();
+  document.addEventListener('astro:page-load', setupPolaroidStack);
+</script>

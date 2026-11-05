@@ -32,34 +32,33 @@ const brakeLines = projects[1];
           </p>
         </div>
 
-        <!-- Right Side: Lok Ye Inspired Hanging Headshot -->
+        <!-- Right Side: Authentic Polaroid Headshot -->
         <div class="lg:col-span-5 flex justify-center lg:justify-end">
-          <div class="relative max-w-xs group">
-            <!-- Top hanging cable accent line -->
-            <div class="flex flex-col items-center mb-0">
-              <div class="w-[1px] h-6 bg-theme-border-strong"></div>
-              <div class="w-2.5 h-2.5 rounded-full border border-theme-border-strong bg-theme-copper/40 -mt-0.5"></div>
-            </div>
+          <div class="relative group select-none">
+            <!-- Translucent Washi Tape Strip on Top -->
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 w-20 h-6 bg-[#e3d081]/60 backdrop-blur-xs rotate-[-3deg] z-20 shadow-xs border-y border-white/30 pointer-events-none"></div>
 
-            <!-- Arched Pill Frame holding real headshot -->
-            <div class="lokye-portrait-frame transition-transform duration-500 ease-out group-hover:rotate-1 group-hover:scale-[1.02]">
-              <div class="relative overflow-hidden rounded-b-[9999px] aspect-[3/4] bg-theme-surface-elevated border border-theme-border/60">
+            <!-- Polaroid Photo Frame -->
+            <div class="relative bg-[#ffffff] dark:bg-[#fbfbf9] text-[#2b2426] p-3.5 pb-6 rounded-xs shadow-[0_15px_35px_-5px_rgba(0,0,0,0.22),0_6px_15px_rgba(0,0,0,0.08)] border border-[#e5dfd8] -rotate-2 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300 ease-out cursor-pointer max-w-[270px]">
+              
+              <!-- Photo Container -->
+              <div class="relative aspect-[4/5] overflow-hidden bg-[#241c1e] rounded-[1px] shadow-inner border border-black/10">
                 <img
                   src="/images/headshot.jpeg"
                   alt="Izzah Nishad"
-                  class="w-full h-full object-cover object-top"
+                  class="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.03]"
                   loading="eager"
                 />
-                <!-- Subtle vignette gradient -->
-                <div class="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none"></div>
+                <!-- Subtle photographic emulsion glare -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/10 pointer-events-none"></div>
               </div>
 
-              <!-- Cute Handwritten Script Label underneath -->
-              <div class="text-center pt-2.5 pb-1">
-                <p class="font-story text-2xl text-theme-text font-normal leading-tight">
+              <!-- Polaroid Bottom Chin Label -->
+              <div class="pt-3 text-center">
+                <p class="font-story text-2xl text-[#2b2426] font-normal leading-tight">
                   Izzah Nishad
                 </p>
-                <p class="font-figtree text-[11px] text-theme-text-muted lowercase tracking-wider">
+                <p class="font-figtree text-[11px] text-[#786a6e] lowercase tracking-wider mt-0.5">
                   cornell 29
                 </p>
               </div>
