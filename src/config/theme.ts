@@ -26,50 +26,50 @@ export interface ThemePalette {
 export const themes: Record<string, ThemePalette> = {
   heritageLight: {
     id: "heritageLight",
-    name: "Mint Cream & Rosewood (Light)",
-    description: "Rosewood, Muted Teal, and Light Gold on Mint Cream paper",
+    name: "Lime Cream & Scarlet (Light)",
+    description: "Primary Scarlet, Tropical Teal, and Light Caramel on Lime Cream tint",
     isDark: false,
     colors: {
-      bg: "#f1f7ed",
+      bg: "#f5faee",
       surface: "#FFFFFF",
-      surfaceElevated: "#e6efe1",
-      surfaceHover: "#dbe7d5",
-      border: "rgba(84, 73, 75, 0.16)",
-      borderStrong: "rgba(84, 73, 75, 0.35)",
-      text: "#322b2d",
-      textMuted: "#685c5f",
-      textFaint: "#96898d",
-      rose: "#b33951",          // Rosewood
-      roseMuted: "#8e2d40",
-      celadon: "#3f7863",       // Muted Teal
-      celadonMuted: "#91c7b1",
-      copper: "#9b7a24",
-      gold: "#e3d081",          // Light Gold
-      paperTint: "rgba(179, 57, 81, 0.04)",
+      surfaceElevated: "#ebf5dc",
+      surfaceHover: "#dff0c9",
+      border: "rgba(50, 41, 47, 0.16)",
+      borderStrong: "rgba(50, 41, 47, 0.35)",
+      text: "#32292f",
+      textMuted: "#63575f",
+      textFaint: "#91858d",
+      rose: "#dd1c1a",          // Primary Scarlet
+      roseMuted: "#b91513",
+      celadon: "#3d797d",       // Tropical Teal
+      celadonMuted: "#70abaf",
+      copper: "#a85918",        // Light Caramel
+      gold: "#f4b886",          // Light Caramel
+      paperTint: "rgba(221, 28, 26, 0.04)",
     }
   },
   heritageDark: {
     id: "heritageDark",
-    name: "Taupe Velvet & Rosewood (Dark)",
-    description: "Luminous Rosewood, Muted Teal, and Light Gold on deep Taupe Grey vellum",
+    name: "Shadow Grey & Scarlet (Dark)",
+    description: "Vibrant Scarlet, Tropical Teal, and Lime Cream on deep Shadow Grey vellum",
     isDark: true,
     colors: {
-      bg: "#1f1a1c",
-      surface: "#2b2326",
-      surfaceElevated: "#382e32",
-      surfaceHover: "#463b40",
-      border: "rgba(241, 247, 237, 0.12)",
-      borderStrong: "rgba(241, 247, 237, 0.25)",
-      text: "#f1f7ed",
-      textMuted: "#baaeb1",
-      textFaint: "#7f7376",
-      rose: "#d65b73",          // Radiant Rosewood
-      roseMuted: "#b33951",
-      celadon: "#91c7b1",       // Muted Teal
-      celadonMuted: "#6ea993",
-      copper: "#e3d081",
-      gold: "#e3d081",          // Light Gold
-      paperTint: "rgba(179, 57, 81, 0.07)",
+      bg: "#1c1619",
+      surface: "#272025",
+      surfaceElevated: "#332a30",
+      surfaceHover: "#40353c",
+      border: "rgba(203, 232, 150, 0.14)",
+      borderStrong: "rgba(203, 232, 150, 0.28)",
+      text: "#f4faed",
+      textMuted: "#b5adb3",
+      textFaint: "#7a7078",
+      rose: "#ff3836",          // Bright Scarlet
+      roseMuted: "#dd1c1a",     // Primary Scarlet
+      celadon: "#70abaf",       // Tropical Teal
+      celadonMuted: "#4f888c",
+      copper: "#f4b886",        // Light Caramel
+      gold: "#cbe896",          // Lime Cream
+      paperTint: "rgba(221, 28, 26, 0.07)",
     }
   },
   botanicalSage: {

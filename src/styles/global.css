@@ -5,65 +5,65 @@
 @tailwind utilities;
 
 :root {
-  /* User Custom Palette: Mint Cream, Taupe Grey, Rosewood, Muted Teal, Light Gold */
-  --color-bg: #f1f7ed; /* Mint Cream */
+  /* User Custom Palette: Lime Cream, Shadow Grey, Tropical Teal, Light Caramel, Primary Scarlet */
+  --color-bg: #f5faee; /* Soft Lime Cream tint */
   --color-surface: #FFFFFF;
-  --color-surface-elevated: #e6efe1;
-  --color-surface-hover: #dbe7d5;
-  --color-border: rgba(84, 73, 75, 0.16); /* Taupe Grey subtle border */
-  --color-border-strong: rgba(84, 73, 75, 0.35);
-  --color-text: #322b2d; /* Deep Taupe Grey text */
-  --color-text-muted: #685c5f;
-  --color-text-faint: #96898d;
-  --color-rose: #b33951; /* Rosewood */
-  --color-rose-muted: #8e2d40;
-  --color-celadon: #3f7863; /* Muted Teal (Contrast optimized for text) */
-  --color-celadon-muted: #91c7b1; /* Muted Teal */
-  --color-copper: #9b7a24; /* Antique Gold (Contrast text) */
-  --color-gold: #e3d081; /* Light Gold */
-  --color-grape: #54494b; /* Taupe Grey */
-  --paper-tint: rgba(179, 57, 81, 0.04);
+  --color-surface-elevated: #ebf5dc;
+  --color-surface-hover: #dff0c9;
+  --color-border: rgba(50, 41, 47, 0.16); /* Shadow Grey subtle border */
+  --color-border-strong: rgba(50, 41, 47, 0.35);
+  --color-text: #32292f; /* Shadow Grey */
+  --color-text-muted: #63575f;
+  --color-text-faint: #91858d;
+  --color-rose: #dd1c1a; /* Primary Scarlet */
+  --color-rose-muted: #b91513;
+  --color-celadon: #3d797d; /* Tropical Teal (Contrast optimized for text) */
+  --color-celadon-muted: #70abaf; /* Tropical Teal */
+  --color-copper: #a85918; /* Warm Caramel contrast text */
+  --color-gold: #f4b886; /* Light Caramel */
+  --color-grape: #32292f; /* Shadow Grey */
+  --paper-tint: rgba(221, 28, 26, 0.04);
 }
 
 html[data-theme="heritageDark"],
 html[data-theme="grapeDark"] {
-  --color-bg: #1f1a1c; /* Deep Taupe Velvet Night */
-  --color-surface: #2b2326;
-  --color-surface-elevated: #382e32;
-  --color-surface-hover: #463b40;
-  --color-border: rgba(241, 247, 237, 0.12); /* Mint Cream border */
-  --color-border-strong: rgba(241, 247, 237, 0.25);
-  --color-text: #f1f7ed; /* Mint Cream */
-  --color-text-muted: #baaeb1;
-  --color-text-faint: #7f7376;
-  --color-rose: #d65b73; /* Radiant Rosewood */
-  --color-rose-muted: #b33951;
-  --color-celadon: #91c7b1; /* Muted Teal */
-  --color-celadon-muted: #6ea993;
-  --color-copper: #e3d081; /* Light Gold */
-  --color-gold: #e3d081;
-  --color-grape: #b3a5a9;
-  --paper-tint: rgba(179, 57, 81, 0.07);
+  --color-bg: #1c1619; /* Deep Shadow Grey Night */
+  --color-surface: #272025;
+  --color-surface-elevated: #332a30;
+  --color-surface-hover: #40353c;
+  --color-border: rgba(203, 232, 150, 0.14); /* Lime Cream border */
+  --color-border-strong: rgba(203, 232, 150, 0.28);
+  --color-text: #f4faed; /* Lime Cream tinted text */
+  --color-text-muted: #b5adb3;
+  --color-text-faint: #7a7078;
+  --color-rose: #ff3836; /* Bright Scarlet */
+  --color-rose-muted: #dd1c1a; /* Primary Scarlet */
+  --color-celadon: #70abaf; /* Tropical Teal */
+  --color-celadon-muted: #4f888c;
+  --color-copper: #f4b886; /* Light Caramel */
+  --color-gold: #cbe896; /* Lime Cream */
+  --color-grape: #8f818a;
+  --paper-tint: rgba(221, 28, 26, 0.07);
 }
 
 html[data-theme="botanicalSage"] {
-  --color-bg: #f1f7ed;
+  --color-bg: #f5faee;
   --color-surface: #FFFFFF;
-  --color-surface-elevated: #e6efe1;
-  --color-surface-hover: #dbe7d5;
-  --color-border: rgba(84, 73, 75, 0.16);
-  --color-border-strong: rgba(84, 73, 75, 0.35);
-  --color-text: #322b2d;
-  --color-text-muted: #685c5f;
-  --color-text-faint: #96898d;
-  --color-rose: #b33951;
-  --color-rose-muted: #8e2d40;
-  --color-celadon: #3f7863;
-  --color-celadon-muted: #91c7b1;
-  --color-copper: #9b7a24;
-  --color-gold: #e3d081;
-  --color-grape: #54494b;
-  --paper-tint: rgba(145, 199, 177, 0.06);
+  --color-surface-elevated: #ebf5dc;
+  --color-surface-hover: #dff0c9;
+  --color-border: rgba(50, 41, 47, 0.16);
+  --color-border-strong: rgba(50, 41, 47, 0.35);
+  --color-text: #32292f;
+  --color-text-muted: #63575f;
+  --color-text-faint: #91858d;
+  --color-rose: #dd1c1a;
+  --color-rose-muted: #b91513;
+  --color-celadon: #3d797d;
+  --color-celadon-muted: #70abaf;
+  --color-copper: #a85918;
+  --color-gold: #f4b886;
+  --color-grape: #32292f;
+  --paper-tint: rgba(112, 171, 175, 0.06);
 }
 
 body {
