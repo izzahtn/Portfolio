@@ -97,60 +97,114 @@ export const projects: Project[] = [
   {
     slug: "baja-brake-lines",
     number: "02",
-    title: "TG22 Brake Lines & Chassis Routing",
+    title: "TG22 Brake Lines & Hydraulic Distribution",
     shortTitle: "Brake Lines",
     organization: "Cornell Baja SAE Racing",
-    category: "Automotive Brake Plumbing & 3D CAD",
-    timeline: "2024 – 2025 Season",
+    category: "Automotive Hydraulics & CNC Machining",
+    timeline: "Spring 2026",
     role: "Mechanical Engineer — Brake Lines (Brakes Subteam)",
-    summary: "Design, 3D CAD packaging, and chassis routing of the rigid stainless and flexible brake lines for Cornell's TG22 Baja SAE off-road racer, engineering line geometry, bend radii, chassis mounts, and caliper interfaces for dynamic 4-wheel lockup.",
+    summary: "Complete redesign, CNC machining, and packaging of the vehicle brake lines and custom 6061 aluminum X & T distribution blocks for Cornell Baja Racing, resolving prior air-bubble bleed traps and cockpit interference.",
     has3dModel: true,
     modelUrl: "/models/brake-lines/TG22_Brake_Lines_Assembly.glb",
-    tags: ["SolidWorks", "Brake Lines", "Hard Lines", "Vehicle Packaging", "Chassis Routing"],
+    tags: ["SolidWorks", "CNC Tormach", "6061 Aluminum", "Hydraulic Routing", "Brake Lines", "Baja SAE"],
     specs: [
-      { label: "Vehicle Platform", value: "Cornell TG22 Baja SAE" },
-      { label: "Working Pressure", value: "1,200 PSI Nominal (1,800 PSI Peak)" },
-      { label: "Master Cylinders", value: "Wilwood Dual Tandem Cylinders" },
-      { label: "Caliper Configuration", value: "3-Caliper (Dual Front Rotors, Single Rear Rotor)" },
-      { label: "Hydraulic Fluid", value: "DOT 4 High-Temperature Synthetic Fluid" },
-      { label: "Tubing Specification", value: "3/16\" Seamless 304 Stainless + Braided PTFE" },
-      { label: "Telemetry Sensors", value: "Dual Solid-State Pressure Transducers" },
-      { label: "CAD System", value: "SolidWorks Parametric Assembly" },
+      { label: "Vehicle Platform", value: "Cornell Baja Racing (Spring 2026)" },
+      { label: "Core Subsystems", value: "Brake Lines & Custom Distribution Blocks" },
+      { label: "Tubing Specification", value: "Metal Braided with Protective Outer Coating" },
+      { label: "Manifold Blocks", value: "Custom 6061 Aluminum X-Block & T-Block" },
+      { label: "Machine Tool", value: "CNC Tormach Mill (Multi-Setup Machining)" },
+      { label: "Block Sealing", value: "Flat Machined Faces with Copper Crush Washers" },
+      { label: "Port Thread Standards", value: "6mm Tapped (Brake Lines) + 7/16\" Tapped (Pressure Sensor)" },
+      { label: "Tubing Cut Lengths", value: "Masters-X: 17\" • X-Long: 35\" • X-Short: 26\" • Masters-T: 38\" • T-Rear: 50\"" },
+      { label: "Caliper Configuration", value: "Top-Mounted Calipers on Rotor Assembly" },
+      { label: "Fluid Bleed Protocol", value: "Syringe Vacuum & Caliper Piston Actuation" },
+      { label: "Validation Results", value: "Zero Fluid Leaks • Bubble-Free Front & Rear Circuits" },
+      { label: "Competition Spares", value: "2 Fully Machined Hot-Spare Blocks" },
+    ],
+    images: [
+      {
+        url: "/images/brake-lines/brake_lines_schematic.png",
+        caption: "Figure 1: Complete vehicle brake lines CAD routing layout, illustrating tandem master cylinders, distribution blocks, pressure sensors, and corner caliper plumbing."
+      },
+      {
+        url: "/images/brake-lines/routing_defect_prev_year.png",
+        caption: "Figure 2: Root-cause failure analysis of previous year's car: high-point elevation hump over the masters that trapped rising air bubbles and degraded pedal firmness."
+      },
+      {
+        url: "/images/brake-lines/front_lines_suspension.png",
+        caption: "Figure 3: Redesigned front routing: tubing drops cleanly near the brake pedal to the X-block and branches directly along upper suspension links to calipers with zero air traps."
+      },
+      {
+        url: "/images/brake-lines/x_block_cad.png",
+        caption: "Figure 4: CAD model of custom 4-way 6061 aluminum X-Block with 6mm line ports, 7/16\" transducer port, and pocket cutouts for weight savings."
+      },
+      {
+        url: "/images/brake-lines/t_block_cad.png",
+        caption: "Figure 5: CAD model of custom 6061 aluminum T-Block, re-engineered to mount on its side for cockpit clearance."
+      },
+      {
+        url: "/images/brake-lines/rear_lines_chassis.png",
+        caption: "Figure 6: Rear lines chassis packaging: T-block relocated back closer to the seat on its side, routing tubing securely along lower chassis frame tubes."
+      },
+      {
+        url: "/images/brake-lines/caliper_top_mount.png",
+        caption: "Figure 7: Caliper relocated to top of rotor mount, minimizing line displacement through steering articulation and allowing tight chassis fastening."
+      },
+      {
+        url: "/images/brake-lines/cnc_tormach_machining.png",
+        caption: "Figure 8: CNC Tormach multi-setup machining: squaring 6061 aluminum billet stock, multi-axis drilling and tapping, and final weight-reduction pocketing."
+      },
+      {
+        url: "/images/brake-lines/t_block_drawing.png",
+        caption: "Figure 9: Formal engineering part drawing for the T-Block manifold detailing dimensions, tolerances, and port centerlines."
+      },
+      {
+        url: "/images/brake-lines/x_block_drawing.png",
+        caption: "Figure 10: Formal engineering part drawing for the X-Block manifold detailing multi-port 6mm and 7/16\" tapping specifications."
+      }
     ],
     sections: [
       {
-        title: "01. Brake Line Packaging & SAE Standards",
-        subtitle: "Routing lines to deliver full hydraulic clamping pressure for 4-wheel lockup",
-        content: "Under Baja SAE regulations, every vehicle must achieve dynamic lockup of all four wheels simultaneously on dry pavement during technical inspection. My core focus was designing and routing the brake lines connecting the tandem master cylinders to each corner caliper, ensuring zero interference with moving suspension links or steering travel.",
+        title: "01. Design Requirements & Root-Cause Failure Analysis",
+        subtitle: "Eliminating bubble traps and driver cockpit interference from previous designs",
+        content: "The primary function of the brake lines is to transmit hydraulic fluid pressure from the tandem master cylinders to the brake calipers. Under pedal application, hydraulic pressure displaces caliper pistons against the brake rotors to decelerate the vehicle. In previous car iterations, routing suffered from a critical failure mode: the front line arched down one side and then climbed up and over to the opposite side, creating a high-elevation bump. Any entrained air migrated to this peak, preventing a complete bleed and causing a dangerously soft pedal. Furthermore, the previous rear T-block faced downward near the front cockpit, obstructing driver egress and complicating pit-lane servicing.",
         bulletPoints: [
-          "Engineered dual independent brake lines: front and rear brake circuits isolated via balance bar to ensure safety in the event of a line rupture.",
-          "Integrated inline brake pressure transducer fittings to automatically illuminate brake lights at >100 PSI.",
-          "Routed lines with high clearance against off-road rock spray, suspension articulation, and thermal radiation from the exhaust manifold."
+          "Mandated non-plastic, high-durability metal braided lines with protective outer coating to prevent tearing, rock strike puncture, and off-road trail abrasion.",
+          "Maintained strict routing boundary constraints: lines must never fall below exposed undercarriage terrain clearance zones and must be securely fastened to chassis tubes.",
+          "Engineered line slack to ensure tubing is never in tension across full suspension rebound, bump travel, and maximum steering lock.",
+          "Re-architected front routing to travel cleanly down near the brake pedal to the X-block and branch outward along the upper suspension links, permanently eliminating the high-point air trap."
         ],
         callout: {
           type: "spec",
-          title: "SAE Technical Inspection Rule B8.3.1",
-          text: "The vehicle must be equipped with a hydraulic braking system that acts on all four wheels and is operated by a single foot control. The system must have two independent hydraulic circuits."
+          title: "Core Design Constraints & Objectives",
+          text: "• Tubing: Durable braided metal with protective outer coating (no plastic lines)\n• Routing Rule: Eliminate elevation humps to avoid air bubble traps\n• Clearance: Zero undercarriage drop below terrain-exposed frame; zero tension under suspension travel\n• Packaging: Relocate blocks to protect driver ingress/egress and optimize pit maintenance"
         }
       },
       {
-        title: "02. Line Routing Architecture & Bend Geometry",
-        subtitle: "Packaging rigid stainless hardlines alongside flexible braided hoses",
-        content: "The TG22 brake lines utilize an optimized hybrid routing strategy: rigid 3/16-inch seamless stainless steel hardlines run along the roll cage tubes for maximum volumetric efficiency and minimum pedal compliance, transitioning to flexible stainless steel braided PTFE hoses across dynamic suspension A-arms.",
+        title: "02. CNC Tormach Machining of 6061 X & T Distribution Blocks",
+        subtitle: "Multi-setup machining, precision tapping, and hermetic copper crush washer sealing",
+        content: "To distribute hydraulic pressure from the tandem master cylinders to the corner calipers and pressure transducers, custom X-junction and T-junction blocks were manufactured in Cornell's machine shop. Both manifolds were machined from solid 6061 aluminum billet stock on a CNC Tormach mill using a multi-step operation: first squaring raw stock to rectangular bounds, followed by precision drilling and tapping multiple 6mm ports for brake lines and a larger 7/16\" port for the inline hydraulic pressure transducer.",
         bulletPoints: [
-          "Modeled custom routing geometry in SolidWorks CAD to verify minimum bend radii (at least 3x tube outer diameter) and prevent wall thinning or flow restriction.",
-          "Positioned welded chassis mounting tabs with rubber-insulated P-clamps along the 4130 chromoly roll cage to prevent line vibration and fatigue.",
-          "Calculated volumetric expansion: rigid stainless hardlines reduce pedal sponge by 38% compared to continuous flexible rubber hoses.",
-          "Installed aluminum T-junction blocks to split front circuit line pressure equally to left and right calipers."
-        ]
+          "Each slide face was precision-machined flat to guarantee a hermetic, leak-proof hydraulic seal using copper crush washers under extreme braking pressure.",
+          "Programmed final CNC pocketing operations to eliminate non-structural material, achieving significant weight savings without compromising thread engagement strength.",
+          "Fabricated two complete sets of newly machined X and T blocks as competition hot spares for immediate trackside swap capability.",
+          "Prepared custom line lengths: Masters-to-X (17 in), X-to-Longer Side (35 in), X-to-Shorter Side (26 in), Masters-to-T (38 in), and T-to-Rear Caliper (50 in)."
+        ],
+        callout: {
+          type: "formula",
+          title: "Distribution Block Port Architecture",
+          text: "\\text{Line Ports: } 6\\text{mm Tapped} \\quad \\Big| \\quad \\text{Pressure Sensor: } 7/16\\text{\" Tapped} \\quad \\Big| \\quad \\text{Sealing: } \\text{Faced Slides + Copper Crush Washers}"
+        }
       },
       {
-        title: "03. Upright Interface & Dynamic Clearance",
-        subtitle: "Connecting brake lines into the corner assembly with zero line binding",
-        content: "As shown in the live 3D SolidWorks assembly above, the brake lines route into the TG22 front uprights and connect to the calipers. The line geometry and hose slack were carefully validated through full steering lock and suspension bump travel to prevent line pinching or tension.",
+        title: "03. Chassis Routing, Caliper Placement & Fluid Bleed Testing",
+        subtitle: "Under-chassis packaging, top-mounted calipers, and vacuum syringe validation",
+        content: "Packaging was refined across both ends of the vehicle. For the rear circuit, the T-block was moved farther back closer to the driver's seat and mounted on its side rather than pointing downward, resolving cockpit interference. Tubing was routed underneath along transverse frame cross-tubes before connecting to the rear caliper. Outboard calipers were repositioned to the top of the rotor mounts, drastically reducing line displacement during steering movements and permitting tighter, snag-free chassis attachment.",
         bulletPoints: [
-          "Validated dynamic line clearance under maximum steering angle and full suspension bump.",
-          "Ensured easy bleeder screw and fitting accessibility so the team can perform full hydraulic bleeds in under 4 minutes in the competition pit lane."
+          "Validation Procedure: Filled and bled the system using a vacuum syringe at the calipers to draw entrained air and brake fluid through the circuits, followed by dynamic pedal actuation to measure caliper piston displacement.",
+          "Empirical Results: Discovered virtually zero air bubbles in the front lines and minimal micro-bubbles in the rear circuit, confirming the success of the new non-inverted routing path.",
+          "Inspection Integrity: Verified zero fluid leakage across all 6mm fittings and pressure sensor ports; confirmed lines withstand dynamic braking cycles with zero damage or tension.",
+          "Future Iterations: Identified next steps including sourcing ultra-compact pressure transducers and CNC machining custom banjo bolts to reduce assembly costs and prevent fitting fragility."
         ]
       }
     ]
