@@ -97,16 +97,16 @@ export const projects: Project[] = [
   {
     slug: "baja-brake-lines",
     number: "02",
-    title: "TG22 Brake Lines & Hydraulic Subsystem",
+    title: "TG22 Brake Lines & Chassis Routing",
     shortTitle: "Brake Lines",
     organization: "Cornell Baja SAE Racing",
-    category: "Automotive Hydraulics & 3D CAD",
+    category: "Automotive Brake Plumbing & 3D CAD",
     timeline: "2024 – 2025 Season",
-    role: "Mechanical Engineer — Brakes Subteam (Former Role)",
-    summary: "Complete pneumatic/hydraulic braking system design and chassis packaging for Cornell's competitive Baja SAE off-road racer, connecting two master cylinders to 3 calipers and electronic pressure sensors for dynamic 4-wheel lockup.",
+    role: "Mechanical Engineer — Brake Lines (Brakes Subteam)",
+    summary: "Design, 3D CAD packaging, and chassis routing of the rigid stainless and flexible brake lines for Cornell's TG22 Baja SAE off-road racer, engineering line geometry, bend radii, chassis mounts, and caliper interfaces for dynamic 4-wheel lockup.",
     has3dModel: true,
     modelUrl: "/models/brake-lines/TG22_Brake_Lines_Assembly.glb",
-    tags: ["SolidWorks", "Hydraulics", "Hard Lines", "Vehicle Packaging", "Machining"],
+    tags: ["SolidWorks", "Brake Lines", "Hard Lines", "Vehicle Packaging", "Chassis Routing"],
     specs: [
       { label: "Vehicle Platform", value: "Cornell TG22 Baja SAE" },
       { label: "Working Pressure", value: "1,200 PSI Nominal (1,800 PSI Peak)" },
@@ -119,13 +119,13 @@ export const projects: Project[] = [
     ],
     sections: [
       {
-        title: "01. Design Objectives & Regulatory Mandates",
-        subtitle: "Meeting stringent SAE Technical Inspection standards for 4-wheel dynamic lockup",
-        content: "Under Baja SAE technical regulations, every vehicle must achieve dynamic lockup of all four wheels simultaneously on dry pavement during technical inspection. The hydraulic brake line system serves as the mission-critical link between driver pedal effort and mechanical clamping torque at each wheel corner.",
+        title: "01. Brake Line Packaging & SAE Standards",
+        subtitle: "Routing lines to deliver full hydraulic clamping pressure for 4-wheel lockup",
+        content: "Under Baja SAE regulations, every vehicle must achieve dynamic lockup of all four wheels simultaneously on dry pavement during technical inspection. My core focus was designing and routing the brake lines connecting the tandem master cylinders to each corner caliper, ensuring zero interference with moving suspension links or steering travel.",
         bulletPoints: [
-          "Dual independent hydraulic circuits: front and rear brake circuits isolated via balance bar to ensure braking safety in the event of a line rupture.",
-          "Integration of inline brake pressure sensors to illuminate rear brake indicator lights automatically at >100 PSI threshold.",
-          "High structural resistance against aggressive off-road debris, suspension articulation, and thermal radiation from the exhaust manifold."
+          "Engineered dual independent brake lines: front and rear brake circuits isolated via balance bar to ensure safety in the event of a line rupture.",
+          "Integrated inline brake pressure transducer fittings to automatically illuminate brake lights at >100 PSI.",
+          "Routed lines with high clearance against off-road rock spray, suspension articulation, and thermal radiation from the exhaust manifold."
         ],
         callout: {
           type: "spec",
@@ -134,23 +134,23 @@ export const projects: Project[] = [
         }
       },
       {
-        title: "02. Hydraulic Architecture & Routing Geometry",
+        title: "02. Line Routing Architecture & Bend Geometry",
         subtitle: "Packaging rigid stainless hardlines alongside flexible braided hoses",
-        content: "The TG22 brake plumbing utilizes an optimized hybrid routing strategy: rigid 3/16-inch seamless stainless steel hardlines run along the roll cage tubes for maximum volumetric efficiency and minimum pedal compliance, transitioning to flexible stainless steel braided PTFE hoses across dynamic suspension links.",
+        content: "The TG22 brake lines utilize an optimized hybrid routing strategy: rigid 3/16-inch seamless stainless steel hardlines run along the roll cage tubes for maximum volumetric efficiency and minimum pedal compliance, transitioning to flexible stainless steel braided PTFE hoses across dynamic suspension A-arms.",
         bulletPoints: [
-          "Custom CNC-machined aluminum T-junction blocks to split front left and right circuit pressure equally.",
-          "Custom mounting tabs welded onto the 4130 chromoly roll cage with rubber-insulated P-clamps to eliminate fatigue vibration.",
-          "Careful bend-radius control (minimum 3x tube outer diameter) using manual tube benders to prevent wall thinning or hydraulic flow restriction.",
-          "Calculated volumetric expansion: rigid lines reduce pedal sponge by 38% compared to continuous flexible rubber hoses."
+          "Modeled custom routing geometry in SolidWorks CAD to verify minimum bend radii (at least 3x tube outer diameter) and prevent wall thinning or flow restriction.",
+          "Positioned welded chassis mounting tabs with rubber-insulated P-clamps along the 4130 chromoly roll cage to prevent line vibration and fatigue.",
+          "Calculated volumetric expansion: rigid stainless hardlines reduce pedal sponge by 38% compared to continuous flexible rubber hoses.",
+          "Installed aluminum T-junction blocks to split front circuit line pressure equally to left and right calipers."
         ]
       },
       {
-        title: "03. Mechanical Packaging & Upright Integration",
-        subtitle: "Fitting calipers, wave disc springs, and custom pins into the corner assembly",
-        content: "As shown in the live 3D SolidWorks assembly above, the brake lines interface directly with the TG22 front uprights and floating brake rotor assemblies. Custom rotor pins and wave disc springs provide thermal expansion compliance while preventing brake drag during high-speed endurance heats.",
+        title: "03. Upright Interface & Dynamic Clearance",
+        subtitle: "Connecting brake lines into the corner assembly with zero line binding",
+        content: "As shown in the live 3D SolidWorks assembly above, the brake lines route into the TG22 front uprights and connect to the calipers. The line geometry and hose slack were carefully validated through full steering lock and suspension bump travel to prevent line pinching or tension.",
         bulletPoints: [
-          "Finite clearance verification between rotating rotor bolts and caliper bracket under full steering lock and suspension bump travel.",
-          "Direct bleeder screw accessibility designed into upright geometry so the team can perform full hydraulic bleeds in under 4 minutes in the competition pit lane."
+          "Validated dynamic line clearance under maximum steering angle and full suspension bump.",
+          "Ensured easy bleeder screw and fitting accessibility so the team can perform full hydraulic bleeds in under 4 minutes in the competition pit lane."
         ]
       }
     ]
