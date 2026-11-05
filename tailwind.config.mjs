@@ -25,11 +25,13 @@ export default {
         }
       },
       fontFamily: {
+        story: ['"Story Script"', 'cursive'],
+        script: ['"Story Script"', 'cursive'],
         sans: ['Figtree', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
         figtree: ['Figtree', 'sans-serif'],
         cormorant: ['"Cormorant Garamond"', 'Playfair Display', 'serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'Courier New', 'monospace'],
-        display: ['"Cormorant Garamond"', 'Space Grotesk', 'sans-serif'],
+        display: ['"Story Script"', '"Cormorant Garamond"', 'serif'],
         serif: ['"Cormorant Garamond"', 'Playfair Display', 'Georgia', 'serif'],
       },
       backgroundImage: {
