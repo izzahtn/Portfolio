@@ -66,27 +66,37 @@ import { artItems, artCategories } from '../data/art';
           <span class="corner-diamond-br"></span>
 
           <div class="space-y-4 flex flex-col h-full justify-between">
-            <!-- Simulated High-Fidelity Artwork Showcase -->
+            <!-- Artwork Image Display -->
             <div
-              class="relative w-full aspect-[4/3] rounded-xl overflow-hidden flex flex-col justify-end p-5 select-none text-white border border-theme-border/50"
-              style={`background-color: ${item.imagePlaceholderColor};`}
+              class="relative w-full aspect-[4/3] rounded-xl overflow-hidden flex flex-col justify-end select-none text-white border border-theme-border/50 bg-theme-surface-elevated"
             >
-              <!-- Atmospheric gradient -->
-              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+              {item.imageUrl ? (
+                <img
+                  src={item.imageUrl}
+                  alt={item.title}
+                  class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="absolute inset-0" style={`background-color: ${item.imagePlaceholderColor};`}></div>
+              )}
+
+              <!-- Subtle bottom text gradient overlay for title legibility -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none"></div>
               
               {item.award && (
                 <div class="absolute top-3 left-3 z-10">
-                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-figtree bg-theme-rose text-white uppercase font-bold tracking-wider shadow">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-figtree bg-theme-rose text-white uppercase font-bold tracking-wider shadow-md">
                     ★ {item.award.split('•')[0]}
                   </span>
                 </div>
               )}
 
-              <div class="relative z-10 space-y-1">
-                <span class="text-[10px] uppercase font-figtree tracking-wider text-theme-copper block font-semibold">
+              <div class="relative z-10 p-4 space-y-1">
+                <span class="text-[10px] uppercase font-figtree tracking-wider text-theme-copper block font-semibold drop-shadow">
                   {item.category} • {item.year}
                 </span>
-                <h2 class="text-xl font-bold font-cormorant leading-tight group-hover:text-theme-copper transition-colors">
+                <h2 class="text-xl font-bold font-cormorant leading-tight group-hover:text-theme-copper transition-colors drop-shadow">
                   {item.title}
                 </h2>
               </div>
@@ -134,9 +144,11 @@ import { artItems, artCategories } from '../data/art';
             ✕ Close
           </button>
 
-          <div id="modal-image-container" class="w-full aspect-[16/10] rounded-sm border border-theme-border flex items-center justify-center relative p-6 text-white text-center">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-            <div id="modal-preview-text" class="relative z-10 font-editorial text-2xl sm:text-3xl font-bold"></div>
+          <div id="modal-image-container" class="w-full max-h-[65vh] rounded-xl overflow-hidden border border-theme-border flex items-center justify-center relative bg-black/40">
+            <img id="modal-img-elem" src="" alt="" class="w-full h-auto max-h-[65vh] object-contain hidden" />
+            <div id="modal-fallback" class="p-12 text-center text-white hidden">
+              <div id="modal-preview-text" class="font-cormorant text-2xl sm:text-3xl font-bold"></div>
+            </div>
           </div>
 
           <div class="space-y-4">
@@ -206,6 +218,8 @@ import { artItems, artCategories } from '../data/art';
   const modalDimensions = document.getElementById('modal-dimensions');
   const modalAward = document.getElementById('modal-award');
   const modalContainer = document.getElementById('modal-image-container');
+  const modalImg = document.getElementById('modal-img-elem') as HTMLImageElement;
+  const modalFallback = document.getElementById('modal-fallback');
   const modalPreviewText = document.getElementById('modal-preview-text');
 
   cards.forEach((card) => {
@@ -220,10 +234,16 @@ import { artItems, artCategories } from '../data/art';
       if (modalDesc) modalDesc.textContent = data.description;
       if (modalMedium) modalMedium.textContent = data.medium;
       if (modalDimensions) modalDimensions.textContent = data.dimensions || 'N/A';
-      if (modalPreviewText) modalPreviewText.textContent = data.title;
 
-      if (modalContainer) {
-        modalContainer.style.backgroundColor = data.imagePlaceholderColor || '#222';
+      if (data.imageUrl && modalImg) {
+        modalImg.src = data.imageUrl;
+        modalImg.alt = data.title;
+        modalImg.classList.remove('hidden');
+        if (modalFallback) modalFallback.classList.add('hidden');
+      } else {
+        if (modalImg) modalImg.classList.add('hidden');
+        if (modalFallback) modalFallback.classList.remove('hidden');
+        if (modalPreviewText) modalPreviewText.textContent = data.title;
       }
 
       if (modalAward) {

@@ -46,7 +46,7 @@ export const projects: Project[] = [
     role: "Mechanical Engineer — Suspension Subteam",
     summary: "Heavy-duty aluminum and alloy steel rear control arms engineered for a high-travel independent rear suspension, connecting rear uprights to the chassis roll cage and supporting dynamic shock piston loads.",
     has3dModel: false,
-    tags: ["Ansys Mechanical", "FEA", "SolidWorks", "CNC Machining", "TIG Welding", "4130 Steel", "Kinematics"],
+    tags: ["Ansys Mechanical", "FEA", "SolidWorks 2026", "CNC Machining", "Manual Lathe", "Kinematics", "Suspension"],
     specs: [
       { label: "Suspension Architecture", value: "Multi-Link Independent Rear Suspension (IRS)" },
       { label: "Primary Materials", value: "4130 Chromoly Steel Tubes + 6061-T6 Aluminum Clevises" },
@@ -54,7 +54,7 @@ export const projects: Project[] = [
       { label: "Simulation & FEA", value: "Ansys Mechanical 2025 Structural Solver" },
       { label: "Critical Load Case", value: "3G Bump + 2G Lateral Cornering Combined" },
       { label: "Target Factor of Safety", value: "FoS ≥ 2.2 against yield under peak dynamic shock" },
-      { label: "Fabrication Methods", value: "CNC Milling, Manual Lathe Turning, Precision TIG Fixturing" },
+      { label: "Fabrication Methods", value: "CNC Milling, Manual Lathe Turning, Precision Fixturing" },
       { label: "Protective Finish", value: "Heat-Treated & Mil-Spec Type II Anodized" },
     ],
     sections: [
@@ -86,7 +86,7 @@ export const projects: Project[] = [
       {
         title: "03. Machine Shop Fabrication & Tolerancing",
         subtitle: "From raw tube stock to heat-treated, race-proven suspension hardware",
-        content: "Manufactured the prototype components utilizing machine shop tools at Cornell: manual lathe for turning bearing cups and misalignment spacers to ±0.0005\" press-fit tolerance, CNC milling for shock clevises, and TIG welding within a rigid aluminum fixture jig to prevent thermal warping.",
+        content: "Manufactured the prototype components utilizing machine shop tools at Cornell: manual lathe for turning bearing cups and misalignment spacers to ±0.0005\" press-fit tolerance, and CNC milling for precision shock clevises and chassis mounting points.",
         bulletPoints: [
           "Toleranced bearing bores checked with telescoping bore gauges and micrometers.",
           "Post-weld inspection for complete joint penetration before heat treatment and protective anodization."

@@ -160,7 +160,7 @@ const brakeLines = projects[1];
                 </div>
                 <div class="flex justify-between border-b border-theme-border/50 pb-1.5">
                   <span class="text-theme-text-muted">Shop Capabilities</span>
-                  <span class="text-theme-text font-medium text-right">CNC Mill, Manual Lathe & Mill, TIG</span>
+                  <span class="text-theme-text font-medium text-right">CNC Mill, Manual Lathe & Mill</span>
                 </div>
                 <div class="flex justify-between border-b border-theme-border/50 pb-1.5">
                   <span class="text-theme-text-muted">Robotics Record</span>
@@ -194,16 +194,16 @@ const brakeLines = projects[1];
           <span class="text-xs font-mono uppercase tracking-widest text-theme-rose block mb-1">
             SELECTED WORKS
           </span>
-          <h2 class="text-3xl sm:text-5xl font-bold font-editorial text-theme-text tracking-tight">
+          <h2 class="text-3xl sm:text-5xl font-bold font-cormorant text-theme-text tracking-tight">
             Engineering Projects
           </h2>
-          <p class="text-sm text-theme-text-muted font-sans mt-2 max-w-xl">
-            Hardware case studies bridging mathematical kinematics, finite element analysis, precision machine shop fabrication, and racing competition.
+          <p class="text-sm text-theme-text-muted font-figtree mt-2 max-w-xl">
+            A collection of mechanical systems I've designed, simulated, and built by hand—from Cornell Baja racing components to laser amplifiers and competition robots.
           </p>
         </div>
         <a
           href="/projects"
-          class="inline-flex items-center gap-1.5 text-xs font-semibold text-theme-rose hover:text-theme-rose-muted transition-colors font-sans"
+          class="inline-flex items-center gap-1.5 text-xs font-medium text-theme-rose hover:text-theme-rose-muted transition-colors font-figtree"
         >
           <span>View All 4 Projects</span>
           <span>→</span>
@@ -223,7 +223,7 @@ const brakeLines = projects[1];
               <span class="w-8 h-[1px] bg-theme-border-strong"></span>
               <span class="text-xs font-figtree uppercase tracking-wider text-theme-text-muted">{rearControlArms.organization}</span>
               <span class="inline-block px-2.5 py-0.5 text-[11px] rounded-full border-[0.5px] border-theme-border font-figtree text-theme-text-muted ml-auto">
-                Kinematics & FEA
+                Kinematics & Linkages
               </span>
             </div>
 
@@ -241,19 +241,19 @@ const brakeLines = projects[1];
             <div class="grid grid-cols-2 gap-4 py-3 border-y border-theme-border/60 font-figtree text-xs">
               <div>
                 <span class="text-[11px] text-theme-text-faint block uppercase">Structural Materials</span>
-                <span class="font-medium text-theme-text">4130 Chromoly + 6061-T6 Aluminum</span>
+                <span class="font-medium text-theme-text">Aluminum & Steel Suspension Tubes</span>
               </div>
               <div>
-                <span class="text-[11px] text-theme-text-faint block uppercase">Stress Validation</span>
-                <span class="font-medium text-theme-celadon">Ansys FEA (FoS = 2.39 at 3G Bump)</span>
+                <span class="text-[11px] text-theme-text-faint block uppercase">Bearing Interface</span>
+                <span class="font-medium text-theme-celadon">Spherical Bearings & Precision Spacers</span>
               </div>
               <div>
                 <span class="text-[11px] text-theme-text-faint block uppercase">Shop Fabrication</span>
-                <span class="font-medium text-theme-text">CNC Milling, Manual Lathe, TIG Fixture</span>
+                <span class="font-medium text-theme-text">CNC Milling, Manual Lathe & Mill</span>
               </div>
               <div>
-                <span class="text-[11px] text-theme-text-faint block uppercase">Wheel Travel</span>
-                <span class="font-medium text-theme-copper">12 Inches Dynamic Articulation</span>
+                <span class="text-[11px] text-theme-text-faint block uppercase">Surface Treatment</span>
+                <span class="font-medium text-theme-copper">Heat-Treated & Anodized Protection</span>
               </div>
             </div>
 
@@ -268,17 +268,44 @@ const brakeLines = projects[1];
             </div>
           </div>
 
+          <!-- Right: Clear Architectural Blueprint / Photo Container -->
           <div class="lg:col-span-5 relative shape-arch-top overflow-hidden border border-theme-border bg-theme-surface-elevated p-6 shadow-md">
-            <div class="text-xs font-mono uppercase text-theme-rose font-bold mb-3">
-              // FINITE ELEMENT ANALYSIS
+            <div class="flex items-center justify-between mb-3 text-xs font-figtree">
+              <span class="font-mono uppercase text-theme-rose font-bold text-[11px]">
+                // SUSPENSION GEOMETRY
+              </span>
+              <span class="text-theme-text-faint text-[10px]">CORNELL BAJA SAE</span>
             </div>
-            <div class="aspect-[4/3] rounded-xl bg-gradient-to-br from-blue-900/40 via-emerald-800/30 to-amber-900/30 border border-theme-border/70 flex flex-col items-center justify-center p-6 text-center space-y-2">
-              <span class="font-cormorant text-2xl text-theme-text font-bold">Ansys Stress Contour Simulation</span>
-              <p class="text-xs text-theme-text-muted max-w-xs font-figtree">
-                Quadratic tetrahedral mesh modeling combined 3G vertical bump and 2G lateral cornering forces.
-              </p>
-              <div class="w-40 h-2.5 rounded-full bg-gradient-to-r from-blue-500 via-emerald-400 via-amber-400 to-red-500 mt-2 border border-black/20"></div>
-              <span class="text-[10px] font-mono text-theme-text-muted">0 MPa → 182 MPa (Yield: 435 MPa)</span>
+
+            <div class="aspect-[4/3] rounded-xl border border-dashed border-theme-border bg-theme-surface p-6 flex flex-col justify-between text-center relative group">
+              <div class="space-y-1">
+                <span class="font-cormorant text-xl text-theme-text font-bold block">
+                  Rear Control Arm Assembly
+                </span>
+                <p class="text-xs text-theme-text-muted font-figtree max-w-xs mx-auto">
+                  Connecting rear uprights directly to the chassis roll cage and supporting the shock piston assemblies under dynamic racing articulation.
+                </p>
+              </div>
+
+              <!-- Technical Specification Pill Callouts -->
+              <div class="space-y-2 py-2">
+                <div class="flex items-center justify-between text-[11px] font-figtree px-3 py-1.5 rounded-md bg-theme-surface-elevated border border-theme-border/60">
+                  <span class="text-theme-text-muted">Chassis Attachment:</span>
+                  <span class="font-medium text-theme-text">Roll Cage Hardpoints</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px] font-figtree px-3 py-1.5 rounded-md bg-theme-surface-elevated border border-theme-border/60">
+                  <span class="text-theme-text-muted">Upright Mount:</span>
+                  <span class="font-medium text-theme-celadon">Spherical Bearing Joints</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px] font-figtree px-3 py-1.5 rounded-md bg-theme-surface-elevated border border-theme-border/60">
+                  <span class="text-theme-text-muted">Shock Mounting:</span>
+                  <span class="font-medium text-theme-copper">Integrated Clevis Tabs</span>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-theme-border/50 text-[10px] text-theme-text-faint font-mono">
+                CAD SOURCE: Y:\TG23\1 - SUSPENSION\3_LINKS\REAR_LINKS
+              </div>
             </div>
           </div>
         </div>

@@ -48,7 +48,7 @@ export const siteConfig: SiteConfig = {
   skills: {
     engineering: ["SolidWorks 2026 (Parametric & Assemblies)", "Autodesk Fusion 360", "Geometric Dimensioning & Tolerancing (GD&T)", "Kinematic Linkage Design", "Hydraulic Brake Packaging"],
     analysis: ["Ansys Mechanical (Structural FEA)", "Von Mises Stress & Deflection", "Hand Calculations & Shear Moments", "MATLAB", "Transient Pulse Circuit Analysis"],
-    fabrication: ["CNC Milling & Routing", "Manual Lathe & Manual Mill", "TIG/MIG Welding (Beginner)", "3D Printing (FDM/SLA)", "Precision Sheet Metal Bending"],
+    fabrication: ["CNC Milling & Routing", "Manual Lathe & Manual Mill", "3D Printing (FDM/SLA)", "Laser Cutting & Waterjet", "Precision Sheet Metal Bending"],
     programming: ["Python", "C++ (VEX Robotics / Autonomous Pathing)", "Java", "MATLAB Scripts"],
     creative: ["Charcoal & Ink Drawing", "Fine Woodworking & Joinery", "Handcrafted Jewelry Making", "Garment & Clothing Patterning"]
   }

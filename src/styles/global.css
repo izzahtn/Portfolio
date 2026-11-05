@@ -5,61 +5,65 @@
 @tailwind utilities;
 
 :root {
-  /* Default: Heritage Light (Artisan Paper) */
-  --color-bg: #FAF8F5;
+  /* User Custom Palette: Ivory, Sweet Peony, Pacific Cyan, Dusty Grape, Yellow Green */
+  --color-bg: #f5fbef; /* Ivory */
   --color-surface: #FFFFFF;
-  --color-surface-elevated: #F3EFEA;
-  --color-surface-hover: #EAE5DE;
-  --color-border: rgba(60, 50, 40, 0.12);
-  --color-border-strong: rgba(60, 50, 40, 0.28);
-  --color-text: #202224;
-  --color-text-muted: #5C6066;
-  --color-text-faint: #8C9098;
-  --color-rose: #B95850;
-  --color-rose-muted: #D4827B;
-  --color-celadon: #547A69;
-  --color-celadon-muted: #7FA392;
-  --color-copper: #BA6A46;
-  --color-gold: #C49752;
-  --paper-tint: rgba(185, 88, 80, 0.04);
+  --color-surface-elevated: #ebf5e3;
+  --color-surface-hover: #e0eed6;
+  --color-border: rgba(99, 69, 138, 0.16); /* Dusty Grape subtle border */
+  --color-border-strong: rgba(99, 69, 138, 0.35);
+  --color-text: #241830; /* Deep Dusty Grape text */
+  --color-text-muted: #5e506d;
+  --color-text-faint: #8a7a9c;
+  --color-rose: #e06c9f; /* Sweet Peony */
+  --color-rose-muted: #c9578b;
+  --color-celadon: #3891a6; /* Pacific Cyan */
+  --color-celadon-muted: #2c7789;
+  --color-copper: #84c318; /* Yellow Green */
+  --color-gold: #84c318;
+  --color-grape: #63458a; /* Dusty Grape */
+  --paper-tint: rgba(224, 108, 159, 0.05);
 }
 
-html[data-theme="heritageDark"] {
-  --color-bg: #161819;
-  --color-surface: #1E2023;
-  --color-surface-elevated: #26292D;
-  --color-surface-hover: #2F3338;
-  --color-border: rgba(255, 255, 255, 0.10);
-  --color-border-strong: rgba(255, 255, 255, 0.22);
-  --color-text: #F5F3EF;
-  --color-text-muted: #A6ABB3;
-  --color-text-faint: #6B7079;
-  --color-rose: #C86A61;
-  --color-rose-muted: #984A42;
-  --color-celadon: #6F9683;
-  --color-celadon-muted: #466B58;
-  --color-copper: #D68A64;
-  --color-gold: #D4AB65;
-  --paper-tint: rgba(200, 106, 97, 0.08);
+html[data-theme="heritageDark"],
+html[data-theme="grapeDark"] {
+  --color-bg: #140f1c; /* Deep Dusty Grape Night */
+  --color-surface: #1e172a;
+  --color-surface-elevated: #281f36;
+  --color-surface-hover: #332845;
+  --color-border: rgba(245, 251, 239, 0.14);
+  --color-border-strong: rgba(245, 251, 239, 0.28);
+  --color-text: #f5fbef; /* Ivory */
+  --color-text-muted: #b9adcb;
+  --color-text-faint: #7e7191;
+  --color-rose: #e06c9f; /* Sweet Peony */
+  --color-rose-muted: #b84a7c;
+  --color-celadon: #3891a6; /* Pacific Cyan */
+  --color-celadon-muted: #2b7485;
+  --color-copper: #84c318; /* Yellow Green */
+  --color-gold: #84c318;
+  --color-grape: #9b7cc7;
+  --paper-tint: rgba(224, 108, 159, 0.08);
 }
 
 html[data-theme="botanicalSage"] {
-  --color-bg: #141715;
-  --color-surface: #1C211E;
-  --color-surface-elevated: #252B27;
-  --color-surface-hover: #2F3632;
-  --color-border: rgba(111, 150, 131, 0.14);
-  --color-border-strong: rgba(111, 150, 131, 0.30);
-  --color-text: #F3F5F2;
-  --color-text-muted: #9DA8A1;
-  --color-text-faint: #636F67;
-  --color-rose: #C86E60;
-  --color-rose-muted: #8F4539;
-  --color-celadon: #7FA892;
-  --color-celadon-muted: #4F7561;
-  --color-copper: #C98555;
-  --color-gold: #C9A763;
-  --paper-tint: rgba(127, 168, 146, 0.08);
+  --color-bg: #f5fbef;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #ebf5e3;
+  --color-surface-hover: #e0eed6;
+  --color-border: rgba(56, 145, 166, 0.18);
+  --color-border-strong: rgba(56, 145, 166, 0.38);
+  --color-text: #1d2b30;
+  --color-text-muted: #48616a;
+  --color-text-faint: #728c94;
+  --color-rose: #e06c9f;
+  --color-rose-muted: #c9578b;
+  --color-celadon: #3891a6;
+  --color-celadon-muted: #2c7789;
+  --color-copper: #84c318;
+  --color-gold: #84c318;
+  --color-grape: #63458a;
+  --paper-tint: rgba(56, 145, 166, 0.06);
 }
 
 body {

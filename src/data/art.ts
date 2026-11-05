@@ -1,12 +1,13 @@
 export interface ArtItem {
   id: string;
   title: string;
-  category: 'Drawing & Fine Art' | 'Woodworking' | 'Jewelry Design' | 'Apparel & Fashion';
+  category: 'Drawing & Fine Art' | 'Woodworking' | 'Jewelry & Sculpture' | 'Apparel & Mixed Media';
   year: string;
   medium: string;
   dimensions?: string;
   award?: string;
   description: string;
+  imageUrl?: string;
   imagePlaceholderColor: string;
   tags: string[];
 }
@@ -14,100 +15,132 @@ export interface ArtItem {
 export const artCategories = [
   'All',
   'Drawing & Fine Art',
+  'Jewelry & Sculpture',
   'Woodworking',
-  'Jewelry Design',
-  'Apparel & Fashion'
+  'Apparel & Mixed Media'
 ] as const;
 
 export const artItems: ArtItem[] = [
   {
-    id: "scholastic-silver-key-drawing",
-    title: "Anatomical Perspective in Charcoal",
-    category: "Drawing & Fine Art",
-    year: "2024",
-    medium: "Compressed Charcoal & White Conte on Toned Paper",
-    dimensions: "18\" x 24\"",
-    award: "CT Scholastic Art Awards • Silver Key (Jan 2024)",
-    description: "An exploratory study in volumetric chiaroscuro and mechanical anatomy. Captures the structural tensions between biological muscle fiber and skeletal leverage systems through dense tonal gradation.",
-    imagePlaceholderColor: "#3d322d",
-    tags: ["Award Winner", "Charcoal", "Figure Drawing", "Chiaroscuro"]
-  },
-  {
-    id: "artist-on-the-rise-best-in-show",
-    title: "Structural Tessellations & Layered Forms",
+    id: "best-in-show-watercolor",
+    title: "Best in Show Watercolor Still Life",
     category: "Drawing & Fine Art",
     year: "2025",
-    medium: "Pen, Archival Ink & Gouache on Heavy Cold-Press Watercolor Paper",
-    dimensions: "22\" x 30\"",
+    medium: "Watercolor on Heavy Cold-Press Archival Paper",
+    dimensions: "Full Sheet",
     award: "Artist On the Rise • Best in Show, Brookfield, CT (Mar 2025)",
-    description: "Awarded Best in Show out of over 120 regional artists. An intricate geometric exploration inspired by mathematical phyllotaxis and mechanical gear trains, layered in concentric pen lines and muted gouache washes.",
+    description: "Awarded Best in Show out of over 120 regional artists. An intricate exploration of transparency, fluid refraction, and saturation contrasts across layered organic forms and glassware.",
+    imageUrl: "/art/best-in-show-watercolor.jpg",
     imagePlaceholderColor: "#2a3b35",
-    tags: ["Best in Show", "Archival Ink", "Geometric", "Gouache"]
+    tags: ["Best in Show", "Watercolor", "Still Life", "Fine Art"]
   },
   {
-    id: "hand-cut-joinery-coffee-table",
-    title: "Dovetail & Mortise Hardwood Occasional Table",
-    category: "Woodworking",
+    id: "scholastic-silver-key-still-life",
+    title: "Connecticut Scholastic Silver Key Still Life",
+    category: "Drawing & Fine Art",
     year: "2024",
-    medium: "Black Walnut & Hard White Maple, Hand-Rubbed Tung Oil",
-    dimensions: "24\" x 18\" x 20\"",
-    description: "Built without mechanical fasteners or metal screws. Features hand-chiseled through-dovetails and blind mortise-and-tenon joints engineered to account for longitudinal and radial seasonal wood movement.",
+    medium: "Charcoal & Mixed Media on Heavy Archival Paper",
+    dimensions: "18\" x 24\"",
+    award: "CT Scholastic Art Awards • Silver Key (Jan 2024)",
+    description: "Honored with the Connecticut Statewide Scholastic Silver Key. A dynamic tonal investigation exploring high-contrast chiaroscuro, reflective textures, and structural massing.",
+    imageUrl: "/art/silver-key-still-life.jpg",
+    imagePlaceholderColor: "#3d322d",
+    tags: ["Silver Key Winner", "Charcoal", "Still Life", "Chiaroscuro"]
+  },
+  {
+    id: "summer-still-life-study",
+    title: "Summer Sunlight Still Life Study",
+    category: "Drawing & Fine Art",
+    year: "2024",
+    medium: "Oil Pastel, Gouache & Colored Pencil on Paper",
+    dimensions: "Studio Scale",
+    description: "An expressive color study balancing vibrant warm light temperatures against cool ambient shadows, capturing the organic geometries of fresh botanicals.",
+    imageUrl: "/art/summer-still-life.jpg",
     imagePlaceholderColor: "#4a3525",
-    tags: ["Woodworking", "Hand Joinery", "Black Walnut", "Tung Oil"]
+    tags: ["Still Life", "Gouache", "Pastel", "Color Study"]
   },
   {
-    id: "turned-hardwood-vessel",
-    title: "End-Grain Turned Vessel with Fluted Rim",
-    category: "Woodworking",
-    year: "2024",
-    medium: "Spalted Birch & Brass Inlay, Shellac Polish",
-    dimensions: "8\" Dia x 6\" H",
-    description: "Lathe-turned hollow form highlighting natural fungal spalting patterns. Rim finished with hand-carved micro-flutes and an inset brass wire boundary line.",
-    imagePlaceholderColor: "#5c432d",
-    tags: ["Woodturning", "Lathe", "Spalted Birch", "Brass Inlay"]
+    id: "kill-the-pen-study-1",
+    title: "Kill the Pen (Study I)",
+    category: "Drawing & Fine Art",
+    year: "2025",
+    medium: "Archival Micro-Point Ink & Technical Pen Drawing",
+    dimensions: "High Resolution Plate",
+    description: "Dense linear composition rendered with precision technical pens. Examines mechanical line density, hatching gradients, and organic cross-sectional layering.",
+    imageUrl: "/art/kill-the-pen.jpg",
+    imagePlaceholderColor: "#22252a",
+    tags: ["Technical Ink", "Fine Line", "Illustration", "Precision"]
   },
   {
-    id: "handcrafted-assemblage-ring",
-    title: "Sculptural Wire & Formed Hardware Ring",
-    category: "Jewelry Design",
+    id: "kill-the-pen-study-2",
+    title: "Kill the Pen (Study II)",
+    category: "Drawing & Fine Art",
+    year: "2025",
+    medium: "Archival Ink, Fine Point & Digital Compositing",
+    dimensions: "High Resolution Plate",
+    description: "Second iteration in the technical pen series, playing with negative space, volumetric weight, and stark monochromatic contrasts.",
+    imageUrl: "/art/kill-the-pen-pt2.jpg",
+    imagePlaceholderColor: "#1d1f23",
+    tags: ["Technical Pen", "Monochrome", "Geometric", "Negative Space"]
+  },
+  {
+    id: "sustained-investigation-study-5",
+    title: "Sustained Investigation • Form & Articulation",
+    category: "Drawing & Fine Art",
+    year: "2025",
+    medium: "Mixed Media, Graphite & Archival Wash",
+    dimensions: "Portfolio Plate",
+    description: "Part of the AP Studio Art Sustained Investigation portfolio, exploring how mundane physical objects and mechanical forms can be deconstructed into expressive silhouettes.",
+    imageUrl: "/art/si-5-revision.jpg",
+    imagePlaceholderColor: "#33383d",
+    tags: ["AP Studio Art", "Sustained Investigation", "Mixed Media"]
+  },
+  {
+    id: "handcrafted-wire-assemblage-1",
+    title: "Cold-Formed Wire & Hardware Ring",
+    category: "Jewelry & Sculpture",
     year: "2025",
     medium: "Formed Brass & Steel Wire, Repurposed Mechanical Components",
     dimensions: "Custom Band",
-    description: "Handcrafted wearable ring formed from coiled and cold-connected brass wire, integrating repurposed mechanical hardware into an architectural, tactile band.",
-    imagePlaceholderColor: "#33383d",
-    tags: ["Jewelry Making", "Handcrafted", "Formed Wire", "Mixed Materials"]
-  },
-  {
-    id: "found-object-suspension-necklace",
-    title: "Suspension Wire & Raw Mineral Collar",
-    category: "Jewelry Design",
-    year: "2025",
-    medium: "Hand-Bent Brass Wire, Braided Cord & Raw Mineral Stone",
-    dimensions: "16\" Choker",
-    description: "Translating mechanical tension into wearable jewelry: hand-formed brass wire structure holding a raw stone through calibrated opposing wire tension without soldering.",
+    description: "Handcrafted wearable piece formed from coiled and tension-connected brass wire, integrating found mechanical hardware into an architectural, tactile wearable.",
+    imageUrl: "/art/img4129.jpg",
     imagePlaceholderColor: "#42382c",
-    tags: ["Jewelry Making", "Wire Forming", "Raw Stone", "Tension Mechanics"]
+    tags: ["Jewelry Making", "Formed Wire", "Found Objects", "Handmade"]
   },
   {
-    id: "tailored-structural-jacket",
-    title: "Asymmetrical Modular Field Jacket",
-    category: "Apparel & Fashion",
+    id: "sculptural-material-study-1",
+    title: "Tactile Object & Form Study",
+    category: "Jewelry & Sculpture",
+    year: "2025",
+    medium: "Mixed Materials, Wire Armature & Mineral Formations",
+    dimensions: "Sculptural Scale",
+    description: "An exploratory physical construction examining calibrated tension mechanics without adhesives or solder, using pure mechanical friction to hold components in equilibrium.",
+    imageUrl: "/art/img4091.jpg",
+    imagePlaceholderColor: "#353f3a",
+    tags: ["Sculpture", "Mechanical Equilibrium", "Mixed Media"]
+  },
+  {
+    id: "hardwood-joinery-study",
+    title: "Precision Joinery & Hardwood Craft",
+    category: "Woodworking",
     year: "2024",
-    medium: "12oz Japanese Cotton Canvas, Matte Black Steel Snap Hardware",
-    dimensions: "Custom Tailored Pattern",
-    description: "Hand-drafted flat pattern garments engineered with articulated elbow darts, gusseted underarms for 360-degree tool mobility, and internal suspension webbing. Double-needle flat-felled seam construction throughout.",
-    imagePlaceholderColor: "#262b29",
-    tags: ["Fashion", "Garment Patterning", "Japanese Canvas", "Workwear"]
+    medium: "Black Walnut & Hard Maple, Hand Joinery",
+    dimensions: "Studio Construction",
+    description: "Hand-cut mortise-and-tenon and through-dovetail joint construction crafted with hand chisels and hand planes, celebrating natural wood grain alignment.",
+    imageUrl: "/art/img4178.jpg",
+    imagePlaceholderColor: "#4a3525",
+    tags: ["Woodworking", "Hand Joinery", "Black Walnut", "Craft"]
   },
   {
-    id: "fine-pen-botanical-drafting",
-    title: "Flora Mechanics: Microscopic Plant Stems",
-    category: "Drawing & Fine Art",
-    year: "2023",
-    medium: "Micron Pigma Ink & Tea Wash on Bristol Board",
-    dimensions: "14\" x 17\"",
-    description: "Cross-sectional cellular illustration combining botanical microscope slide observations with technical drafting cross-hatching and callout notes.",
-    imagePlaceholderColor: "#2e3a33",
-    tags: ["Ink Drafting", "Botanical", "Micron", "Cross-Hatching"]
+    id: "tactile-fiber-pattern-study",
+    title: "Structural Canvas & Modular Patterning",
+    category: "Apparel & Mixed Media",
+    year: "2024",
+    medium: "Heavy Canvas, Steel Hardware & Double-Felled Seams",
+    dimensions: "Custom Tailored Pattern",
+    description: "Hand-drafted flat pattern garment engineering incorporating articulated kinetic gussets for maximum tool mobility and durability.",
+    imageUrl: "/art/img4224.jpg",
+    imagePlaceholderColor: "#262b29",
+    tags: ["Fashion", "Pattern Making", "Canvas", "Apparel"]
   }
 ];
