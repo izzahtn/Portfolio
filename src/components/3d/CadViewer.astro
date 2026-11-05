@@ -253,10 +253,11 @@ const {
           try {
             this.modelGroup.add(gltf.scene);
 
-            // Find and collect all shock and spring assembly nodes
+            // Find and collect all shock and suspension geometry tube nodes (including TG22 22000002 shock tubes)
             this.shockNodes = [];
             gltf.scene.traverse((child) => {
-              if (child.name && /shock|genesis|springasm/i.test(child.name)) {
+              const name = child.name || '';
+              if (!/pedal/i.test(name) && /22000002|shock|genesis|springasm|suspension.*geo|shock.*bod/i.test(name)) {
                 this.shockNodes.push(child);
               }
             });
@@ -441,6 +442,9 @@ const {
     setShocksVisibility(visible: boolean) {
       this.shockNodes.forEach((node) => {
         node.visible = visible;
+        node.traverse((descendant) => {
+          descendant.visible = visible;
+        });
       });
       const label = this.container.querySelector('#shocks-btn-label');
       if (label) {
