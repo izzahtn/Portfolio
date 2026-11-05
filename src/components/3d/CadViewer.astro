@@ -79,6 +79,11 @@ const {
           <span>Ansys FEA Mode</span>
         </button>
 
+        <button id="btn-shocks" class="px-3 py-1.5 rounded-full hover:bg-theme-surface-hover text-theme-copper flex items-center gap-1.5 transition-colors border border-theme-copper/40 bg-theme-copper/10 active:scale-95 font-medium" title="Toggle Shock Absorber and Spring Assembly Visibility">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/></svg>
+          <span id="shocks-btn-label">Shocks: Suppressed</span>
+        </button>
+
         <button id="btn-reset" class="px-3 py-1.5 rounded-full hover:bg-theme-surface-hover text-theme-text-muted hover:text-theme-text transition-colors border border-transparent hover:border-theme-border active:scale-95" title="Reset Camera View">
           <span>Reset</span>
         </button>
@@ -118,6 +123,8 @@ const {
     isWireframe: boolean = false;
     isFeaMode: boolean = false;
     isRotating: boolean = true;
+    isShocksSuppressed: boolean = true;
+    shockNodes: THREE.Object3D[] = [];
     initialCameraPos: THREE.Vector3 = new THREE.Vector3();
     initialTarget: THREE.Vector3 = new THREE.Vector3();
 
@@ -307,8 +314,28 @@ const {
           try {
             this.modelGroup.add(gltf.scene);
 
-            // Calculate bounding box across all active meshes
-            const box = new THREE.Box3().setFromObject(gltf.scene);
+            // Find and collect all shock and spring assembly nodes
+            this.shockNodes = [];
+            gltf.scene.traverse((child) => {
+              if (child.name && /shock|genesis|springasm/i.test(child.name)) {
+                this.shockNodes.push(child);
+              }
+            });
+
+            // Suppress shocks by default so brake lines and calipers are in clear view
+            this.setShocksVisibility(!this.isShocksSuppressed);
+
+            // Calculate bounding box across visible meshes
+            const box = new THREE.Box3();
+            gltf.scene.traverse((child) => {
+              if ((child as THREE.Mesh).isMesh && child.visible) {
+                box.expandByObject(child);
+              }
+            });
+            if (box.isEmpty()) {
+              box.setFromObject(gltf.scene);
+            }
+
             const center = box.getCenter(new THREE.Vector3());
             const size = box.getSize(new THREE.Vector3());
             const maxDim = Math.max(size.x, size.y, size.z);
@@ -467,6 +494,15 @@ const {
         });
       }
 
+      // Shocks toggle button
+      const btnShocks = this.container.querySelector('#btn-shocks');
+      if (btnShocks) {
+        btnShocks.addEventListener('click', () => {
+          this.isShocksSuppressed = !this.isShocksSuppressed;
+          this.setShocksVisibility(!this.isShocksSuppressed);
+        });
+      }
+
       // Reset button
       const btnReset = this.container.querySelector('#btn-reset');
       if (btnReset) {
@@ -475,6 +511,23 @@ const {
           this.controls.target.copy(this.initialTarget);
           this.controls.update();
         });
+      }
+    }
+
+    setShocksVisibility(visible: boolean) {
+      this.shockNodes.forEach((node) => {
+        node.visible = visible;
+      });
+      const label = this.container.querySelector('#shocks-btn-label');
+      if (label) {
+        label.textContent = visible ? 'Shocks: Shown' : 'Shocks: Suppressed';
+      }
+      const btnShocks = this.container.querySelector('#btn-shocks');
+      if (btnShocks) {
+        btnShocks.classList.toggle('text-theme-copper', !visible);
+        btnShocks.classList.toggle('border-theme-copper/50', !visible);
+        btnShocks.classList.toggle('bg-theme-copper/10', !visible);
+        btnShocks.classList.toggle('text-theme-text-muted', visible);
       }
     }
 

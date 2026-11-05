@@ -1,7 +1,7 @@
 export interface ArtItem {
   id: string;
   title: string;
-  category: 'Drawing & Fine Art' | 'Woodworking' | 'Jewelry & Sculpture' | 'Apparel & Mixed Media';
+  category: 'Fine Art & Painting' | 'Drawing & Technical Ink' | 'Custom Wearable Art';
   year: string;
   medium: string;
   dimensions?: string;
@@ -14,133 +14,108 @@ export interface ArtItem {
 
 export const artCategories = [
   'All',
-  'Drawing & Fine Art',
-  'Jewelry & Sculpture',
-  'Woodworking',
-  'Apparel & Mixed Media'
+  'Fine Art & Painting',
+  'Drawing & Technical Ink',
+  'Custom Wearable Art'
 ] as const;
 
 export const artItems: ArtItem[] = [
   {
     id: "best-in-show-watercolor",
-    title: "Best in Show Watercolor Still Life",
-    category: "Drawing & Fine Art",
+    title: "Watercolor Staircase Portrait",
+    category: "Fine Art & Painting",
     year: "2025",
-    medium: "Watercolor on Heavy Cold-Press Archival Paper",
+    medium: "Watercolor & Mixed Media on Heavy Archival Cold-Press Paper",
     dimensions: "Full Sheet",
     award: "Artist On the Rise • Best in Show, Brookfield, CT (Mar 2025)",
-    description: "Awarded Best in Show out of over 120 regional artists. An intricate exploration of transparency, fluid refraction, and saturation contrasts across layered organic forms and glassware.",
+    description: "Awarded Best in Show out of over 120 regional artists. An intimate low-angle portrait capturing subtle natural light, facial expression, and the complex drapery of denim jeans and a chunky cable knit sweater against a wooden staircase bannister.",
     imageUrl: "/art/best-in-show-watercolor.jpg",
     imagePlaceholderColor: "#2a3b35",
-    tags: ["Best in Show", "Watercolor", "Still Life", "Fine Art"]
+    tags: ["Best in Show", "Watercolor", "Portrait", "Textiles"]
   },
   {
     id: "scholastic-silver-key-still-life",
-    title: "Connecticut Scholastic Silver Key Still Life",
-    category: "Drawing & Fine Art",
+    title: "Reflective Silver & Glass Still Life",
+    category: "Drawing & Technical Ink",
     year: "2024",
-    medium: "Charcoal & Mixed Media on Heavy Archival Paper",
+    medium: "Charcoal & White Chalk on Heavy Archival Paper",
     dimensions: "18\" x 24\"",
     award: "CT Scholastic Art Awards • Silver Key (Jan 2024)",
-    description: "Honored with the Connecticut Statewide Scholastic Silver Key. A dynamic tonal investigation exploring high-contrast chiaroscuro, reflective textures, and structural massing.",
+    description: "Honored with the Connecticut Statewide Scholastic Silver Key. High-contrast chiaroscuro study rendering specular highlights, optical refraction, and intricate surface embossments across an ornate silver floral vessel, crystal glass decanter, cut glass dish, and brass bell.",
     imageUrl: "/art/silver-key-still-life.jpg",
     imagePlaceholderColor: "#3d322d",
-    tags: ["Silver Key Winner", "Charcoal", "Still Life", "Chiaroscuro"]
+    tags: ["Silver Key Winner", "Charcoal", "Chiaroscuro", "Glassware"]
   },
   {
     id: "summer-still-life-study",
-    title: "Summer Sunlight Still Life Study",
-    category: "Drawing & Fine Art",
+    title: "Summer Still Life with Doves & Balance Scale",
+    category: "Fine Art & Painting",
     year: "2024",
-    medium: "Oil Pastel, Gouache & Colored Pencil on Paper",
+    medium: "Acrylic & Oil on Canvas",
     dimensions: "Studio Scale",
-    description: "An expressive color study balancing vibrant warm light temperatures against cool ambient shadows, capturing the organic geometries of fresh botanicals.",
+    description: "A narrative physical composition balancing organic forms and nostalgic mechanical artifacts: sculpted white doves perched on driftwood, a clear cassette tape, an antique balance scale, chess rooks, and a magenta iPod Shuffle.",
     imageUrl: "/art/summer-still-life.jpg",
     imagePlaceholderColor: "#4a3525",
-    tags: ["Still Life", "Gouache", "Pastel", "Color Study"]
-  },
-  {
-    id: "kill-the-pen-study-1",
-    title: "Kill the Pen (Study I)",
-    category: "Drawing & Fine Art",
-    year: "2025",
-    medium: "Archival Micro-Point Ink & Technical Pen Drawing",
-    dimensions: "High Resolution Plate",
-    description: "Dense linear composition rendered with precision technical pens. Examines mechanical line density, hatching gradients, and organic cross-sectional layering.",
-    imageUrl: "/art/kill-the-pen.jpg",
-    imagePlaceholderColor: "#22252a",
-    tags: ["Technical Ink", "Fine Line", "Illustration", "Precision"]
+    tags: ["Still Life", "Acrylic", "Found Objects", "Narrative"]
   },
   {
     id: "kill-the-pen-study-2",
     title: "Kill the Pen (Study II)",
-    category: "Drawing & Fine Art",
+    category: "Drawing & Technical Ink",
     year: "2025",
-    medium: "Archival Ink, Fine Point & Digital Compositing",
+    medium: "Archival Technical Pen & Micro-Point Ink on Paper",
     dimensions: "High Resolution Plate",
-    description: "Second iteration in the technical pen series, playing with negative space, volumetric weight, and stark monochromatic contrasts.",
+    description: "A sustained technical pen challenge — drawing continuously until the ink cartridge empties. Features a gothic scarecrow swarmed by crows in a cornfield, using dense cross-hatching, varied contour line weight, and organic surface textures.",
     imageUrl: "/art/kill-the-pen-pt2.jpg",
     imagePlaceholderColor: "#1d1f23",
-    tags: ["Technical Pen", "Monochrome", "Geometric", "Negative Space"]
+    tags: ["Technical Pen", "Cross-Hatching", "Illustration", "Precision"]
   },
   {
     id: "sustained-investigation-study-5",
-    title: "Sustained Investigation • Form & Articulation",
-    category: "Drawing & Fine Art",
+    title: "Sustained Investigation • Solitude in the Crowd",
+    category: "Fine Art & Painting",
     year: "2025",
-    medium: "Mixed Media, Graphite & Archival Wash",
+    medium: "Acrylic on Stretched Canvas",
     dimensions: "Portfolio Plate",
-    description: "Part of the AP Studio Art Sustained Investigation portfolio, exploring how mundane physical objects and mechanical forms can be deconstructed into expressive silhouettes.",
+    description: "Part of the AP Studio Art Sustained Investigation exploring societal pressure and sensory overload. A contemplative self-portrait with hands to face in the foreground stands apart from a warm, dense sea of silhouettes beneath a blinding sun.",
     imageUrl: "/art/si-5-revision.jpg",
     imagePlaceholderColor: "#33383d",
-    tags: ["AP Studio Art", "Sustained Investigation", "Mixed Media"]
+    tags: ["AP Studio Art", "Sustained Investigation", "Acrylic", "Self-Portrait"]
   },
   {
-    id: "handcrafted-wire-assemblage-1",
-    title: "Cold-Formed Wire & Hardware Ring",
-    category: "Jewelry & Sculpture",
+    id: "sustained-investigation-the-exchange",
+    title: "Sustained Investigation • The Exchange",
+    category: "Fine Art & Painting",
     year: "2025",
-    medium: "Formed Brass & Steel Wire, Repurposed Mechanical Components",
-    dimensions: "Custom Band",
-    description: "Handcrafted wearable piece formed from coiled and tension-connected brass wire, integrating found mechanical hardware into an architectural, tactile wearable.",
-    imageUrl: "/art/img4129.jpg",
-    imagePlaceholderColor: "#42382c",
-    tags: ["Jewelry Making", "Formed Wire", "Found Objects", "Handmade"]
+    medium: "Acrylic on Canvas",
+    dimensions: "Studio Scale",
+    description: "Examining familial and generational economic dynamics: multi-generational hands reaching for and grasping a single one-dollar bill against a vivid ultramarine backdrop.",
+    imageUrl: "/art/img4228.jpg",
+    imagePlaceholderColor: "#2b4068",
+    tags: ["AP Studio Art", "Sustained Investigation", "Acrylic", "Figure Study"]
   },
   {
-    id: "sculptural-material-study-1",
-    title: "Tactile Object & Form Study",
-    category: "Jewelry & Sculpture",
-    year: "2025",
-    medium: "Mixed Materials, Wire Armature & Mineral Formations",
-    dimensions: "Sculptural Scale",
-    description: "An exploratory physical construction examining calibrated tension mechanics without adhesives or solder, using pure mechanical friction to hold components in equilibrium.",
-    imageUrl: "/art/img4091.jpg",
-    imagePlaceholderColor: "#353f3a",
-    tags: ["Sculpture", "Mechanical Equilibrium", "Mixed Media"]
-  },
-  {
-    id: "hardwood-joinery-study",
-    title: "Precision Joinery & Hardwood Craft",
-    category: "Woodworking",
+    id: "ocean-seascape-dusk",
+    title: "Ocean Seascape at Dusk",
+    category: "Fine Art & Painting",
     year: "2024",
-    medium: "Black Walnut & Hard Maple, Hand Joinery",
-    dimensions: "Studio Construction",
-    description: "Hand-cut mortise-and-tenon and through-dovetail joint construction crafted with hand chisels and hand planes, celebrating natural wood grain alignment.",
+    medium: "Acrylic on Canvas",
+    dimensions: "Studio Scale",
+    description: "An expressive maritime study capturing deep indigo waters, crashing wave breaks, and sea foam rolling onto a dark shore under an evening cloud canopy.",
     imageUrl: "/art/img4178.jpg",
-    imagePlaceholderColor: "#4a3525",
-    tags: ["Woodworking", "Hand Joinery", "Black Walnut", "Craft"]
+    imagePlaceholderColor: "#213654",
+    tags: ["Seascape", "Acrylic", "Ocean", "Color Study"]
   },
   {
-    id: "tactile-fiber-pattern-study",
-    title: "Structural Canvas & Modular Patterning",
-    category: "Apparel & Mixed Media",
+    id: "custom-painted-sneakers",
+    title: "Hand-Painted Custom Coastal Sneakers",
+    category: "Custom Wearable Art",
     year: "2024",
-    medium: "Heavy Canvas, Steel Hardware & Double-Felled Seams",
-    dimensions: "Custom Tailored Pattern",
-    description: "Hand-drafted flat pattern garment engineering incorporating articulated kinetic gussets for maximum tool mobility and durability.",
-    imageUrl: "/art/img4224.jpg",
-    imagePlaceholderColor: "#262b29",
-    tags: ["Fashion", "Pattern Making", "Canvas", "Apparel"]
+    medium: "Angelus Acrylic Leather Paint & Sealant on Leather Nike Sneakers",
+    dimensions: "Wearable Scale",
+    description: "Custom wearable artwork transforming classic leather sneakers with hand-painted ocean wave surf along the toe boxes and coastal palms, beach dunes, and clouds wrapping the heel counters.",
+    imageUrl: "/art/img4234.jpg",
+    imagePlaceholderColor: "#36454f",
+    tags: ["Custom Sneakers", "Wearable Art", "Leather Paint", "Handmade"]
   }
 ];
