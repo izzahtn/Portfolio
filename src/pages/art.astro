@@ -15,16 +15,15 @@ import { artItems, artCategories } from '../data/art';
           STUDIO ATELIER & VISUAL ARTS
         </span>
         
-        <!-- Shuffle Gallery Button -->
+        <!-- Random Artwork Spotlight Button -->
         <button
-          id="shuffle-gallery-btn"
+          id="random-art-btn"
           type="button"
-          class="px-5 py-2 rounded-full border border-theme-border bg-theme-surface/90 hover:bg-theme-surface hover:border-theme-copper transition-all shadow-xs flex items-center gap-2 font-figtree text-xs text-theme-text font-medium cursor-pointer"
+          class="px-5 py-2 rounded-full border border-theme-copper/40 bg-theme-copper/10 hover:bg-theme-copper hover:text-white transition-all shadow-xs flex items-center gap-2 font-figtree text-xs text-theme-copper hover:text-white font-medium cursor-pointer group active:scale-95"
+          title="Spotlight a random piece with artist backstory"
         >
-          <svg class="w-3.5 h-3.5 text-theme-copper animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-          </svg>
-          <span>Shuffle Gallery</span>
+          <span class="text-sm group-hover:rotate-45 transition-transform inline-block">🎲</span>
+          <span>Spotlight Random Piece</span>
         </button>
       </div>
 
@@ -108,6 +107,16 @@ import { artItems, artCategories } from '../data/art';
                 {item.description}
               </p>
 
+              {item.funFact && (
+                <div class="p-2.5 rounded-lg bg-theme-copper/10 border border-theme-copper/25 text-xs font-figtree flex items-start gap-2">
+                  <span class="text-sm select-none">💡</span>
+                  <div class="space-y-0.5">
+                    <span class="text-[9px] font-mono uppercase tracking-wider font-bold text-theme-copper block">Artist Backstory</span>
+                    <p class="text-theme-text text-xs leading-snug">{item.funFact}</p>
+                  </div>
+                </div>
+              )}
+
               <div class="pt-3 border-t border-theme-border/60 space-y-1.5 text-xs">
                 <div>
                   <span class="text-theme-text-faint uppercase text-[10px] block font-mono">Medium</span>
@@ -135,17 +144,26 @@ import { artItems, artCategories } from '../data/art';
       ))}
     </div>
 
-    <!-- Interactive Lightbox Modal -->
+    <!-- Interactive Lightbox & Spotlight Modal -->
     <div id="art-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6">
       <div class="relative w-full max-w-3xl matting-frame shadow-2xl max-h-[90vh] overflow-y-auto">
         <div class="matting-frame-inner p-6 sm:p-8 space-y-6 bg-theme-surface">
-          <!-- Close Button -->
-          <button id="modal-close" class="absolute top-4 right-4 px-3 py-1.5 rounded-full text-theme-text-muted hover:text-white bg-theme-bg border border-theme-border font-sans text-xs font-medium">
-            ✕ Close
-          </button>
+          <!-- Top Toolbar: Random Roll + Close -->
+          <div class="flex items-center justify-between gap-3 border-b border-theme-border/70 pb-3">
+            <button
+              id="modal-random-next"
+              type="button"
+              class="px-4 py-1.5 rounded-full text-xs font-figtree font-medium text-theme-copper bg-theme-copper/10 border border-theme-copper/40 hover:bg-theme-copper hover:text-white transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 shadow-xs"
+            >
+              <span>🎲</span> <span>Show Another Random Artwork</span>
+            </button>
+            <button id="modal-close" class="px-3.5 py-1.5 rounded-full text-theme-text-muted hover:text-white bg-theme-bg border border-theme-border font-figtree text-xs font-medium cursor-pointer transition-colors">
+              ✕ Close
+            </button>
+          </div>
 
-          <div id="modal-image-container" class="w-full max-h-[65vh] rounded-xl overflow-hidden border border-theme-border flex items-center justify-center relative bg-black/40">
-            <img id="modal-img-elem" src="" alt="" class="w-full h-auto max-h-[65vh] object-contain hidden" />
+          <div id="modal-image-container" class="w-full max-h-[60vh] rounded-xl overflow-hidden border border-theme-border flex items-center justify-center relative bg-black/40">
+            <img id="modal-img-elem" src="" alt="" class="w-full h-auto max-h-[60vh] object-contain hidden" />
             <div id="modal-fallback" class="p-12 text-center text-white hidden">
               <div id="modal-preview-text" class="font-cormorant text-2xl sm:text-3xl font-bold"></div>
             </div>
@@ -154,17 +172,26 @@ import { artItems, artCategories } from '../data/art';
           <div class="space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-2 border-b border-theme-border pb-3">
               <div>
-                <span id="modal-category" class="text-xs font-sans text-theme-copper uppercase tracking-wider block font-semibold"></span>
-                <h2 id="modal-title" class="text-2xl sm:text-3xl font-bold font-editorial text-theme-text"></h2>
+                <span id="modal-category" class="text-xs font-figtree text-theme-copper uppercase tracking-wider block font-semibold"></span>
+                <h2 id="modal-title" class="text-2xl sm:text-3xl font-bold font-cormorant text-theme-text"></h2>
               </div>
               <span id="modal-year" class="text-xs font-mono text-theme-text-faint"></span>
             </div>
 
-            <div id="modal-award" class="hidden p-3 rounded-md bg-theme-rose/10 border border-theme-rose/40 text-theme-rose font-sans text-xs font-semibold"></div>
+            <!-- Artist Backstory & Fun Fact Callout Box -->
+            <div id="modal-funfact-container" class="hidden p-4 rounded-xl bg-theme-copper/10 border border-theme-copper/35 text-xs font-figtree flex items-start gap-3 shadow-xs">
+              <span class="text-lg select-none">💡</span>
+              <div class="space-y-1">
+                <span class="text-[10px] font-mono uppercase tracking-wider font-bold text-theme-copper block">Artist Backstory & Fun Fact</span>
+                <p id="modal-funfact" class="text-theme-text text-sm leading-relaxed font-figtree font-medium"></p>
+              </div>
+            </div>
 
-            <p id="modal-desc" class="text-sm text-theme-text-muted leading-relaxed font-sans"></p>
+            <div id="modal-award" class="hidden p-3 rounded-md bg-theme-rose/10 border border-theme-rose/40 text-theme-rose font-figtree text-xs font-semibold"></div>
 
-            <div class="grid grid-cols-2 gap-4 p-4 bg-theme-bg border border-theme-border font-sans text-xs rounded-sm">
+            <p id="modal-desc" class="text-sm text-theme-text-muted leading-relaxed font-figtree"></p>
+
+            <div class="grid grid-cols-2 gap-4 p-4 bg-theme-bg border border-theme-border font-figtree text-xs rounded-sm">
               <div>
                 <span class="text-theme-text-faint uppercase text-[10px] block font-mono">Medium</span>
                 <span id="modal-medium" class="text-theme-text font-medium block"></span>
@@ -217,60 +244,94 @@ import { artItems, artCategories } from '../data/art';
   const modalMedium = document.getElementById('modal-medium');
   const modalDimensions = document.getElementById('modal-dimensions');
   const modalAward = document.getElementById('modal-award');
-  const modalContainer = document.getElementById('modal-image-container');
   const modalImg = document.getElementById('modal-img-elem') as HTMLImageElement;
   const modalFallback = document.getElementById('modal-fallback');
   const modalPreviewText = document.getElementById('modal-preview-text');
+  const modalFunFact = document.getElementById('modal-funfact');
+  const modalFunFactContainer = document.getElementById('modal-funfact-container');
 
+  // Collect all art item data
+  const allArtItems: any[] = [];
+  cards.forEach((card) => {
+    const dataStr = card.getAttribute('data-item');
+    if (dataStr) {
+      try {
+        allArtItems.push(JSON.parse(dataStr));
+      } catch (e) {}
+    }
+  });
+
+  function openModalWithData(data: any) {
+    if (!modal) return;
+    if (modalTitle) modalTitle.textContent = data.title;
+    if (modalCat) modalCat.textContent = data.category;
+    if (modalYear) modalYear.textContent = data.year;
+    if (modalDesc) modalDesc.textContent = data.description;
+    if (modalMedium) modalMedium.textContent = data.medium;
+    if (modalDimensions) modalDimensions.textContent = data.dimensions || 'Studio Plate';
+
+    if (modalFunFact && modalFunFactContainer) {
+      if (data.funFact) {
+        modalFunFact.textContent = data.funFact;
+        modalFunFactContainer.classList.remove('hidden');
+      } else {
+        modalFunFactContainer.classList.add('hidden');
+      }
+    }
+
+    if (data.imageUrl && modalImg) {
+      modalImg.src = data.imageUrl;
+      modalImg.alt = data.title;
+      modalImg.classList.remove('hidden');
+      if (modalFallback) modalFallback.classList.add('hidden');
+    } else {
+      if (modalImg) modalImg.classList.add('hidden');
+      if (modalFallback) modalFallback.classList.remove('hidden');
+      if (modalPreviewText) modalPreviewText.textContent = data.title;
+    }
+
+    if (modalAward) {
+      if (data.award) {
+        modalAward.textContent = `★ ${data.award}`;
+        modalAward.classList.remove('hidden');
+      } else {
+        modalAward.classList.add('hidden');
+      }
+    }
+
+    modal.classList.remove('hidden');
+  }
+
+  // Card click opens modal
   cards.forEach((card) => {
     card.addEventListener('click', () => {
       const dataStr = card.getAttribute('data-item');
-      if (!dataStr || !modal) return;
-      const data = JSON.parse(dataStr);
-
-      if (modalTitle) modalTitle.textContent = data.title;
-      if (modalCat) modalCat.textContent = data.category;
-      if (modalYear) modalYear.textContent = data.year;
-      if (modalDesc) modalDesc.textContent = data.description;
-      if (modalMedium) modalMedium.textContent = data.medium;
-      if (modalDimensions) modalDimensions.textContent = data.dimensions || 'N/A';
-
-      if (data.imageUrl && modalImg) {
-        modalImg.src = data.imageUrl;
-        modalImg.alt = data.title;
-        modalImg.classList.remove('hidden');
-        if (modalFallback) modalFallback.classList.add('hidden');
-      } else {
-        if (modalImg) modalImg.classList.add('hidden');
-        if (modalFallback) modalFallback.classList.remove('hidden');
-        if (modalPreviewText) modalPreviewText.textContent = data.title;
-      }
-
-      if (modalAward) {
-        if (data.award) {
-          modalAward.textContent = `★ ${data.award}`;
-          modalAward.classList.remove('hidden');
-        } else {
-          modalAward.classList.add('hidden');
-        }
-      }
-
-      modal.classList.remove('hidden');
+      if (!dataStr) return;
+      openModalWithData(JSON.parse(dataStr));
     });
   });
 
-  // Lok Ye Shuffle Gallery logic
-  const shuffleBtn = document.getElementById('shuffle-gallery-btn');
-  const artGrid = document.getElementById('art-grid');
-  if (shuffleBtn && artGrid) {
-    shuffleBtn.addEventListener('click', () => {
-      const cardArray = Array.from(artGrid.children);
-      // Fisher-Yates shuffle
-      for (let i = cardArray.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        artGrid.appendChild(cardArray[j]);
-      }
-    });
+  // Spotlight Random Piece logic
+  let lastRandomIndex = -1;
+  function pickRandomArtwork() {
+    if (allArtItems.length === 0) return;
+    let nextIndex = Math.floor(Math.random() * allArtItems.length);
+    if (allArtItems.length > 1 && nextIndex === lastRandomIndex) {
+      nextIndex = (nextIndex + 1) % allArtItems.length;
+    }
+    lastRandomIndex = nextIndex;
+    const chosen = allArtItems[nextIndex];
+    openModalWithData(chosen);
+  }
+
+  const randomArtBtn = document.getElementById('random-art-btn');
+  if (randomArtBtn) {
+    randomArtBtn.addEventListener('click', pickRandomArtwork);
+  }
+
+  const modalRandomNext = document.getElementById('modal-random-next');
+  if (modalRandomNext) {
+    modalRandomNext.addEventListener('click', pickRandomArtwork);
   }
 
   if (modalClose && modal) {
