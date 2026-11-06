@@ -1,6 +1,7 @@
 ---
 import Header from '../components/common/Header.astro';
 import Footer from '../components/common/Footer.astro';
+import PageTopNavigator from '../components/common/PageTopNavigator.astro';
 import PageEndNavigator from '../components/common/PageEndNavigator.astro';
 import { siteConfig } from '../config/site';
 import '../styles/global.css';
@@ -44,6 +45,7 @@ const {
   <body class="min-h-screen flex flex-col bg-theme-bg text-theme-text font-sans selection:bg-theme-rose/20 selection:text-theme-rose">
     <Header />
     <main class="flex-1 bg-artisan-paper relative">
+      <PageTopNavigator />
       <slot />
       <PageEndNavigator />
     </main>

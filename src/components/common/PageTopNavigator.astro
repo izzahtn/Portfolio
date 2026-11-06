@@ -1,0 +1,349 @@
+---
+interface Props {
+  currentPath?: string;
+  prevUrl?: string;
+  prevTitle?: string;
+}
+
+const currentUrl = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+interface PrevRoute {
+  path: string;
+  title: string;
+  desc: string;
+}
+
+const prevRouteMap: Record<string, PrevRoute> = {
+  '/': {
+    path: '/resume',
+    title: 'Resume & Transcripts',
+    desc: 'Work experience, technical skills & academic coursework'
+  },
+  '/projects': {
+    path: '/',
+    title: 'Home Dossier',
+    desc: 'Selected works, Cornell engineering & personality overview'
+  },
+  '/about': {
+    path: '/projects',
+    title: 'Engineering Projects',
+    desc: 'Baja suspension links, hydraulic brake lines & optoelectronics'
+  },
+  '/art': {
+    path: '/about',
+    title: 'About Izzah',
+    desc: 'Cornell background, machine shop philosophy & outside passions'
+  },
+  '/resume': {
+    path: '/art',
+    title: 'Fine Art & Creative Crafts',
+    desc: 'Watercolor portraits, technical ink studies & jewelry'
+  },
+  '/cad-lab': {
+    path: '/projects',
+    title: 'Engineering Projects',
+    desc: 'Explore all 4 core mechanical systems and reports'
+  }
+};
+
+let prev = prevRouteMap[currentUrl];
+
+// Fallback for /projects/[slug]
+if (!prev) {
+  if (currentUrl.startsWith('/projects/baja-rear-control-arms')) {
+    prev = {
+      path: '/projects',
+      title: 'Engineering Projects',
+      desc: 'Return to full engineering project catalog'
+    };
+  } else if (currentUrl.startsWith('/projects/baja-brake-lines')) {
+    prev = {
+      path: '/projects/baja-rear-control-arms',
+      title: 'TG23 Rear Suspension Links',
+      desc: 'Previous project: Kinematics, Ansys FEA & in-house weld fixtures'
+    };
+  } else if (currentUrl.startsWith('/projects/nitrogen-laser-pulse-amplifier')) {
+    prev = {
+      path: '/projects/baja-brake-lines',
+      title: 'TG22 Brake Lines & Distribution',
+      desc: 'Previous project: SolidWorks CAD routing & CNC machined blocks'
+    };
+  } else if (currentUrl.startsWith('/projects/vex-competition-robotics')) {
+    prev = {
+      path: '/projects/nitrogen-laser-pulse-amplifier',
+      title: 'Nitrogen Laser Pulse Amplifier',
+      desc: 'Previous project: High-voltage pulsed power circuitry'
+    };
+  } else if (currentUrl.startsWith('/projects')) {
+    prev = {
+      path: '/projects',
+      title: 'Engineering Projects',
+      desc: 'Return to engineering projects list'
+    };
+  } else {
+    prev = {
+      path: '/',
+      title: 'Home',
+      desc: 'Return to home'
+    };
+  }
+}
+
+const targetUrl = Astro.props.prevUrl || prev.path;
+const targetTitle = Astro.props.prevTitle || prev.title;
+---
+
+<!-- Sleek Floating Pull-Down-At-Top Navigator -->
+<div
+  id="page-top-nav"
+  class="fixed top-18 sm:top-22 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-md select-none transition-all duration-300 -translate-y-12 opacity-0 pointer-events-none cursor-pointer"
+  data-prev-url={targetUrl}
+>
+  <div class="relative overflow-hidden rounded-full border border-theme-border-strong bg-theme-surface/95 backdrop-blur-md px-4 py-2.5 shadow-2xl group hover:border-theme-rose transition-all flex items-center justify-between gap-3">
+    <!-- Progress Bar -->
+    <div
+      class="top-progress-bar absolute inset-0 bg-theme-rose/15 origin-left scale-x-0 transition-transform duration-75 pointer-events-none"
+    ></div>
+
+    <div class="relative z-10 flex items-center gap-2.5 min-w-0">
+      <div class="top-nav-arrow-badge w-7 h-7 rounded-full bg-theme-rose/10 border border-theme-rose/30 text-theme-rose flex items-center justify-center font-mono font-bold text-xs shrink-0 group-hover:bg-theme-rose group-hover:text-white transition-colors">
+        ↑
+      </div>
+      <div class="min-w-0">
+        <span class="text-[9px] font-mono uppercase tracking-widest text-theme-rose font-bold block leading-none">
+          PREVIOUS
+        </span>
+        <span class="font-lora text-xs sm:text-sm font-bold text-theme-text group-hover:text-theme-rose transition-colors truncate block">
+          {targetTitle}
+        </span>
+      </div>
+    </div>
+
+    <div class="relative z-10 flex items-center gap-2 shrink-0">
+      <span class="top-nav-status text-[11px] text-theme-text-muted font-figtree hidden sm:inline">
+        Pull up to go back
+      </span>
+      <a
+        href={targetUrl}
+        class="px-3 py-1 rounded-full bg-theme-rose text-white text-[11px] font-medium hover:bg-theme-rose-muted transition-all shadow-xs inline-flex items-center gap-1 shrink-0"
+      >
+        <span>Back</span>
+        <span>↑</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initPageTopNavigator() {
+    const topNav = document.getElementById('page-top-nav');
+    if (!topNav) return;
+
+    const prevUrl = topNav.getAttribute('data-prev-url');
+    if (!prevUrl) return;
+
+    const progressBar = topNav.querySelector('.top-progress-bar') as HTMLElement;
+    const statusHint = topNav.querySelector('.top-nav-status') as HTMLElement;
+    const arrowBadge = topNav.querySelector('.top-nav-arrow-badge') as HTMLElement;
+
+    let isNavigating = false;
+    let holdStartTime = 0;
+    let animId: number | null = null;
+    const HOLD_DURATION = 380; // 380ms smooth progression before route change
+
+    // Two-phase upward pull logic:
+    // Phase 1: Reaching top does NOT trigger. Page lands at top. Initial upward scroll momentum settles.
+    // Phase 2: A deliberate subsequent pull up (wheel deltaY < -12 or touch pull down from top) triggers navigation.
+    let hasLandedAtTop = false;
+    let topLandedTime = 0;
+    let armedForSecondPull = false;
+    let settleTimeout: any = null;
+    let accumulatedPull = 0;
+    let hideBannerTimeout: any = null;
+
+    const isScrolledToTop = () => {
+      return window.scrollY <= 15;
+    };
+
+    const showBanner = () => {
+      topNav.classList.remove('-translate-y-12', 'opacity-0', 'pointer-events-none');
+      topNav.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+    };
+
+    const hideBanner = () => {
+      if (isNavigating) return;
+      topNav.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      topNav.classList.add('-translate-y-12', 'opacity-0', 'pointer-events-none');
+      if (progressBar) progressBar.style.transform = 'scaleX(0)';
+      if (statusHint) statusHint.textContent = 'Pull up to go back';
+    };
+
+    const checkScrollPosition = () => {
+      const atTop = isScrolledToTop();
+      if (atTop) {
+        if (!hasLandedAtTop) {
+          hasLandedAtTop = true;
+          topLandedTime = performance.now();
+          armedForSecondPull = false;
+          accumulatedPull = 0;
+
+          // Settle quiet period (~320ms)
+          clearTimeout(settleTimeout);
+          settleTimeout = setTimeout(() => {
+            if (hasLandedAtTop && !isNavigating) {
+              armedForSecondPull = true;
+            }
+          }, 320);
+        }
+      } else {
+        // Scrolled down away from top
+        hasLandedAtTop = false;
+        armedForSecondPull = false;
+        accumulatedPull = 0;
+        clearTimeout(settleTimeout);
+        hideBanner();
+        cancelNavigation();
+      }
+    };
+
+    window.addEventListener('scroll', checkScrollPosition, { passive: true });
+
+    const triggerNavigation = () => {
+      if (isNavigating) return;
+      isNavigating = true;
+      showBanner();
+      if (statusHint) statusHint.textContent = 'Returning to previous page...';
+      if (arrowBadge) arrowBadge.classList.add('animate-bounce');
+
+      holdStartTime = performance.now();
+      const step = (time: number) => {
+        const elapsed = time - holdStartTime;
+        const ratio = Math.min(elapsed / HOLD_DURATION, 1);
+        if (progressBar) progressBar.style.transform = `scaleX(${ratio})`;
+
+        if (ratio < 1) {
+          animId = requestAnimationFrame(step);
+        } else {
+          window.location.href = prevUrl;
+        }
+      };
+      animId = requestAnimationFrame(step);
+    };
+
+    const cancelNavigation = () => {
+      if (isNavigating) {
+        isNavigating = false;
+        if (animId) cancelAnimationFrame(animId);
+        if (progressBar) progressBar.style.transform = 'scaleX(0)';
+        if (arrowBadge) arrowBadge.classList.remove('animate-bounce');
+        if (statusHint) statusHint.textContent = 'Pull up to go back';
+      }
+    };
+
+    // Direct click navigates immediately
+    topNav.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('a')) {
+        window.location.href = prevUrl;
+      }
+    });
+
+    // Mouse wheel / Trackpad upward detection
+    window.addEventListener(
+      'wheel',
+      (e) => {
+        if (isNavigating) return;
+
+        // If scrolling down, hide banner and reset
+        if (e.deltaY > 10) {
+          accumulatedPull = 0;
+          cancelNavigation();
+          hideBanner();
+          return;
+        }
+
+        // Must be at the top
+        if (!isScrolledToTop()) {
+          return;
+        }
+
+        const timeSinceLanding = performance.now() - topLandedTime;
+        if (hasLandedAtTop && (armedForSecondPull || timeSinceLanding > 380)) {
+          armedForSecondPull = true;
+          if (e.deltaY < -12) {
+            showBanner();
+            accumulatedPull += Math.abs(e.deltaY);
+            if (statusHint) statusHint.textContent = 'Pull up again to go back ↑';
+
+            clearTimeout(hideBannerTimeout);
+            hideBannerTimeout = setTimeout(() => {
+              if (!isNavigating) hideBanner();
+            }, 1800);
+
+            // Once deliberate pull threshold met:
+            if (accumulatedPull >= 25) {
+              triggerNavigation();
+            }
+          }
+        }
+      },
+      { passive: true }
+    );
+
+    // Mobile Touch Gesture detection at top
+    let touchStartedAtTop = false;
+    let touchStartY = 0;
+
+    window.addEventListener(
+      'touchstart',
+      (e) => {
+        touchStartedAtTop = isScrolledToTop() && hasLandedAtTop;
+        touchStartY = e.touches[0].clientY;
+      },
+      { passive: true }
+    );
+
+    window.addEventListener(
+      'touchmove',
+      (e) => {
+        if (!touchStartedAtTop || isNavigating) return;
+        const currentY = e.touches[0].clientY;
+        const pullDistance = Math.max(0, currentY - touchStartY); // Dragging down at top
+        if (pullDistance > 10) {
+          showBanner();
+          const pullRatio = Math.min(pullDistance / 80, 0.95);
+          if (progressBar) progressBar.style.transform = `scaleX(${pullRatio})`;
+          if (statusHint) statusHint.textContent = 'Release to go back ↑';
+        }
+      },
+      { passive: true }
+    );
+
+    window.addEventListener(
+      'touchend',
+      (e) => {
+        if (isNavigating) return;
+        if (!touchStartedAtTop) {
+          checkScrollPosition();
+          return;
+        }
+
+        const touchEndY = e.changedTouches[0].clientY;
+        const deltaY = touchEndY - touchStartY; // Dragging down at top
+        if (deltaY > 45) {
+          triggerNavigation();
+        } else {
+          hideBanner();
+        }
+      },
+      { passive: true }
+    );
+  }
+
+  // Initialize on load and on page restore
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPageTopNavigator);
+  } else {
+    initPageTopNavigator();
+  }
+</script>
