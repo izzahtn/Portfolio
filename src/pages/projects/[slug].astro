@@ -100,13 +100,14 @@ const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex +
           </span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {project.images.map((img, i) => {
             const isWide = img.url.includes('combined');
+            const isDiagram = img.url.includes('diagram');
             return (
               <div class={`matting-frame shadow-md group ${isWide ? 'md:col-span-2' : ''}`}>
                 <div class="matting-frame-inner p-4 bg-theme-surface space-y-3">
-                  <div class={`overflow-hidden rounded-sm border border-theme-border bg-black/5 ${isWide ? 'aspect-[16/9] sm:aspect-[2/1]' : 'aspect-[4/3]'} flex items-center justify-center`}>
+                  <div class={`overflow-hidden rounded-sm border border-theme-border bg-black/5 ${isWide ? 'aspect-[16/9] sm:aspect-[2.2/1]' : isDiagram ? 'aspect-[3/4] sm:aspect-[4/5]' : 'aspect-[4/3]'} flex items-center justify-center`}>
                     <img
                       src={img.url}
                       alt={img.caption}

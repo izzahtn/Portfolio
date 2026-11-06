@@ -207,23 +207,23 @@ export const projects: Project[] = [
     timeline: "Fall 2025",
     role: "Lead Hardware & Circuit Builder (Dr. J. Velazquez Lab)",
     summary: "Constructed and tested a multi-stage high-voltage pulse amplifier system for a molecular nitrogen laser, integrating a 555-timer astable pulse generator, SCR fast electronic switch, 1:4 pulse transformer, and a Hydrogen Thyratron gas switch to achieve nanosecond-scale stimulated ultraviolet emission at 337.1 nm.",
-    heroImage: "/images/laser/nitrogen-laser-apparatus.jpg",
+    heroImage: "/images/laser/pulse_amplifier_box.jpeg",
     images: [
       {
+        url: "/images/laser/pulse_amplifier_box.jpeg",
+        caption: "Figure 1: Custom pulse amplifier hardware chassis and electronic enclosure constructed in the laboratory, housing the high-voltage pulse-forming circuitry, step-up transformer, and trigger output lines."
+      },
+      {
+        url: "/images/laser/pulse_amplifier_circuit_diagram.png",
+        caption: "Figure 2: Complete electrical schematic and timing architecture for the pulse amplifier and discharge circuit, detailing the 555 astable oscillator, 2N4443 SCR gating stage, 1:4 pulse transformer, and spark-gap/thyratron excitation stage."
+      },
+      {
+        url: "/images/laser/experimental_plots_combined.png",
+        caption: "Figure 3: Combined experimental verification plots: (A) Photodiode output voltage vs. high-voltage power supply establishing lasing threshold at Vth ≈ 10.5 kV and saturation at ~13.5 kV; (B) Laser output vs. nitrogen cavity pressure identifying optimal 15–50 Torr regime; and (C) Speed of light time-delay transit measurement (m = 0.0396 ns/cm)."
+      },
+      {
         url: "/images/laser/nitrogen-laser-apparatus.jpg",
-        caption: "Physical Nitrogen Laser apparatus in Dr. J. Velazquez's Cornell laboratory, showing the high-voltage chassis, thyratron housing, and UV discharge chamber."
-      },
-      {
-        url: "/images/laser/lasing-threshold-plot.png",
-        caption: "Plot 1: Photodiode output voltage as a function of power supply voltage, showing the lasing threshold at Vth ≈ 10.5 kV and saturation plateau at ~13.5 kV."
-      },
-      {
-        url: "/images/laser/pressure-curve-plot.jpg",
-        caption: "Plot 2: Laser output vs. nitrogen cavity pressure (Torr), establishing the optimal gas excitation regime between 15 and 50 Torr."
-      },
-      {
-        url: "/images/laser/speed-of-light-time-delay-plot.jpg",
-        caption: "Plot 3: Dual photodiode transit time vs. distance, determining inverted signal speed (m = 0.0396 ns/cm) and cable length calibration."
+        caption: "Figure 4: Molecular nitrogen laser laboratory apparatus in Dr. J. Velazquez's Cornell laboratory, showing the high-voltage chassis, thyratron housing, and ultraviolet discharge chamber."
       }
     ],
     has3dModel: false,
