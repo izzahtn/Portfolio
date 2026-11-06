@@ -1,0 +1,230 @@
+---
+interface Props {
+  currentPath?: string;
+  nextUrl?: string;
+  nextTitle?: string;
+  nextDescription?: string;
+}
+
+const currentUrl = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+interface NextRoute {
+  path: string;
+  title: string;
+  desc: string;
+}
+
+const routeMap: Record<string, NextRoute> = {
+  '/': {
+    path: '/projects',
+    title: 'Engineering Projects',
+    desc: 'Baja suspension links, hydraulic brake lines & optoelectronics'
+  },
+  '/projects': {
+    path: '/about',
+    title: 'About Izzah',
+    desc: 'Cornell background, machine shop philosophy & outside passions'
+  },
+  '/about': {
+    path: '/art',
+    title: 'Fine Art & Creative Crafts',
+    desc: 'Watercolor portraits, technical ink studies & jewelry'
+  },
+  '/art': {
+    path: '/resume',
+    title: 'Resume & Transcripts',
+    desc: 'Work experience, technical skills & academic coursework'
+  },
+  '/resume': {
+    path: '/',
+    title: 'Back to Home',
+    desc: 'Cornell engineering dossier & selected works'
+  },
+  '/cad-lab': {
+    path: '/projects',
+    title: 'Engineering Projects',
+    desc: 'Explore all 4 core mechanical systems and reports'
+  }
+};
+
+let next = routeMap[currentUrl];
+
+// Fallback for /projects/[slug]
+if (!next) {
+  if (currentUrl.startsWith('/projects/baja-rear-control-arms')) {
+    next = {
+      path: '/projects/baja-brake-lines',
+      title: 'TG22 Brake Lines & Hydraulic Distribution',
+      desc: 'Next project: CAD routing, CNC 6061 blocks & vacuum bleeding'
+    };
+  } else if (currentUrl.startsWith('/projects/baja-brake-lines')) {
+    next = {
+      path: '/projects/nitrogen-laser-pulse-amplifier',
+      title: 'Nitrogen Laser Pulse Amplifier',
+      desc: 'Next project: Applied physics high-voltage pulsed optoelectronics'
+    };
+  } else if (currentUrl.startsWith('/projects/nitrogen-laser-pulse-amplifier')) {
+    next = {
+      path: '/projects/vex-competition-robotics',
+      title: 'VEX World Finalist Robotics',
+      desc: 'Next project: 51 awards and world championship finalist mechanisms'
+    };
+  } else if (currentUrl.startsWith('/projects')) {
+    next = {
+      path: '/about',
+      title: 'About Izzah',
+      desc: 'Cornell background, machine shop philosophy & outside passions'
+    };
+  } else {
+    next = {
+      path: '/projects',
+      title: 'Engineering Projects',
+      desc: 'Vehicle dynamics, structural FEA & machine shop builds'
+    };
+  }
+}
+
+const targetUrl = Astro.props.nextUrl || next.path;
+const targetTitle = Astro.props.nextTitle || next.title;
+const targetDesc = Astro.props.nextDescription || next.desc;
+---
+
+<div class="page-end-nav-wrapper max-w-4xl mx-auto px-4 sm:px-6 my-8 select-none" data-next-url={targetUrl}>
+  <div class="relative overflow-hidden rounded-2xl border border-theme-border bg-theme-surface/95 backdrop-blur-md p-4 sm:p-5 shadow-lg group hover:border-theme-rose transition-all">
+    <!-- Visual progress indicator for scroll-through -->
+    <div
+      class="scroll-progress-bar absolute inset-0 bg-theme-rose/10 origin-left scale-x-0 transition-transform duration-75 pointer-events-none"
+    ></div>
+
+    <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5">
+        <div class="w-9 h-9 rounded-full bg-theme-rose/10 border border-theme-rose/30 text-theme-rose flex items-center justify-center font-mono font-bold text-sm shrink-0 group-hover:bg-theme-rose group-hover:text-white transition-colors">
+          ↓
+        </div>
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-theme-rose font-semibold block">
+            UP NEXT
+          </span>
+          <span class="font-lora text-base sm:text-lg font-bold text-theme-text group-hover:text-theme-rose transition-colors block">
+            {targetTitle}
+          </span>
+          <p class="text-[11px] text-theme-text-muted font-figtree hidden sm:block">
+            {targetDesc}
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 self-end sm:self-center shrink-0">
+        <span class="text-[11px] text-theme-text-muted font-figtree hidden md:inline scroll-status-hint">
+          Scroll past page end or click
+        </span>
+        <a
+          href={targetUrl}
+          class="nav-next-action-btn px-4 sm:px-5 py-2 rounded-full bg-theme-rose text-white text-xs font-medium hover:bg-theme-rose-muted transition-all shadow-sm inline-flex items-center gap-1.5 group-hover:scale-105 active:scale-95"
+        >
+          <span>Continue</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initPageEndNavigator() {
+    const navWrappers = document.querySelectorAll('.page-end-nav-wrapper');
+    if (!navWrappers.length) return;
+
+    navWrappers.forEach((wrapper) => {
+      const nextUrl = wrapper.getAttribute('data-next-url');
+      if (!nextUrl) return;
+
+      const progressBar = wrapper.querySelector('.scroll-progress-bar') as HTMLElement;
+      const statusHint = wrapper.querySelector('.scroll-status-hint') as HTMLElement;
+      let isNavigating = false;
+      let holdStartTime = 0;
+      let animId: number | null = null;
+      const HOLD_DURATION = 420; // 420ms smooth progression before route change
+
+      const triggerNavigation = () => {
+        if (isNavigating) return;
+        isNavigating = true;
+        if (statusHint) statusHint.textContent = 'Continuing to next page...';
+
+        holdStartTime = performance.now();
+        const step = (time: number) => {
+          const elapsed = time - holdStartTime;
+          const ratio = Math.min(elapsed / HOLD_DURATION, 1);
+          if (progressBar) progressBar.style.transform = `scaleX(${ratio})`;
+
+          if (ratio < 1) {
+            animId = requestAnimationFrame(step);
+          } else {
+            window.location.href = nextUrl;
+          }
+        };
+        animId = requestAnimationFrame(step);
+      };
+
+      const cancelNavigation = () => {
+        if (isNavigating) {
+          isNavigating = false;
+          if (animId) cancelAnimationFrame(animId);
+          if (progressBar) progressBar.style.transform = 'scaleX(0)';
+          if (statusHint) statusHint.textContent = 'Scroll past page end or click';
+        }
+      };
+
+      const isScrolledToBottom = () => {
+        const scrollPosition = window.innerHeight + window.scrollY;
+        const totalHeight = document.documentElement.scrollHeight;
+        // Within 12px of the absolute bottom
+        return scrollPosition >= totalHeight - 12;
+      };
+
+      // Detect downward mousewheel/trackpad scroll when already at the page bottom
+      window.addEventListener(
+        'wheel',
+        (e) => {
+          if (isNavigating) return;
+          if (isScrolledToBottom() && e.deltaY > 12) {
+            triggerNavigation();
+          } else if (e.deltaY < -10) {
+            cancelNavigation();
+          }
+        },
+        { passive: true }
+      );
+
+      // Detect upward swipe on mobile touch at page bottom
+      let touchStartY = 0;
+      window.addEventListener(
+        'touchstart',
+        (e) => {
+          touchStartY = e.touches[0].clientY;
+        },
+        { passive: true }
+      );
+
+      window.addEventListener(
+        'touchend',
+        (e) => {
+          if (isNavigating) return;
+          const touchEndY = e.changedTouches[0].clientY;
+          const deltaY = touchStartY - touchEndY;
+          if (isScrolledToBottom() && deltaY > 35) {
+            triggerNavigation();
+          }
+        },
+        { passive: true }
+      );
+    });
+  }
+
+  // Initialize on initial page load and on page restore
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPageEndNavigator);
+  } else {
+    initPageEndNavigator();
+  }
+</script>
