@@ -74,11 +74,6 @@ const {
           <span class="hidden sm:inline">Wireframe</span>
         </button>
 
-        <button id="btn-shocks" class="px-3 py-1.5 rounded-full hover:bg-theme-surface-hover text-theme-copper flex items-center gap-1.5 transition-colors border border-theme-copper/40 bg-theme-copper/10 active:scale-95 font-medium" title="Toggle Shock Absorber and Spring Assembly Visibility">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/></svg>
-          <span id="shocks-btn-label">Shocks: Suppressed</span>
-        </button>
-
         <button id="btn-reset" class="px-3 py-1.5 rounded-full hover:bg-theme-surface-hover text-theme-text-muted hover:text-theme-text transition-colors border border-transparent hover:border-theme-border active:scale-95" title="Reset Camera View">
           <span>Reset</span>
         </button>
@@ -108,8 +103,6 @@ const {
     originalMaterials: Map<THREE.Mesh, THREE.Material | THREE.Material[]>;
     isWireframe: boolean = false;
     isRotating: boolean = true;
-    isShocksSuppressed: boolean = true;
-    shockNodes: THREE.Object3D[] = [];
     initialCameraPos: THREE.Vector3 = new THREE.Vector3();
     initialTarget: THREE.Vector3 = new THREE.Vector3();
 
@@ -253,17 +246,16 @@ const {
           try {
             this.modelGroup.add(gltf.scene);
 
-            // Find and collect all shock and suspension geometry tube nodes (including TG22 22000002 shock tubes)
-            this.shockNodes = [];
+            // Permanently suppress uprights, hubs, shocks, and suspension geometry
             gltf.scene.traverse((child) => {
               const name = child.name || '';
-              if (!/pedal/i.test(name) && /22000002|shock|genesis|springasm|suspension.*geo|shock.*bod/i.test(name)) {
-                this.shockNodes.push(child);
+              if (!/pedal|brake|line|block|rotor|caliper|fitting|pad/i.test(name) && /upright|hub|shock|genesis|springasm|22000002|suspension.*geo|gearbox|casing/i.test(name)) {
+                child.visible = false;
+                child.traverse((descendant) => {
+                  descendant.visible = false;
+                });
               }
             });
-
-            // Suppress shocks by default so brake lines and calipers are in clear view
-            this.setShocksVisibility(!this.isShocksSuppressed);
 
             // Calculate bounding box across visible meshes
             const box = new THREE.Box3();
@@ -419,15 +411,6 @@ const {
         });
       }
 
-      // Shocks toggle button
-      const btnShocks = this.container.querySelector('#btn-shocks');
-      if (btnShocks) {
-        btnShocks.addEventListener('click', () => {
-          this.isShocksSuppressed = !this.isShocksSuppressed;
-          this.setShocksVisibility(!this.isShocksSuppressed);
-        });
-      }
-
       // Reset button
       const btnReset = this.container.querySelector('#btn-reset');
       if (btnReset) {
@@ -436,26 +419,6 @@ const {
           this.controls.target.copy(this.initialTarget);
           this.controls.update();
         });
-      }
-    }
-
-    setShocksVisibility(visible: boolean) {
-      this.shockNodes.forEach((node) => {
-        node.visible = visible;
-        node.traverse((descendant) => {
-          descendant.visible = visible;
-        });
-      });
-      const label = this.container.querySelector('#shocks-btn-label');
-      if (label) {
-        label.textContent = visible ? 'Shocks: Shown' : 'Shocks: Suppressed';
-      }
-      const btnShocks = this.container.querySelector('#btn-shocks');
-      if (btnShocks) {
-        btnShocks.classList.toggle('text-theme-copper', !visible);
-        btnShocks.classList.toggle('border-theme-copper/50', !visible);
-        btnShocks.classList.toggle('bg-theme-copper/10', !visible);
-        btnShocks.classList.toggle('text-theme-text-muted', visible);
       }
     }
 
