@@ -40,7 +40,6 @@ export const siteConfig: SiteConfig = {
   bio: "Second-year Mechanical Engineering student at Cornell University ('29). Currently designing suspension linkages for Cornell Baja Racing (previously on Brakes subteam), building pulsed power optoelectronics in applied physics, and creating award-winning fine art, woodworking, and handcrafted jewelry.",
   nav: [
     { label: "Projects", href: "/projects" },
-    { label: "3D CAD Lab", href: "/cad-lab" },
     { label: "Art & Play", href: "/art" },
     { label: "About", href: "/about" },
     { label: "Resume", href: "/resume" },

@@ -107,17 +107,12 @@ import { artItems, artCategories } from '../data/art';
                 {item.description}
               </p>
 
-              {item.funFact && (
-                <div class="p-2.5 rounded-lg bg-theme-copper/10 border border-theme-copper/25 text-xs font-figtree flex items-start gap-2">
-                  <span class="text-sm select-none">💡</span>
-                  <div class="space-y-0.5">
-                    <span class="text-[9px] font-mono uppercase tracking-wider font-bold text-theme-copper block">Artist Backstory</span>
-                    <p class="text-theme-text text-xs leading-snug">{item.funFact}</p>
-                  </div>
-                </div>
-              )}
+              <div class="flex items-center justify-between text-[11px] text-theme-copper group-hover:text-theme-rose transition-colors font-medium pt-0.5">
+                <span>Click for full artwork & backstory</span>
+                <span>→</span>
+              </div>
 
-              <div class="pt-3 border-t border-theme-border/60 space-y-1.5 text-xs">
+              <div class="pt-2.5 border-t border-theme-border/60 space-y-1.5 text-xs">
                 <div>
                   <span class="text-theme-text-faint uppercase text-[10px] block font-mono">Medium</span>
                   <span class="text-theme-text font-medium block">{item.medium}</span>
@@ -182,7 +177,7 @@ import { artItems, artCategories } from '../data/art';
             <div id="modal-funfact-container" class="hidden p-4 rounded-xl bg-theme-copper/10 border border-theme-copper/35 text-xs font-figtree flex items-start gap-3 shadow-xs">
               <span class="text-lg select-none">💡</span>
               <div class="space-y-1">
-                <span class="text-[10px] font-mono uppercase tracking-wider font-bold text-theme-copper block">Artist Backstory & Fun Fact</span>
+                <span class="text-[10px] font-mono uppercase tracking-wider font-bold text-theme-copper block">Artist Backstory</span>
                 <p id="modal-funfact" class="text-theme-text text-sm leading-relaxed font-figtree font-medium"></p>
               </div>
             </div>

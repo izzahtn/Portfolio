@@ -96,10 +96,10 @@ import { projects } from '../../data/projects';
                 </a>
                 {project.has3dModel && (
                   <a
-                    href="/cad-lab"
+                    href={`/projects/${project.slug}`}
                     class="px-4 py-2 rounded-full border border-theme-border text-xs font-medium text-theme-text hover:border-theme-rose hover:text-theme-rose transition-colors"
                   >
-                    Open in 3D CAD Lab
+                    View Interactive 3D ↗
                   </a>
                 )}
               </div>
