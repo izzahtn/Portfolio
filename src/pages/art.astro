@@ -4,13 +4,13 @@ import { artItems, artCategories } from '../data/art';
 ---
 
 <BaseLayout
-  title="Fine Art & Creative Crafts | Izzah Nishad"
-  description="Creative studio portfolio: fine art watercolor portraits, charcoal still lifes, technical ink illustrations, and custom wearable pieces."
+  title="Art | Izzah Nishad"
+  description="Fine art and creative crafts portfolio of Izzah Nishad: watercolor portraits, high-contrast charcoal still lifes, technical ink drawings, and custom wearable pieces."
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
     <!-- Header -->
-    <div class="border-b border-theme-border pb-5">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
+    <div class="border-b border-theme-border pb-6 space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <span class="text-xs font-mono uppercase tracking-widest text-theme-copper block">
           FINE ART & CREATIVE CRAFTS
         </span>
@@ -27,28 +27,60 @@ import { artItems, artCategories } from '../data/art';
         </button>
       </div>
 
+      <!-- Shorter Title -->
       <h1 class="text-4xl sm:text-6xl font-normal font-lora text-theme-text tracking-tight">
-        Material Craft & Visual Works
+        Art
       </h1>
-      <p class="text-xs sm:text-sm text-theme-text-muted font-figtree mt-2 max-w-2xl leading-relaxed">
-        A curated selection of physical works spanning watercolor portraits, high-contrast charcoal still lifes, archival technical ink drawings, and custom wearable art.
-      </p>
 
-      <!-- Category Filter Pills -->
-      <div class="flex flex-wrap gap-2 pt-4 font-figtree text-xs" id="art-filters">
-        {artCategories.map((cat, idx) => (
-          <button
-            type="button"
-            data-category={cat}
-            class={`art-filter-btn px-3.5 py-1 rounded-full border transition-all lowercase text-xs ${
-              idx === 0
-                ? 'border-theme-copper bg-theme-copper text-white font-medium shadow-xs'
-                : 'border-theme-border bg-theme-surface text-theme-text-muted hover:border-theme-copper hover:text-theme-text'
-            }`}
-          >
-            {cat.toLowerCase()}
-          </button>
-        ))}
+      <!-- Describing line on top with buttons to show each type -->
+      <div class="space-y-3">
+        <p class="text-xs sm:text-sm text-theme-text-muted font-figtree max-w-2xl leading-relaxed">
+          A curated selection of physical works spanning watercolor portraits, high-contrast charcoal still lifes, archival technical ink drawings, and custom wearable art.
+        </p>
+
+        <!-- Category Filter Pills (buttons to show each type) -->
+        <div class="flex flex-wrap gap-2 pt-1 font-figtree text-xs" id="art-filters">
+          {artCategories.map((cat, idx) => (
+            <button
+              type="button"
+              data-category={cat}
+              class={`art-filter-btn px-3.5 py-1 rounded-full border transition-all lowercase text-xs ${
+                idx === 0
+                  ? 'border-theme-copper bg-theme-copper text-white font-medium shadow-xs'
+                  : 'border-theme-border bg-theme-surface text-theme-text-muted hover:border-theme-copper hover:text-theme-text'
+              }`}
+            >
+              {cat.toLowerCase()}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Box explaining that my strongest hobby is art, with the line art of me placed ON TOP of it -->
+      <div class="relative mt-16 sm:mt-20 pt-6 pb-6 px-6 sm:px-8 rounded-2xl border border-theme-border/80 bg-theme-surface shadow-xs transition-colors">
+        <!-- Line art of me placed ON TOP of the box -->
+        <div class="absolute -top-16 sm:-top-20 right-6 sm:right-10 md:right-16 w-28 sm:w-36 md:w-40 pointer-events-none select-none">
+          <img
+            src="/art/line-art-me-seated.png"
+            alt="Line art of Izzah Nishad sitting on top of the box"
+            class="w-full h-auto drop-shadow-sm dark:invert dark:opacity-90"
+            loading="eager"
+          />
+        </div>
+
+        <div class="pr-24 sm:pr-40 md:pr-44 space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-theme-rose/10 text-theme-rose border border-theme-rose/30 font-semibold">
+              ★ My Strongest Hobby
+            </span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-lora font-normal text-theme-text tracking-tight">
+            Fine Art & Physical Craft
+          </h2>
+          <p class="text-xs sm:text-sm text-theme-text-muted font-figtree leading-relaxed max-w-3xl">
+            Art is my strongest hobby—I am skilled in painting using watercolor and acrylic, and I am an avid enjoyer of traditional art and physical craft. Whether rendering high-contrast chiaroscuro, drafting continuous technical pen plates, or sewing custom garments, the patience, spatial awareness, and precision I hone through fine art directly inform my engineering design.
+          </p>
+        </div>
       </div>
     </div>
 
