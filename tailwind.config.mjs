@@ -25,14 +25,15 @@ export default {
         }
       },
       fontFamily: {
+        lora: ['Lora', 'Georgia', 'serif'],
         story: ['"Story Script"', 'cursive'],
         script: ['"Story Script"', 'cursive'],
         sans: ['Figtree', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
         figtree: ['Figtree', 'sans-serif'],
-        cormorant: ['"Cormorant Garamond"', 'Playfair Display', 'serif'],
+        cormorant: ['Lora', '"Cormorant Garamond"', 'serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'Courier New', 'monospace'],
-        display: ['"Story Script"', '"Cormorant Garamond"', 'serif'],
-        serif: ['"Cormorant Garamond"', 'Playfair Display', 'Georgia', 'serif'],
+        display: ['Lora', '"Story Script"', 'serif'],
+        serif: ['Lora', '"Cormorant Garamond"', 'Playfair Display', 'Georgia', 'serif'],
       },
       backgroundImage: {
         'blueprint-grid': "radial-gradient(circle, var(--grid-dot) 1px, transparent 1px)",

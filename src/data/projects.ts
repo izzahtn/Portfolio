@@ -38,58 +38,69 @@ export const projects: Project[] = [
   {
     slug: "baja-rear-control-arms",
     number: "01",
-    title: "Rear Suspension Control Arms & Links",
-    shortTitle: "Rear Control Arms",
+    title: "TG23 Rear Suspension Links & Kinematics",
+    shortTitle: "Rear Suspension Links",
     organization: "Cornell Baja SAE Racing",
     category: "Vehicle Suspension & FEA",
-    timeline: "Nov 2025 – Present",
+    timeline: "2025 – 2026 Season",
     role: "Mechanical Engineer — Suspension Subteam",
-    summary: "Heavy-duty aluminum and alloy steel rear control arms engineered for a high-travel independent rear suspension, connecting rear uprights to the chassis roll cage and supporting dynamic shock piston loads.",
+    summary: "Design, vehicle packaging, and Ansys structural FEA for Cornell Baja Racing's TG23 rear suspension links, transitioning from previous bent lower tubes to optimized straight-tube links analyzed across 6 dynamic vehicle load cases.",
     has3dModel: false,
-    tags: ["Ansys Mechanical", "FEA", "SolidWorks 2026", "CNC Machining", "Manual Lathe", "Kinematics", "Suspension"],
+    tags: ["Ansys Mechanical", "FEA", "SolidWorks", "Suspension Kinematics", "4130 Chromoly", "Baja SAE"],
     specs: [
-      { label: "Suspension Architecture", value: "Multi-Link Independent Rear Suspension (IRS)" },
-      { label: "Primary Materials", value: "4130 Chromoly Steel Tubes + 6061-T6 Aluminum Clevises" },
-      { label: "Bearings & Articulation", value: "Aurora High-Misalignment Spherical Bearings" },
-      { label: "Simulation & FEA", value: "Ansys Mechanical 2025 Structural Solver" },
-      { label: "Critical Load Case", value: "3G Bump + 2G Lateral Cornering Combined" },
-      { label: "Target Factor of Safety", value: "FoS ≥ 2.2 against yield under peak dynamic shock" },
-      { label: "Fabrication Methods", value: "CNC Milling, Manual Lathe Turning, Precision Fixturing" },
-      { label: "Protective Finish", value: "Heat-Treated & Mil-Spec Type II Anodized" },
+      { label: "Vehicle Platform", value: "Cornell Baja Racing TG23" },
+      { label: "Suspension Architecture", value: "Dual-Link Independent Rear Suspension (IRS)" },
+      { label: "Link Configuration", value: "Upper Wishbone A-Arm + Lower Shock-Bearing Link" },
+      { label: "Tube Geometry", value: "Straight Lower & Upper Tubes (Stress & Weight Optimized)" },
+      { label: "Structural Materials", value: "4130 Chromoly Steel Alloy + Precision Machined Cups" },
+      { label: "FEA Simulation Suite", value: "Ansys Mechanical Structural Solver" },
+      { label: "Dynamic Load Cases", value: "6 Cases: Landing, In/Outboard Curbslam, Rear End, Tree Boom, Tree Toast" },
+      { label: "Kinematic Motion", value: "Multi-Axis Travel Without Steering Linkage Coupling" },
+      { label: "Shock Mounting", value: "Direct Lower-Link Clevis Tabs Braced to Trailing Arm" },
+      { label: "Engineering Milestone", value: "Critical Design Review (CDR) Complete • Road to FDR" },
     ],
     sections: [
       {
-        title: "01. Suspension Kinematics & Structural Mandate",
-        subtitle: "Preserving dynamic camber and roll center curves over 12 inches of travel",
-        content: "On a single-seat Baja SAE race car, the rear suspension arms absorb continuous multi-axis impact forces: vertical landing shock from 6-foot jumps, severe lateral scrub during high-speed corner drifts, and driving torque. The links must maintain strict wheel alignment without plastic deformation or fatigue failure.",
+        title: "01. Suspension Mandate & Transition to Straight-Tube Geometry",
+        subtitle: "Constraining wheel geometry, packaging shocks, and eliminating bend stresses",
+        content: "On a single-seat off-road Baja racer, the rear suspension links must constrain the rear wheels to the chassis frame, withstand massive multi-axis impact forces, and carry the vehicle's dynamic shock absorber assemblies through extreme articulation. Unlike the front suspension, the rear linkages do not accommodate steering inputs, allowing geometry to be purely optimized for dynamic camber curves, driveshaft clearance, and impact absorption.",
         bulletPoints: [
-          "Integrated shock piston mount tabs directly into the control arm clevis assembly to optimize motion ratios and reduce unsprung weight.",
-          "Spherical bearings equipped with custom lathe-turned misalignment spacers provide 28 degrees of angular articulation without binding.",
-          "Lightweighting achieved via progressive wall-thickness optimization and CNC pocketing of 6061-T6 aluminum clevises."
-        ]
-      },
-      {
-        title: "02. Ansys Mechanical FEA & Structural Validation",
-        subtitle: "Simulating combined bump, cornering, and reverse-impact load cases",
-        content: "Using Ansys Mechanical, structural static and transient load simulations were executed on the control arm weldment assembly. Boundary conditions constrained the spherical chassis pivot points while applying combined dynamic forces at the outboard upright pin.",
-        bulletPoints: [
-          "Mesh convergence study conducted with quadratic tetrahedral solid elements, refining the mesh around tube-to-clevis weld fillets.",
-          "Maximum Von Mises stress identified at shock mount weld interface (182 MPa), comfortably beneath 4130 normalized yield strength (435 MPa), yielding a Factor of Safety of 2.39.",
-          "Deflection analysis showed less than 0.85 mm total lateral displacement under maximum cornering load, preventing unwanted wheel toe changes."
+          "Identified root limitations in previous vehicle designs: past cars utilized bent lower tubes to gain ground clearance and angle shock tabs, but this required an auxiliary crossbar, introduced bend stress concentrations, and consumed scarce packaging envelope near frame hardpoints.",
+          "Selected straight-tube architecture for both uppers and lowers: eliminates the need to relocate frame shock hardpoints, removes manufacturing bend dies, eases welding fixturing, and cuts overall unsprung mass.",
+          "In the latest design iteration, the secondary crossbar from the center bar to the lower link side has been eliminated, simplifying the weldment while maintaining high structural rigidity.",
+          "Engineered simplified bearing cup geometry for precision lathe machining and seamless fitment with spherical articulation bearings."
         ],
         callout: {
-          type: "formula",
-          title: "Dynamic Factor of Safety (Von Mises)",
-          text: "FoS = \\sigma_{yield} / \\sigma_{vM,max} = 435\\text{ MPa} / 182\\text{ MPa} = 2.39 \\quad (\\text{Target: } \\ge 2.2)"
+          type: "spec",
+          title: "Design Constraints & Manufacturing Objectives",
+          text: "• Architecture: Straight lower & upper tubes (no bends)\n• Frame Packaging: Zero relocation of chassis shock mount hardpoints\n• Clearance: Strict envelope clearance to dynamic rotating driveshafts\n• Manufacturability: Streamlined welding setups and simplified lathe-turned bearing cups"
         }
       },
       {
-        title: "03. Machine Shop Fabrication & Tolerancing",
-        subtitle: "From raw tube stock to heat-treated, race-proven suspension hardware",
-        content: "Manufactured the prototype components utilizing machine shop tools at Cornell: manual lathe for turning bearing cups and misalignment spacers to ±0.0005\" press-fit tolerance, and CNC milling for precision shock clevises and chassis mounting points.",
+        title: "02. Ansys Structural FEA Across 6 Dynamic Load Cases",
+        subtitle: "Simulating landing shock, obstacle collisions, and high-speed curb strikes",
+        content: "Using Ansys Mechanical, finite element structural simulations were executed across multiple suspension ride positions to identify peak stress concentrations and verify structural integrity against yield. The rear linkages were evaluated against 6 core vehicle load cases derived from off-road racing conditions:",
         bulletPoints: [
-          "Toleranced bearing bores checked with telescoping bore gauges and micrometers.",
-          "Post-weld inspection for complete joint penetration before heat treatment and protective anodization."
+          "Landing: Simulates peak dynamic vertical compression following a 6-foot jump landing with full shock damping resistance.",
+          "Outboard & Inboard Curbslam: Evaluates high-energy lateral tire strikes against immovable obstacles, testing crossmember shear and trailing arm bending.",
+          "Rear End Collision: Models direct reverse impact deceleration forces transmitted through the rear upright.",
+          "Tree Boom & Tree Toast: Simulates frontal and oblique high-speed tree collisions typical of endurance woods courses, testing trailing-arm buckling resistance.",
+          "Road to FDR Refinements: Currently refining the Ansys model with solid weld fillets and optimizing the transition geometry between the shock mounting tabs and the trailing arm."
+        ],
+        callout: {
+          type: "formula",
+          title: "Dynamic Evaluation Regime",
+          text: "\\text{6 Critical Load Cases: } \\begin{cases} \\text{Vertical: Landing} \\\\ \\text{Lateral: Inboard \\& Outboard Curbslam} \\\\ \\text{Longitudinal: Rear End Impact} \\\\ \\text{Oblique Obstacle: Tree Boom \\& Tree Toast} \\end{cases}"
+        }
+      },
+      {
+        title: "03. Machine Shop Fabrication & Road to FDR",
+        subtitle: "Precision lathe-turned cups, weld fixturing, and validation roadmap",
+        content: "Manufacturability was a guiding priority throughout the CDR milestone. By transitioning to straight tubing and simplified bearing cups, machine shop cycle times and fixturing complexity were dramatically reduced.",
+        bulletPoints: [
+          "Simplified bearing cups machined on manual lathes to ±0.0005\" press-fit tolerances, verified with telescoping bore gauges.",
+          "Designed weld fixtures to maintain strict pivot centerline alignment across both A-arm pivot axes during TIG welding.",
+          "Ongoing roadmap toward Final Design Review (FDR): finalizing physical test protocols, incorporating CDR peer feedback, and validating updated shock tab geometry under physical testing."
         ]
       }
     ]
