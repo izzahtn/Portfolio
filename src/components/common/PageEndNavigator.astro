@@ -98,7 +98,7 @@ const targetDesc = Astro.props.nextDescription || next.desc;
 
     <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div class="flex items-center gap-3.5">
-        <div class="w-9 h-9 rounded-full bg-theme-rose/10 border border-theme-rose/30 text-theme-rose flex items-center justify-center font-mono font-bold text-sm shrink-0 group-hover:bg-theme-rose group-hover:text-white transition-colors">
+        <div class="nav-arrow-badge w-9 h-9 rounded-full bg-theme-rose/10 border border-theme-rose/30 text-theme-rose flex items-center justify-center font-mono font-bold text-sm shrink-0 group-hover:bg-theme-rose group-hover:text-white transition-colors">
           ↓
         </div>
         <div>
@@ -116,7 +116,7 @@ const targetDesc = Astro.props.nextDescription || next.desc;
 
       <div class="flex items-center gap-3 self-end sm:self-center shrink-0">
         <span class="text-[11px] text-theme-text-muted font-figtree hidden md:inline scroll-status-hint">
-          Scroll past page end or click
+          Pull down to continue or click
         </span>
         <a
           href={targetUrl}
@@ -141,15 +141,68 @@ const targetDesc = Astro.props.nextDescription || next.desc;
 
       const progressBar = wrapper.querySelector('.scroll-progress-bar') as HTMLElement;
       const statusHint = wrapper.querySelector('.scroll-status-hint') as HTMLElement;
+      const arrowBadge = wrapper.querySelector('.nav-arrow-badge') as HTMLElement;
+
       let isNavigating = false;
       let holdStartTime = 0;
       let animId: number | null = null;
-      const HOLD_DURATION = 420; // 420ms smooth progression before route change
+      const HOLD_DURATION = 380; // 380ms smooth progression before route change
+
+      // Two-phase pull logic:
+      // Phase 1: Reaching bottom does NOT trigger. Arms the "at bottom" state once initial scroll momentum settles.
+      // Phase 2: A deliberate subsequent pull down triggers navigation.
+      let hasLandedAtBottom = false;
+      let bottomLandedTime = 0;
+      let armedForSecondPull = false;
+      let settleTimeout: any = null;
+      let accumulatedPull = 0;
+
+      const isScrolledToBottom = () => {
+        const scrollPosition = window.innerHeight + window.scrollY;
+        const totalHeight = Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight
+        );
+        // Within 40px of bottom
+        return scrollPosition >= totalHeight - 40;
+      };
+
+      const checkScrollPosition = () => {
+        const atBottom = isScrolledToBottom();
+        if (atBottom) {
+          if (!hasLandedAtBottom) {
+            hasLandedAtBottom = true;
+            bottomLandedTime = performance.now();
+            armedForSecondPull = false;
+            accumulatedPull = 0;
+
+            // Wait for initial scroll momentum to settle (at least 320ms quiet period)
+            clearTimeout(settleTimeout);
+            settleTimeout = setTimeout(() => {
+              if (hasLandedAtBottom && !isNavigating) {
+                armedForSecondPull = true;
+                if (statusHint) statusHint.textContent = 'Pull down again to continue ↓';
+                if (arrowBadge) arrowBadge.classList.add('animate-bounce');
+              }
+            }, 320);
+          }
+        } else {
+          // Scrolled back up away from bottom
+          hasLandedAtBottom = false;
+          armedForSecondPull = false;
+          accumulatedPull = 0;
+          clearTimeout(settleTimeout);
+          if (arrowBadge) arrowBadge.classList.remove('animate-bounce');
+          cancelNavigation();
+        }
+      };
+
+      window.addEventListener('scroll', checkScrollPosition, { passive: true });
 
       const triggerNavigation = () => {
         if (isNavigating) return;
         isNavigating = true;
-        if (statusHint) statusHint.textContent = 'Continuing to next page...';
+        if (statusHint) statusHint.textContent = 'Swapping to next page...';
 
         holdStartTime = performance.now();
         const step = (time: number) => {
@@ -171,18 +224,12 @@ const targetDesc = Astro.props.nextDescription || next.desc;
           isNavigating = false;
           if (animId) cancelAnimationFrame(animId);
           if (progressBar) progressBar.style.transform = 'scaleX(0)';
-          if (statusHint) statusHint.textContent = 'Scroll past page end or click';
+          if (statusHint) {
+            statusHint.textContent = armedForSecondPull
+              ? 'Pull down again to continue ↓'
+              : 'Pull down to continue or click';
+          }
         }
-      };
-
-      const isScrolledToBottom = () => {
-        const scrollPosition = window.innerHeight + window.scrollY;
-        const totalHeight = Math.max(
-          document.body.scrollHeight,
-          document.documentElement.scrollHeight
-        );
-        // Within 40px of the absolute bottom
-        return scrollPosition >= totalHeight - 40;
       };
 
       // Card click navigates immediately
@@ -193,26 +240,66 @@ const targetDesc = Astro.props.nextDescription || next.desc;
         }
       });
 
-      // Detect downward mousewheel/trackpad scroll when already at the page bottom
+      // Mouse wheel / Trackpad detection
       window.addEventListener(
         'wheel',
         (e) => {
           if (isNavigating) return;
-          if (isScrolledToBottom() && e.deltaY > 12) {
-            triggerNavigation();
-          } else if (e.deltaY < -10) {
+
+          // If scrolling up, cancel and reset pull
+          if (e.deltaY < -10) {
+            accumulatedPull = 0;
             cancelNavigation();
+            return;
+          }
+
+          // Check if user is at bottom
+          if (!isScrolledToBottom()) {
+            return;
+          }
+
+          // Check if armed (meaning they arrived, paused, and are now pulling AGAIN)
+          const timeSinceLanding = performance.now() - bottomLandedTime;
+          if (hasLandedAtBottom && (armedForSecondPull || timeSinceLanding > 380)) {
+            armedForSecondPull = true;
+            if (e.deltaY > 12) {
+              accumulatedPull += e.deltaY;
+              // Once they make a second deliberate downward flick/scroll:
+              if (accumulatedPull >= 25) {
+                triggerNavigation();
+              }
+            }
           }
         },
         { passive: true }
       );
 
-      // Detect upward swipe on mobile touch at page bottom
+      // Mobile Touch Gesture detection
+      let touchStartedAtBottom = false;
       let touchStartY = 0;
+
       window.addEventListener(
         'touchstart',
         (e) => {
+          // Only arm if user was ALREADY at the bottom before starting the touch gesture
+          touchStartedAtBottom = isScrolledToBottom() && hasLandedAtBottom;
           touchStartY = e.touches[0].clientY;
+        },
+        { passive: true }
+      );
+
+      window.addEventListener(
+        'touchmove',
+        (e) => {
+          if (!touchStartedAtBottom || isNavigating) return;
+          const currentY = e.touches[0].clientY;
+          const pullDistance = Math.max(0, touchStartY - currentY);
+          if (pullDistance > 10 && progressBar) {
+            // Visual feedback as user pulls down
+            const pullRatio = Math.min(pullDistance / 80, 0.95);
+            progressBar.style.transform = `scaleX(${pullRatio})`;
+            if (statusHint) statusHint.textContent = 'Release to continue ↓';
+          }
         },
         { passive: true }
       );
@@ -221,10 +308,18 @@ const targetDesc = Astro.props.nextDescription || next.desc;
         'touchend',
         (e) => {
           if (isNavigating) return;
+          if (!touchStartedAtBottom) {
+            checkScrollPosition();
+            return;
+          }
+
           const touchEndY = e.changedTouches[0].clientY;
           const deltaY = touchStartY - touchEndY;
-          if (isScrolledToBottom() && deltaY > 35) {
+          if (deltaY > 45) {
             triggerNavigation();
+          } else {
+            if (progressBar) progressBar.style.transform = 'scaleX(0)';
+            if (statusHint) statusHint.textContent = 'Pull down again to continue ↓';
           }
         },
         { passive: true }
