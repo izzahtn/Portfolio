@@ -11,29 +11,46 @@ const brakeLines = projects[1];
 
 <BaseLayout>
   <!-- HERO SECTION -->
-  <section class="relative pt-14 pb-20 border-b border-theme-border">
+  <section class="relative pt-6 sm:pt-8 pb-10 sm:pb-12 border-b border-theme-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Main Headline Block: User's Name + Bio on Left, Hanging Headshot on Right -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
         <!-- Left: Editorial Typography & Bio -->
-        <div class="lg:col-span-7 space-y-6">
+        <div class="lg:col-span-7 space-y-4 sm:space-y-5">
           <!-- Expressive Name Heading in Lora -->
-          <h1 class="text-6xl sm:text-8xl lg:text-9xl font-normal font-lora text-theme-text tracking-tight leading-[1.05] pb-1">
+          <h1 class="text-5xl sm:text-7xl lg:text-8xl font-normal font-lora text-theme-text tracking-tight leading-[1.05] pb-1">
             {siteConfig.name}
           </h1>
 
-          <p class="text-2xl sm:text-3xl font-lora italic text-theme-rose font-normal leading-snug">
+          <p class="text-xl sm:text-2xl font-lora italic text-theme-rose font-normal leading-snug">
             Mechanical Engineer & Maker • Cornell University ('29)
           </p>
 
-          <p class="text-base sm:text-lg text-theme-text-muted leading-relaxed font-figtree max-w-xl">
+          <p class="text-sm sm:text-base text-theme-text-muted leading-relaxed font-figtree max-w-xl">
             Designing vehicle suspension linkages for <strong>Cornell Baja Racing</strong> (previously on the Brakes subteam), researching high-voltage pulsed power optoelectronics in applied physics, and creating award-winning fine art, woodworking, and handcrafted jewelry.
           </p>
+
+          <!-- Direct Primary Action Buttons: Straight to Projects & Resume -->
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a
+              href="/projects"
+              class="px-5 py-2.5 rounded-full bg-theme-rose text-white text-xs font-semibold hover:bg-theme-rose-muted transition-all shadow-md inline-flex items-center gap-2 group cursor-pointer"
+            >
+              <span>Explore Engineering Projects</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+            <a
+              href="/resume"
+              class="px-4 py-2.5 rounded-full border border-theme-border text-xs font-medium text-theme-text hover:border-theme-rose hover:text-theme-rose transition-colors"
+            >
+              Resume & Skills
+            </a>
+          </div>
         </div>
 
         <!-- Right Side: Authentic Polaroid Headshot + Hanging Decor Charms -->
-        <div class="lg:col-span-5 flex flex-col items-center lg:items-end justify-center relative pt-8 sm:pt-10">
+        <div class="lg:col-span-5 flex flex-col items-center lg:items-end justify-center relative pt-2 sm:pt-4">
           
           <!-- Hanging Charms Mobile / Dangling Decor (Leaves, Stars, Gears, Wrenches) -->
           <div class="flex items-start justify-center gap-6 sm:gap-7 mb-[-6px] pointer-events-none select-none z-10 w-full max-w-[270px] px-4">
@@ -122,30 +139,30 @@ const brakeLines = projects[1];
       </div>
     </div>
 
-    <!-- Circular Section-Crossing Scroll Badge (Inspired by Han Nguyen Inspo) -->
-    <div class="absolute -bottom-7 sm:-bottom-8 left-1/2 -translate-x-1/2 z-20">
+    <!-- Direct Navigation Button Immediately Linking to Projects (Replaces explore down) -->
+    <div class="absolute -bottom-5 sm:-bottom-6 left-1/2 -translate-x-1/2 z-20">
       <a
-        href="#projects"
-        class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#f4b886] hover:bg-[#cbe896] text-[#32292f] border-2 border-[#32292f]/25 shadow-lg flex flex-col items-center justify-center transition-all duration-300 hover:scale-110 group cursor-pointer"
-        title="Scroll down to projects"
+        href="/projects"
+        class="px-5 py-2.5 rounded-full bg-[#f4b886] hover:bg-[#cbe896] text-[#32292f] border-2 border-[#32292f]/25 shadow-lg flex items-center gap-2 transition-all duration-300 hover:scale-105 group cursor-pointer font-figtree font-semibold text-xs tracking-wide"
+        title="Go directly to all Engineering Projects"
       >
-        <span class="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider leading-none">explore</span>
-        <span class="text-xs group-hover:translate-y-0.5 transition-transform duration-200 mt-0.5">↓</span>
+        <span class="font-mono text-[10px] uppercase tracking-wider font-bold">ALL PROJECTS</span>
+        <span class="text-sm group-hover:translate-x-1 transition-transform duration-200">→</span>
       </a>
     </div>
   </section>
 
   <!-- FEATURED ENGINEERING PROJECTS: PROJECT 01 (REAR CONTROL ARMS) & PROJECT 02 (BRAKE LINES + 3D) -->
-  <section id="projects" class="py-20 border-b border-theme-border relative overflow-hidden">
+  <section id="projects" class="py-10 sm:py-14 border-b border-theme-border relative overflow-hidden">
     <!-- Subtle Wireframe Outline Background Typography -->
     <div class="absolute right-4 top-8 text-8xl sm:text-9xl font-editorial font-bold wireframe-text-faint opacity-15 select-none pointer-events-none -mr-4">
       WORKS
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
       
       <!-- Section Header -->
-      <div class="border-b border-theme-border pb-6">
+      <div class="border-b border-theme-border pb-5">
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <div class="flex items-center gap-2 mb-1.5">
@@ -157,10 +174,10 @@ const brakeLines = projects[1];
                 SELECTED WORKS ✦ 2026
               </span>
             </div>
-            <h2 class="text-3xl sm:text-5xl font-bold font-cormorant text-theme-text tracking-tight">
+            <h2 class="text-3xl sm:text-4xl font-bold font-cormorant text-theme-text tracking-tight">
               Engineering Projects
             </h2>
-            <p class="text-sm text-theme-text-muted font-figtree mt-2 max-w-xl">
+            <p class="text-xs sm:text-sm text-theme-text-muted font-figtree mt-1.5 max-w-xl">
               A collection of mechanical systems I've designed, simulated, and built by hand—from Cornell Baja racing components to laser amplifiers and competition robots.
             </p>
           </div>
@@ -173,19 +190,19 @@ const brakeLines = projects[1];
           </a>
         </div>
         <!-- Running Stitch Divider Line -->
-        <div class="running-stitch w-full mt-5"></div>
+        <div class="running-stitch w-full mt-4"></div>
       </div>
 
       <!-- PROJECT 01: REAR SUSPENSION CONTROL ARMS -->
-      <div class="relative shape-sculptural bg-theme-surface border border-theme-border p-8 sm:p-12 shadow-xl hover:shadow-2xl transition-all duration-300">
+      <div class="relative shape-sculptural bg-theme-surface border border-theme-border p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
         <!-- Decorative corner diamonds -->
         <span class="corner-diamond-tl"></span>
         <span class="corner-diamond-br"></span>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div class="lg:col-span-7 space-y-5">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          <div class="lg:col-span-7 space-y-4">
             <div class="flex items-center gap-3">
-              <span class="font-cormorant text-2xl font-bold text-theme-rose">Project 01</span>
+              <span class="font-cormorant text-xl sm:text-2xl font-bold text-theme-rose">Project 01</span>
               <span class="w-8 h-[1px] bg-theme-border-strong"></span>
               <span class="text-xs font-figtree uppercase tracking-wider text-theme-text-muted">{rearControlArms.organization}</span>
               <span class="inline-block px-2.5 py-0.5 text-[11px] rounded-full border-[0.5px] border-theme-border font-figtree text-theme-text-muted ml-auto">
@@ -193,37 +210,37 @@ const brakeLines = projects[1];
               </span>
             </div>
 
-            <h3 class="text-2xl sm:text-4xl font-bold font-cormorant text-theme-text">
+            <h3 class="text-2xl sm:text-3xl font-bold font-cormorant text-theme-text">
               <a href={`/projects/${rearControlArms.slug}`} class="hover:text-theme-rose transition-colors">
                 {rearControlArms.title}
               </a>
             </h3>
 
-            <p class="text-sm sm:text-base text-theme-text-muted leading-relaxed font-figtree">
+            <p class="text-xs sm:text-sm text-theme-text-muted leading-relaxed font-figtree">
               {rearControlArms.summary}
             </p>
 
             <!-- Key highlights in geometric framed pill matrix -->
-            <div class="grid grid-cols-2 gap-4 py-3 border-y border-theme-border/60 font-figtree text-xs">
+            <div class="grid grid-cols-2 gap-3 py-2.5 border-y border-theme-border/60 font-figtree text-xs">
               <div>
-                <span class="text-[11px] text-theme-text-faint block uppercase">Structural Materials</span>
+                <span class="text-[10px] text-theme-text-faint block uppercase">Structural Materials</span>
                 <span class="font-medium text-theme-text">Aluminum & Steel Suspension Tubes</span>
               </div>
               <div>
-                <span class="text-[11px] text-theme-text-faint block uppercase">Bearing Interface</span>
+                <span class="text-[10px] text-theme-text-faint block uppercase">Bearing Interface</span>
                 <span class="font-medium text-theme-celadon">Spherical Bearings & Precision Spacers</span>
               </div>
               <div>
-                <span class="text-[11px] text-theme-text-faint block uppercase">Shop Fabrication</span>
+                <span class="text-[10px] text-theme-text-faint block uppercase">Shop Fabrication</span>
                 <span class="font-medium text-theme-text">CNC Milling, Manual Lathe & Mill</span>
               </div>
               <div>
-                <span class="text-[11px] text-theme-text-faint block uppercase">Surface Treatment</span>
+                <span class="text-[10px] text-theme-text-faint block uppercase">Surface Treatment</span>
                 <span class="font-medium text-theme-copper">Heat-Treated & Anodized Protection</span>
               </div>
             </div>
 
-            <div class="flex items-center gap-4 pt-2 font-figtree">
+            <div class="flex items-center gap-4 pt-1 font-figtree">
               <a
                 href={`/projects/${rearControlArms.slug}`}
                 class="px-5 py-2.5 rounded-full bg-theme-rose text-white text-xs font-medium hover:bg-theme-rose-muted transition-colors shadow-sm inline-flex items-center gap-2"
@@ -235,17 +252,17 @@ const brakeLines = projects[1];
           </div>
 
           <!-- Right: Clear Architectural Blueprint / Photo Container -->
-          <div class="lg:col-span-5 relative shape-arch-top overflow-hidden border border-theme-border bg-theme-surface-elevated p-6 shadow-md">
-            <div class="flex items-center justify-between mb-3 text-xs font-figtree">
-              <span class="font-mono uppercase text-theme-rose font-bold text-[11px]">
+          <div class="lg:col-span-5 relative shape-arch-top overflow-hidden border border-theme-border bg-theme-surface-elevated p-5 shadow-md">
+            <div class="flex items-center justify-between mb-2.5 text-xs font-figtree">
+              <span class="font-mono uppercase text-theme-rose font-bold text-[10px]">
                 // SUSPENSION GEOMETRY
               </span>
               <span class="text-theme-text-faint text-[10px]">CORNELL BAJA SAE</span>
             </div>
 
-            <div class="aspect-[4/3] rounded-xl border border-dashed border-theme-border bg-theme-surface p-6 flex flex-col justify-between text-center relative group">
+            <div class="aspect-[4/3] rounded-xl border border-dashed border-theme-border bg-theme-surface p-5 flex flex-col justify-between text-center relative group">
               <div class="space-y-1">
-                <span class="font-cormorant text-xl text-theme-text font-bold block">
+                <span class="font-cormorant text-lg sm:text-xl text-theme-text font-bold block">
                   Rear Control Arm Assembly
                 </span>
                 <p class="text-xs text-theme-text-muted font-figtree max-w-xs mx-auto">
@@ -254,16 +271,16 @@ const brakeLines = projects[1];
               </div>
 
               <!-- Technical Specification Pill Callouts -->
-              <div class="space-y-2 py-2">
-                <div class="flex items-center justify-between text-[11px] font-figtree px-3 py-1.5 rounded-md bg-theme-surface-elevated border border-theme-border/60">
+              <div class="space-y-1.5 py-1">
+                <div class="flex items-center justify-between text-[11px] font-figtree px-3 py-1 rounded-md bg-theme-surface-elevated border border-theme-border/60">
                   <span class="text-theme-text-muted">Chassis Attachment:</span>
                   <span class="font-medium text-theme-text">Roll Cage Hardpoints</span>
                 </div>
-                <div class="flex items-center justify-between text-[11px] font-figtree px-3 py-1.5 rounded-md bg-theme-surface-elevated border border-theme-border/60">
+                <div class="flex items-center justify-between text-[11px] font-figtree px-3 py-1 rounded-md bg-theme-surface-elevated border border-theme-border/60">
                   <span class="text-theme-text-muted">Upright Mount:</span>
                   <span class="font-medium text-theme-celadon">Spherical Bearing Joints</span>
                 </div>
-                <div class="flex items-center justify-between text-[11px] font-figtree px-3 py-1.5 rounded-md bg-theme-surface-elevated border border-theme-border/60">
+                <div class="flex items-center justify-between text-[11px] font-figtree px-3 py-1 rounded-md bg-theme-surface-elevated border border-theme-border/60">
                   <span class="text-theme-text-muted">Shock Mounting:</span>
                   <span class="font-medium text-theme-copper">Integrated Clevis Tabs</span>
                 </div>
@@ -278,16 +295,16 @@ const brakeLines = projects[1];
       </div>
 
       <!-- PROJECT 02: TG22 BRAKE LINES ASSEMBLY (WITH ALTERNATING LOK YE LAYOUT & 3D VIEWER) -->
-      <div class="relative shape-sculptural-alt bg-theme-surface border border-theme-border p-8 sm:p-12 shadow-xl hover:shadow-2xl transition-all duration-300">
+      <div class="relative shape-sculptural-alt bg-theme-surface border border-theme-border p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
         <!-- Decorative corner diamonds -->
         <span class="corner-diamond-tr"></span>
         <span class="corner-diamond-bl"></span>
 
         <!-- Alternating grid: 3D canvas on left for desktop, text on right -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div class="lg:col-span-6 lg:order-2 space-y-5">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          <div class="lg:col-span-6 lg:order-2 space-y-4">
             <div class="flex items-center gap-3">
-              <span class="font-cormorant text-2xl font-bold text-theme-rose">Project 02</span>
+              <span class="font-cormorant text-xl sm:text-2xl font-bold text-theme-rose">Project 02</span>
               <span class="w-8 h-[1px] bg-theme-border-strong"></span>
               <span class="text-xs font-figtree uppercase tracking-wider text-theme-text-muted">{brakeLines.organization}</span>
               <span class="inline-block px-2.5 py-0.5 text-[11px] rounded-full border-[0.5px] border-theme-rose/50 bg-theme-rose/10 text-theme-rose font-figtree font-medium ml-auto">
@@ -295,37 +312,37 @@ const brakeLines = projects[1];
               </span>
             </div>
 
-            <h3 class="text-2xl sm:text-4xl font-bold font-cormorant text-theme-text">
+            <h3 class="text-2xl sm:text-3xl font-bold font-cormorant text-theme-text">
               <a href={`/projects/${brakeLines.slug}`} class="hover:text-theme-rose transition-colors">
                 {brakeLines.title}
               </a>
             </h3>
 
-            <p class="text-sm sm:text-base text-theme-text-muted leading-relaxed font-figtree">
+            <p class="text-xs sm:text-sm text-theme-text-muted leading-relaxed font-figtree">
               {brakeLines.summary}
             </p>
 
             <!-- Key highlights -->
-            <div class="grid grid-cols-2 gap-4 py-3 border-y border-theme-border/60 font-figtree text-xs">
+            <div class="grid grid-cols-2 gap-3 py-2.5 border-y border-theme-border/60 font-figtree text-xs">
               <div>
-                <span class="text-[11px] text-theme-text-faint block uppercase">Line Specification</span>
+                <span class="text-[10px] text-theme-text-faint block uppercase">Line Specification</span>
                 <span class="font-medium text-theme-text">Braided Metal + Protective Coating</span>
               </div>
               <div>
-                <span class="text-[11px] text-theme-text-faint block uppercase">Distribution Manifolds</span>
+                <span class="text-[10px] text-theme-text-faint block uppercase">Distribution Manifolds</span>
                 <span class="font-medium text-theme-celadon">CNC 6061 Aluminum X & T Blocks</span>
               </div>
               <div>
-                <span class="text-[11px] text-theme-text-faint block uppercase">Sealing Interface</span>
+                <span class="text-[10px] text-theme-text-faint block uppercase">Sealing Interface</span>
                 <span class="font-medium text-theme-text">Faced Slides + Copper Crush Washers</span>
               </div>
               <div>
-                <span class="text-[11px] text-theme-text-faint block uppercase">Hydraulic Testing</span>
+                <span class="text-[10px] text-theme-text-faint block uppercase">Hydraulic Testing</span>
                 <span class="font-medium text-theme-copper">Syringe Vacuum Tested • Zero Leaks</span>
               </div>
             </div>
 
-            <div class="flex items-center gap-4 pt-2 font-figtree">
+            <div class="flex items-center gap-4 pt-1 font-figtree">
               <a
                 href={`/projects/${brakeLines.slug}`}
                 class="px-5 py-2.5 rounded-full bg-theme-rose text-white text-xs font-medium hover:bg-theme-rose-muted transition-colors shadow-sm inline-flex items-center gap-2"
@@ -335,7 +352,7 @@ const brakeLines = projects[1];
               </a>
               <a
                 href="/cad-lab"
-                class="px-5 py-2.5 rounded-full border border-theme-border text-xs font-medium text-theme-text hover:border-theme-rose hover:text-theme-rose transition-colors"
+                class="px-4 py-2.5 rounded-full border border-theme-border text-xs font-medium text-theme-text hover:border-theme-rose hover:text-theme-rose transition-colors"
               >
                 Fullscreen CAD Lab ↗
               </a>
@@ -348,7 +365,7 @@ const brakeLines = projects[1];
               <CadViewer
                 modelUrl="/models/brake-lines/TG22_Brake_Lines_Assembly.glb"
                 title="SolidWorks TG22 Corner Assembly"
-                height="450px"
+                height="360px"
               />
             </div>
           </div>

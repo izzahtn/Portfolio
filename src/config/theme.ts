@@ -74,7 +74,7 @@ export const themes: Record<string, ThemePalette> = {
   },
   botanicalSage: {
     id: "botanicalSage",
-    name: "Botanical Atelier (Olive & Terracotta)",
+    name: "Botanical Crafts (Olive & Terracotta)",
     description: "Deep lichen green, soft terracotta clay, and antique ochre",
     isDark: true,
     colors: {

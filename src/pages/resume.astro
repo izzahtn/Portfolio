@@ -9,10 +9,10 @@ import { siteConfig } from '../config/site';
   title="Resume | Izzah Nishad"
   description="Izzah Nishad's professional mechanical engineering resume, education, and technical experience."
 >
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10 space-y-8">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
     
     <!-- Top Action Toolbar -->
-    <div class="flex flex-wrap items-center justify-between gap-4 p-4 bg-theme-surface border border-theme-border font-mono text-xs">
+    <div class="flex flex-wrap items-center justify-between gap-3 p-3 sm:p-4 bg-theme-surface border border-theme-border font-mono text-xs">
       <div class="flex items-center gap-2">
         <span class="w-2.5 h-2.5 bg-theme-rose"></span>
         <span class="font-bold text-theme-text uppercase">OFFICIAL RESUME // IZZAH NISHAD</span>
@@ -23,7 +23,7 @@ import { siteConfig } from '../config/site';
           href={siteConfig.resumeUrl}
           target="_blank"
           download="Izzah_Nishad_Resume.pdf"
-          class="px-4 py-2 bg-theme-rose text-white font-semibold hover:bg-theme-rose-muted transition-colors flex items-center gap-2 shadow"
+          class="px-4 py-2 bg-theme-rose text-white font-semibold hover:bg-theme-rose-muted transition-colors flex items-center gap-2 shadow text-xs"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
           <span>DOWNLOAD PDF</span>
@@ -31,7 +31,7 @@ import { siteConfig } from '../config/site';
 
         <button
           onclick="window.print()"
-          class="hidden sm:inline-flex px-3 py-2 bg-theme-bg border border-theme-border hover:border-theme-text text-theme-text transition-colors"
+          class="hidden sm:inline-flex px-3 py-2 bg-theme-bg border border-theme-border hover:border-theme-text text-theme-text transition-colors text-xs"
         >
           PRINT
         </button>
@@ -39,7 +39,7 @@ import { siteConfig } from '../config/site';
     </div>
 
     <!-- Paper-Style Clean Resume Container -->
-    <div class="p-8 sm:p-12 bg-theme-surface border border-theme-border shadow-2xl space-y-8 font-sans text-sm text-theme-text print:border-none print:shadow-none">
+    <div class="p-6 sm:p-8 bg-theme-surface border border-theme-border shadow-2xl space-y-6 font-sans text-sm text-theme-text print:border-none print:shadow-none">
       
       <!-- Resume Header -->
       <div class="border-b-2 border-theme-text pb-6 text-center space-y-2">

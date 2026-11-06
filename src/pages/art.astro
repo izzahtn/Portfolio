@@ -4,22 +4,22 @@ import { artItems, artCategories } from '../data/art';
 ---
 
 <BaseLayout
-  title="Art & Play Atelier | Izzah Nishad"
+  title="Fine Art & Creative Crafts | Izzah Nishad"
   description="Creative studio portfolio: fine art watercolor portraits, charcoal still lifes, technical ink illustrations, and custom wearable pieces."
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
     <!-- Header -->
-    <div class="border-b border-theme-border pb-8">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
+    <div class="border-b border-theme-border pb-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
         <span class="text-xs font-mono uppercase tracking-widest text-theme-copper block">
-          STUDIO ATELIER & VISUAL ARTS
+          FINE ART & CREATIVE CRAFTS
         </span>
         
         <!-- Random Artwork Spotlight Button -->
         <button
           id="random-art-btn"
           type="button"
-          class="px-5 py-2 rounded-full border border-theme-copper/40 bg-theme-copper/10 hover:bg-theme-copper hover:text-white transition-all shadow-xs flex items-center gap-2 font-figtree text-xs text-theme-copper hover:text-white font-medium cursor-pointer group active:scale-95"
+          class="px-4 py-1.5 rounded-full border border-theme-copper/40 bg-theme-copper/10 hover:bg-theme-copper hover:text-white transition-all shadow-xs flex items-center gap-2 font-figtree text-xs text-theme-copper hover:text-white font-medium cursor-pointer group active:scale-95"
           title="Spotlight a random piece with artist backstory"
         >
           <span class="text-sm group-hover:rotate-45 transition-transform inline-block">🎲</span>
@@ -27,20 +27,20 @@ import { artItems, artCategories } from '../data/art';
         </button>
       </div>
 
-      <h1 class="text-5xl sm:text-7xl font-normal font-lora text-theme-text tracking-tight">
+      <h1 class="text-4xl sm:text-6xl font-normal font-lora text-theme-text tracking-tight">
         Material Craft & Visual Works
       </h1>
-      <p class="text-sm sm:text-base text-theme-text-muted font-figtree mt-3 max-w-2xl leading-relaxed">
+      <p class="text-xs sm:text-sm text-theme-text-muted font-figtree mt-2 max-w-2xl leading-relaxed">
         A curated selection of physical works spanning watercolor portraits, high-contrast charcoal still lifes, archival technical ink drawings, and custom wearable art.
       </p>
 
       <!-- Category Filter Pills -->
-      <div class="flex flex-wrap gap-2 pt-6 font-figtree text-xs" id="art-filters">
+      <div class="flex flex-wrap gap-2 pt-4 font-figtree text-xs" id="art-filters">
         {artCategories.map((cat, idx) => (
           <button
             type="button"
             data-category={cat}
-            class={`art-filter-btn px-4 py-1.5 rounded-full border transition-all lowercase ${
+            class={`art-filter-btn px-3.5 py-1 rounded-full border transition-all lowercase text-xs ${
               idx === 0
                 ? 'border-theme-copper bg-theme-copper text-white font-medium shadow-xs'
                 : 'border-theme-border bg-theme-surface text-theme-text-muted hover:border-theme-copper hover:text-theme-text'
@@ -53,10 +53,10 @@ import { artItems, artCategories } from '../data/art';
     </div>
 
     <!-- Art Masonry Grid with Interesting Architectural Shapes -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="art-grid">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="art-grid">
       {artItems.map((item, idx) => (
         <article
-          class={`art-card relative group hover:scale-[1.02] ${idx % 2 === 0 ? 'hover:rotate-1 shape-sculptural' : 'hover:-rotate-1 shape-sculptural-alt'} border border-theme-border bg-theme-surface p-5 transition-all duration-300 shadow-md cursor-pointer`}
+          class={`art-card relative group hover:scale-[1.02] ${idx % 2 === 0 ? 'hover:rotate-1 shape-sculptural' : 'hover:-rotate-1 shape-sculptural-alt'} border border-theme-border bg-theme-surface p-4 sm:p-5 transition-all duration-300 shadow-md cursor-pointer`}
           data-category={item.category}
           data-item={JSON.stringify(item)}
         >
