@@ -57,7 +57,7 @@ export const projects: Project[] = [
       { label: "Dynamic Load Cases", value: "6 Cases: Landing, In/Outboard Curbslam, Rear End, Tree Boom, Tree Toast" },
       { label: "Kinematic Motion", value: "Multi-Axis Travel Without Steering Linkage Coupling" },
       { label: "Shock Mounting", value: "Direct Lower-Link Clevis Tabs Braced to Trailing Arm" },
-      { label: "Engineering Milestone", value: "Critical Design Review (CDR) Complete • Road to FDR" },
+      { label: "Fabrication & Fixturing", value: "Self-Machined Weld Fixtures & TIG-Welded Linkages" },
     ],
     sections: [
       {
@@ -85,7 +85,7 @@ export const projects: Project[] = [
           "Outboard & Inboard Curbslam: Evaluates high-energy lateral tire strikes against immovable obstacles, testing crossmember shear and trailing arm bending.",
           "Rear End Collision: Models direct reverse impact deceleration forces transmitted through the rear upright.",
           "Tree Boom & Tree Toast: Simulates frontal and oblique high-speed tree collisions typical of endurance woods courses, testing trailing-arm buckling resistance.",
-          "Road to FDR Refinements: Currently refining the Ansys model with solid weld fillets and optimizing the transition geometry between the shock mounting tabs and the trailing arm."
+          "Stress & Tab Optimization: Refining the Ansys model with solid weld fillets and optimizing the transition geometry between the shock mounting tabs and the trailing arm."
         ],
         callout: {
           type: "formula",
@@ -94,13 +94,14 @@ export const projects: Project[] = [
         }
       },
       {
-        title: "03. Machine Shop Fabrication & Road to FDR",
-        subtitle: "Precision lathe-turned cups, weld fixturing, and validation roadmap",
-        content: "Manufacturability was a guiding priority throughout the CDR milestone. By transitioning to straight tubing and simplified bearing cups, machine shop cycle times and fixturing complexity were dramatically reduced.",
+        title: "03. Machine Shop Fabrication & Welded Fixturing",
+        subtitle: "Custom in-house weld fixtures, precision lathe-turned cups, and TIG welding execution",
+        content: "Manufacturability is central to how I approach this project. Rather than relying on generic shop clamps, I am making the dedicated weld fixtures myself in the machine shop to locate the suspension tubes and bearing cups with strict geometric accuracy before and during TIG welding.",
         bulletPoints: [
+          "Personally fabricating custom weld fixtures to clamp the tubes and maintain strict pivot centerline alignment across both A-arm pivot axes during TIG welding.",
+          "Welding the 4130 chromoly linkages with tight coped fitup, sequencing passes to manage heat input and eliminate thermal distortion across the bearing cups.",
           "Simplified bearing cups machined on manual lathes to ±0.0005\" press-fit tolerances, verified with telescoping bore gauges.",
-          "Designed weld fixtures to maintain strict pivot centerline alignment across both A-arm pivot axes during TIG welding.",
-          "Ongoing roadmap toward Final Design Review (FDR): finalizing physical test protocols, incorporating CDR peer feedback, and validating updated shock tab geometry under physical testing."
+          "Transitioning to straight tubing eliminated complex tube-bending setups, allowing fixturing and welding to proceed with minimal cycle time."
         ]
       }
     ]

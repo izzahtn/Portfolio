@@ -76,21 +76,21 @@ export const artItems: ArtItem[] = [
     tags: ["Technical Pen", "Cross-Hatching", "Illustration", "Precision"]
   },
   {
-    id: "sustained-investigation-study-5",
-    title: "Sustained Investigation • Solitude in the Crowd",
+    id: "solitude-in-the-crowd",
+    title: "Solitude in the Crowd",
     category: "Fine Art & Painting",
     year: "2025",
     medium: "Acrylic on Stretched Canvas",
     dimensions: "Portfolio Plate",
-    description: "Part of the AP Studio Art Sustained Investigation exploring societal pressure and sensory overload. A contemplative figure with hands to face in the foreground stands apart from a warm, dense sea of silhouettes beneath a blinding sun.",
+    description: "An expressive visual study exploring societal pressure and sensory overload. A contemplative figure with hands to face in the foreground stands apart from a warm, dense sea of silhouettes beneath a blinding sun.",
     funFact: "The muse in the crowd is actually my best friend, who deals with these sensory and social overwhelm issues in real life.",
     imageUrl: "/art/si-5-revision.jpg",
     imagePlaceholderColor: "#33383d",
-    tags: ["AP Studio Art", "Sustained Investigation", "Acrylic", "Portrait Study"]
+    tags: ["Acrylic", "Portrait Study", "Figure Study"]
   },
   {
-    id: "sustained-investigation-the-exchange",
-    title: "Sustained Investigation • The Exchange",
+    id: "the-exchange",
+    title: "The Exchange",
     category: "Fine Art & Painting",
     year: "2025",
     medium: "Acrylic on Canvas",
@@ -99,7 +99,7 @@ export const artItems: ArtItem[] = [
     funFact: "The inspiration for the hands on money was my little cousin constantly reaching out and grabbing whatever money I had out!",
     imageUrl: "/art/img4228.jpg",
     imagePlaceholderColor: "#2b4068",
-    tags: ["AP Studio Art", "Sustained Investigation", "Acrylic", "Figure Study"]
+    tags: ["Acrylic", "Figure Study", "Narrative"]
   },
   {
     id: "ocean-seascape-dusk",

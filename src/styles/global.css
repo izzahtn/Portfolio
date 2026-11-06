@@ -5,65 +5,66 @@
 @tailwind utilities;
 
 :root {
-  /* User Custom Palette: Lime Cream, Shadow Grey, Tropical Teal, Light Caramel, Primary Scarlet */
-  --color-bg: #f5faee; /* Soft Lime Cream tint */
+  /* User Custom Palette: Sandy Brown (#fcaa67), Cream (#ffffc7), Dark Cyan (#548687), Deep Mocha (#473335), Primary Scarlet (#dd1c1a) */
+  --color-bg: #fdfde6; /* Warm soft Cream tint */
   --color-surface: #FFFFFF;
-  --color-surface-elevated: #ebf5dc;
-  --color-surface-hover: #dff0c9;
-  --color-border: rgba(50, 41, 47, 0.16); /* Shadow Grey subtle border */
-  --color-border-strong: rgba(50, 41, 47, 0.35);
-  --color-text: #32292f; /* Shadow Grey */
-  --color-text-muted: #63575f;
-  --color-text-faint: #91858d;
+  --color-surface-elevated: #ffffc7; /* Pure Cream */
+  --color-surface-hover: #fcfcc4;
+  --color-border: rgba(71, 51, 53, 0.16); /* Deep Mocha subtle border */
+  --color-border-strong: rgba(71, 51, 53, 0.35);
+  --color-text: #473335; /* Deep Mocha */
+  --color-text-muted: #75595c;
+  --color-text-faint: #9e8285;
   --color-rose: #dd1c1a; /* Primary Scarlet */
   --color-rose-muted: #b91513;
-  --color-celadon: #3d797d; /* Tropical Teal (Contrast optimized for text) */
-  --color-celadon-muted: #70abaf; /* Tropical Teal */
-  --color-copper: #a85918; /* Warm Caramel contrast text */
-  --color-gold: #f4b886; /* Light Caramel */
-  --color-grape: #32292f; /* Shadow Grey */
+  --color-celadon: #3e6c6d; /* Dark Cyan text contrast */
+  --color-celadon-muted: #548687; /* Dark Cyan */
+  --color-copper: #d47a32; /* Sandy Brown contrast text */
+  --color-gold: #fcaa67; /* Sandy Brown */
+  --color-grape: #473335; /* Deep Mocha */
   --paper-tint: rgba(221, 28, 26, 0.04);
 }
 
 html[data-theme="heritageDark"],
 html[data-theme="grapeDark"] {
-  --color-bg: #1c1619; /* Deep Shadow Grey Night */
-  --color-surface: #272025;
-  --color-surface-elevated: #332a30;
-  --color-surface-hover: #40353c;
-  --color-border: rgba(203, 232, 150, 0.14); /* Lime Cream border */
-  --color-border-strong: rgba(203, 232, 150, 0.28);
-  --color-text: #f4faed; /* Lime Cream tinted text */
-  --color-text-muted: #b5adb3;
-  --color-text-faint: #7a7078;
+  --color-bg: #241819; /* Deep Mocha Night */
+  --color-surface: #302224; /* Deep Mocha Surface */
+  --color-surface-elevated: #3e2d2f;
+  --color-surface-hover: #4d393b;
+  --color-border: rgba(255, 255, 199, 0.15); /* Cream border */
+  --color-border-strong: rgba(255, 255, 199, 0.30);
+  --color-text: #ffffc7; /* Cream text */
+  --color-text-muted: #dcd6b6;
+  --color-text-faint: #99937a;
   --color-rose: #ff3836; /* Bright Scarlet */
   --color-rose-muted: #dd1c1a; /* Primary Scarlet */
-  --color-celadon: #70abaf; /* Tropical Teal */
-  --color-celadon-muted: #4f888c;
-  --color-copper: #f4b886; /* Light Caramel */
-  --color-gold: #cbe896; /* Lime Cream */
-  --color-grape: #8f818a;
+  --color-celadon: #6ca6a7; /* Dark Cyan */
+  --color-celadon-muted: #548687;
+  --color-copper: #fcaa67; /* Sandy Brown */
+  --color-gold: #ffffc7; /* Cream */
+  --color-grape: #9e8285;
   --paper-tint: rgba(221, 28, 26, 0.07);
 }
 
+html[data-theme="sandyMocha"],
 html[data-theme="botanicalSage"] {
-  --color-bg: #f5faee;
+  --color-bg: #ffffc7; /* Pure Cream */
   --color-surface: #FFFFFF;
-  --color-surface-elevated: #ebf5dc;
-  --color-surface-hover: #dff0c9;
-  --color-border: rgba(50, 41, 47, 0.16);
-  --color-border-strong: rgba(50, 41, 47, 0.35);
-  --color-text: #32292f;
-  --color-text-muted: #63575f;
-  --color-text-faint: #91858d;
+  --color-surface-elevated: #fbe8d5;
+  --color-surface-hover: #f9dec4;
+  --color-border: rgba(71, 51, 53, 0.18);
+  --color-border-strong: rgba(71, 51, 53, 0.40);
+  --color-text: #473335;
+  --color-text-muted: #75595c;
+  --color-text-faint: #9e8285;
   --color-rose: #dd1c1a;
   --color-rose-muted: #b91513;
-  --color-celadon: #3d797d;
-  --color-celadon-muted: #70abaf;
-  --color-copper: #a85918;
-  --color-gold: #f4b886;
-  --color-grape: #32292f;
-  --paper-tint: rgba(112, 171, 175, 0.06);
+  --color-celadon: #3e6c6d;
+  --color-celadon-muted: #548687;
+  --color-copper: #d47a32;
+  --color-gold: #fcaa67;
+  --color-grape: #473335;
+  --paper-tint: rgba(84, 134, 135, 0.07);
 }
 
 body {
