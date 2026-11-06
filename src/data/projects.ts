@@ -127,40 +127,16 @@ export const projects: Project[] = [
         caption: "Figure 1: Complete vehicle brake lines CAD routing layout, illustrating tandem master cylinders, distribution blocks, pressure sensors, and corner caliper plumbing."
       },
       {
-        url: "/images/brake-lines/routing_defect_prev_year.png",
-        caption: "Figure 2: Root-cause failure analysis of previous year's car: high-point elevation hump over the masters that trapped rising air bubbles and degraded pedal firmness."
-      },
-      {
         url: "/images/brake-lines/front_lines_suspension.png",
-        caption: "Figure 3: Redesigned front routing: tubing drops cleanly near the brake pedal to the X-block and branches directly along upper suspension links to calipers with zero air traps."
+        caption: "Figure 2: Front brake lines routing: tubing drops cleanly near the brake pedal to the X-block and branches directly along upper suspension links to calipers."
       },
       {
-        url: "/images/brake-lines/x_block_cad.png",
-        caption: "Figure 4: CAD model of custom 4-way 6061 aluminum X-Block with 6mm line ports, 7/16\" transducer port, and pocket cutouts for weight savings."
+        url: "/images/brake-lines/t_block_combined.png",
+        caption: "Figure 3: Custom 6061-T6 aluminum T-Block manifold: 3D CAD model (left) and ANSI engineering part drawing (right) detailing dimensions, tolerances, and port centerlines."
       },
       {
-        url: "/images/brake-lines/t_block_cad.png",
-        caption: "Figure 5: CAD model of custom 6061 aluminum T-Block, re-engineered to mount on its side for cockpit clearance."
-      },
-      {
-        url: "/images/brake-lines/rear_lines_chassis.png",
-        caption: "Figure 6: Rear lines chassis packaging: T-block relocated back closer to the seat on its side, routing tubing securely along lower chassis frame tubes."
-      },
-      {
-        url: "/images/brake-lines/caliper_top_mount.png",
-        caption: "Figure 7: Caliper relocated to top of rotor mount, minimizing line displacement through steering articulation and allowing tight chassis fastening."
-      },
-      {
-        url: "/images/brake-lines/cnc_tormach_machining.png",
-        caption: "Figure 8: CNC Tormach multi-setup machining: squaring 6061 aluminum billet stock, multi-axis drilling and tapping, and final weight-reduction pocketing."
-      },
-      {
-        url: "/images/brake-lines/t_block_drawing.png",
-        caption: "Figure 9: Formal engineering part drawing for the T-Block manifold detailing dimensions, tolerances, and port centerlines."
-      },
-      {
-        url: "/images/brake-lines/x_block_drawing.png",
-        caption: "Figure 10: Formal engineering part drawing for the X-Block manifold detailing multi-port 6mm and 7/16\" tapping specifications."
+        url: "/images/brake-lines/x_block_combined.png",
+        caption: "Figure 4: Custom 6061-T6 aluminum 4-way X-Block manifold: 3D CAD model (left) and ANSI engineering part drawing (right) detailing multi-port 6mm and 7/16\" tapping specifications."
       }
     ],
     sections: [
@@ -181,12 +157,12 @@ export const projects: Project[] = [
         }
       },
       {
-        title: "02. CNC Tormach Machining of 6061 X & T Distribution Blocks",
-        subtitle: "Multi-setup machining, precision tapping, and hermetic copper crush washer sealing",
-        content: "To distribute hydraulic pressure from the tandem master cylinders to the corner calipers and pressure transducers, custom X-junction and T-junction blocks were manufactured in Cornell's machine shop. Both manifolds were machined from solid 6061 aluminum billet stock on a CNC Tormach mill using a multi-step operation: first squaring raw stock to rectangular bounds, followed by precision drilling and tapping multiple 6mm ports for brake lines and a larger 7/16\" port for the inline hydraulic pressure transducer.",
+        title: "02. CNC Tormach Machining & CAM Toolpathing for Distribution Blocks",
+        subtitle: "Multi-setup milling, precision tapping, and hermetic copper crush washer sealing",
+        content: "To distribute hydraulic pressure from the tandem master cylinders to the corner calipers and pressure transducers, custom X-junction and T-junction blocks were manufactured in Cornell's machine shop. Both manifolds were machined from solid 6061 aluminum billet stock using CAM programming and a CNC Tormach mill: first facing and squaring raw stock to rectangular bounds, followed by multi-setup precision drilling and thread-tapping multiple 6mm ports for brake lines and a 7/16\" port for the inline hydraulic pressure transducer.",
         bulletPoints: [
-          "Each slide face was precision-machined flat to guarantee a hermetic, leak-proof hydraulic seal using copper crush washers under extreme braking pressure.",
-          "Programmed final CNC pocketing operations to eliminate non-structural material, achieving significant weight savings without compromising thread engagement strength.",
+          "Executed multi-setup CAM operations on the CNC Tormach to machine each block slide face flat, guaranteeing a hermetic, leak-proof hydraulic seal with copper crush washers under dynamic braking pressures.",
+          "Programmed final 2D adaptive pocketing operations to remove non-structural material, achieving significant weight savings while maintaining full thread integrity.",
           "Fabricated two complete sets of newly machined X and T blocks as competition hot spares for immediate trackside swap capability.",
           "Prepared custom line lengths: Masters-to-X (17 in), X-to-Longer Side (35 in), X-to-Shorter Side (26 in), Masters-to-T (38 in), and T-to-Rear Caliper (50 in)."
         ],
