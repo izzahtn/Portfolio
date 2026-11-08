@@ -88,29 +88,40 @@ const brakeLines = projects[1];
             </div>
           </div>
 
-          <!-- Relative Container for Polaroid and Subtle Floating Pills -->
+          <!-- Relative Container for Polaroid and Actual Soap Bubbles -->
           <div class="relative group select-none">
             <!-- Translucent Washi Tape Strip on Top -->
-            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 w-20 h-6 bg-[#e3d081]/60 backdrop-blur-xs rotate-[-3deg] z-20 shadow-xs border-y border-white/30 pointer-events-none"></div>
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 w-20 h-6 bg-[#e3d081]/60 backdrop-blur-xs rotate-[-3deg] z-30 shadow-xs border-y border-white/30 pointer-events-none"></div>
 
-            <!-- Subtle Floating Personality Pill 1: Top Right (Plant Lover) -->
-            <div class="absolute -top-3 -right-6 sm:-right-8 z-20 pointer-events-none rotate-3">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-figtree font-medium bg-[#548687] text-[#ffffc7] shadow-md border border-[#473335]/20">
-                <span>🌱</span>
-                <span>plant lover</span>
-              </span>
+            <!-- Stacked Polaroid Under-Card Edge (authentically visible underneath) -->
+            <div
+              class="absolute inset-0 bg-[#ffffff] dark:bg-[#fbfbf9] rounded-xs border border-[#e5dfd8] rotate-[3.5deg] translate-x-3 translate-y-2.5 shadow-md pointer-events-none z-0"
+              aria-hidden="true"
+            >
+              <div class="w-full h-full p-3.5 pb-6 flex flex-col justify-between">
+                <div class="w-full aspect-[4/5] bg-[#3a2d30]/10 rounded-[1px]"></div>
+                <div class="h-6"></div>
+              </div>
             </div>
 
-            <!-- Subtle Floating Personality Pill 2: Bottom Left (Scrap Sewing) -->
-            <div class="absolute -bottom-2 -left-6 sm:-left-8 z-20 pointer-events-none -rotate-3">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-figtree font-medium bg-[#fcaa67] text-[#473335] shadow-md border border-[#473335]/20">
-                <span>🧵</span>
-                <span>scrap sewing</span>
-              </span>
-            </div>
+            <!-- Authentic Iridescent Soap Bubbles -->
+            <!-- Bubble 1: Main large bubble near top-right -->
+            <div class="soap-bubble w-11 h-11 -top-5 -right-5 sm:-right-6 animate-bubble-float-a" title="soap bubble"></div>
 
-            <!-- Polaroid Photo Frame -->
-            <div class="relative bg-[#ffffff] dark:bg-[#fbfbf9] text-[#2b2426] p-3.5 pb-6 rounded-xs shadow-[0_15px_35px_-5px_rgba(0,0,0,0.22),0_6px_15px_rgba(0,0,0,0.08)] border border-[#e5dfd8] -rotate-2 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300 ease-out cursor-pointer max-w-[270px]">
+            <!-- Bubble 2: Tiny satellite bubble drifting above top-right -->
+            <div class="soap-bubble w-5 h-5 -top-8 right-6 animate-bubble-float-b" title="soap bubble"></div>
+
+            <!-- Bubble 3: Medium iridescent bubble near bottom-left -->
+            <div class="soap-bubble w-9 h-9 -bottom-4 -left-5 sm:-left-6 animate-bubble-float-c" title="soap bubble"></div>
+
+            <!-- Bubble 4: Small baby bubble near bottom-left -->
+            <div class="soap-bubble w-5 h-5 -bottom-7 left-4 animate-bubble-float-a" title="soap bubble"></div>
+
+            <!-- Bubble 5: Cute floating bubble near mid-right -->
+            <div class="soap-bubble w-7 h-7 bottom-12 -right-4 animate-bubble-float-b" title="soap bubble"></div>
+
+            <!-- Main Top Polaroid Photo Frame -->
+            <div class="relative bg-[#ffffff] dark:bg-[#fbfbf9] text-[#2b2426] p-3.5 pb-6 rounded-xs shadow-[0_15px_35px_-5px_rgba(0,0,0,0.22),0_6px_15px_rgba(0,0,0,0.08)] border border-[#e5dfd8] -rotate-2 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300 ease-out cursor-pointer max-w-[270px] z-10">
               
               <!-- Photo Container -->
               <div class="relative aspect-[4/5] overflow-hidden bg-[#241c1e] rounded-[1px] shadow-inner border border-black/10">

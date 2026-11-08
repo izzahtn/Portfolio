@@ -4,40 +4,69 @@ interface PhotoItem {
   src: string;
   alt: string;
   imageClass?: string;
+  caption?: string;
 }
 
 const photos: PhotoItem[] = [
-  { id: "headshot", src: "/images/headshot.jpeg", alt: "Izzah Nishad" },
-  { id: "travel", src: "/images/fun-photos/travel.jpeg", alt: "Travel and exploring" },
+  { id: "headshot", src: "/images/headshot.jpeg", alt: "Izzah Nishad", caption: "Izzah • Cornell '29" },
+  { id: "travel", src: "/images/fun-photos/travel.jpeg", alt: "Travel and exploring", caption: "Exploring & summits" },
   {
     id: "travel-2",
     src: "/images/fun-photos/travel-pt2.jpeg",
     alt: "Suspension bridge",
-    imageClass: "scale-[1.38] origin-center"
+    imageClass: "scale-[1.38] origin-center",
+    caption: "Suspension bridge walk"
   },
-  { id: "kayaking", src: "/images/fun-photos/Kayaking.jpeg", alt: "Kayaking outdoors" },
-  { id: "halloween", src: "/images/fun-photos/halloween-walle.jpg", alt: "Handmade Wall-E" }
+  { id: "kayaking", src: "/images/fun-photos/Kayaking.jpeg", alt: "Kayaking outdoors", caption: "Outdoors on the water" },
+  { id: "halloween", src: "/images/fun-photos/halloween-walle.jpg", alt: "Handmade Wall-E", caption: "Handmade Wall-E" }
 ];
 ---
 
-<div class="polaroid-widget relative select-none w-full max-w-[280px] sm:max-w-[300px] mx-auto py-2">
+<div class="polaroid-widget relative select-none w-full max-w-[280px] sm:max-w-[310px] mx-auto py-2">
   <!-- Washi tape at top -->
-  <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 w-20 h-6 bg-[#e3d081]/70 backdrop-blur-xs -rotate-2 z-30 shadow-xs border-y border-white/40 pointer-events-none"></div>
+  <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-20 h-6 bg-[#e3d081]/75 backdrop-blur-xs -rotate-2 z-40 shadow-xs border-y border-white/40 pointer-events-none"></div>
+
+  <!-- Delicate authentic floating soap bubbles around the stack -->
+  <div class="soap-bubble w-9 h-9 -top-4 -right-4 animate-bubble-float-a" title="soap bubble"></div>
+  <div class="soap-bubble w-5 h-5 -top-7 right-6 animate-bubble-float-b" title="soap bubble"></div>
+  <div class="soap-bubble w-7 h-7 -bottom-3 -left-4 animate-bubble-float-c" title="soap bubble"></div>
+  <div class="soap-bubble w-4 h-4 -bottom-6 left-5 animate-bubble-float-a" title="soap bubble"></div>
 
   <!-- Polaroid Frame Stack Container -->
   <div
     id="polaroid-deck"
-    class="relative w-full cursor-pointer group"
-    title="Click photo to see next"
+    class="relative w-full cursor-pointer py-1 px-3"
+    title="Click photo to flip to next"
   >
+    <!-- In-flow sizer to establish exact deck dimensions -->
+    <div class="invisible pointer-events-none p-3 pb-7 rounded-xs border select-none opacity-0" aria-hidden="true">
+      <div class="w-full aspect-square"></div>
+      <div class="h-3.5"></div>
+    </div>
+
+    <!-- Visible Layered Stack of Real Polaroid Cards -->
     {photos.map((photo, index) => {
-      const isFirst = index === 0;
+      // Server-side initial stack classes
+      const initialTransform =
+        index === 0
+          ? 'translate(0px, 0px) rotate(-1.5deg) scale(1)'
+          : index === 1
+          ? 'translate(14px, 8px) rotate(4deg) scale(0.99)'
+          : index === 2
+          ? 'translate(-14px, 14px) rotate(-5.5deg) scale(0.98)'
+          : index === 3
+          ? 'translate(4px, 20px) rotate(2deg) scale(0.96)'
+          : 'translate(0px, 16px) rotate(0deg) scale(0.92)';
+
+      const initialZIndex = index === 0 ? 30 : index === 1 ? 20 : index === 2 ? 10 : index === 3 ? 5 : 1;
+      const initialOpacity = index <= 2 ? 1 : index === 3 ? 0.9 : 0;
+      const initialPointerEvents = index <= 2 ? 'auto' : 'none';
+
       return (
         <div
-          class={`polaroid-slide ${isFirst ? 'relative' : 'absolute inset-0'} bg-[#ffffff] text-[#2b2426] p-3 pb-8 rounded-xs shadow-[0_12px_30px_-5px_rgba(0,0,0,0.22),0_4px_12px_rgba(0,0,0,0.08)] border border-[#e5dfd8] transition-all duration-300 ease-out ${
-            isFirst ? 'opacity-100 scale-100 z-10 pointer-events-auto -rotate-1' : 'opacity-0 scale-95 z-0 pointer-events-none'
-          }`}
+          class="polaroid-slide absolute inset-0 bg-[#ffffff] dark:bg-[#fbfbf9] text-[#2b2426] p-3 pb-7 rounded-xs shadow-[0_14px_32px_-6px_rgba(0,0,0,0.24),0_4px_14px_rgba(0,0,0,0.08)] border border-[#e5dfd8] transition-all duration-350 ease-out"
           data-index={index}
+          style={`transform: ${initialTransform}; z-index: ${initialZIndex}; opacity: ${initialOpacity}; pointer-events: ${initialPointerEvents};`}
         >
           <!-- Square Photo Window -->
           <div class="relative w-full aspect-square overflow-hidden bg-[#1c1819] rounded-[1px] shadow-inner border border-black/10">
@@ -51,15 +80,19 @@ const photos: PhotoItem[] = [
             <div class="absolute inset-0 bg-gradient-to-tr from-black/15 via-transparent to-white/10 pointer-events-none"></div>
           </div>
           
-          <!-- Authentic blank Polaroid chin (unlabeled to avoid overlap) -->
-          <div class="h-3"></div>
+          <!-- Authentic Polaroid chin label -->
+          <div class="pt-2 text-center">
+            <p class="font-figtree text-[11px] text-[#786a6e] font-medium tracking-tight">
+              {photo.caption}
+            </p>
+          </div>
         </div>
       );
     })}
   </div>
 
-  <!-- Sleek Controls Below the Polaroid -->
-  <div class="flex items-center justify-between gap-2 pt-4 font-figtree text-xs text-theme-text-muted">
+  <!-- Sleek Controls Below the Stack -->
+  <div class="flex items-center justify-between gap-2 pt-6 font-figtree text-xs text-theme-text-muted">
     <button
       id="polaroid-prev-btn"
       type="button"
@@ -107,44 +140,109 @@ const photos: PhotoItem[] = [
 
     let currentIndex = 0;
     const total = slides.length;
-    const angles = [-1.5, 1.5, -2, 2, -1];
+    let isAnimating = false;
 
-    function showPhoto(newIndex: number) {
+    // Physical Stack Depth Configurations (Depth 0 = top, Depth 1 = peeking right, Depth 2 = peeking left, Depth 3 = peeking bottom)
+    const LAYERS = [
+      {
+        transform: 'translate(0px, 0px) rotate(-1.5deg) scale(1)',
+        zIndex: '30',
+        opacity: '1',
+        pointerEvents: 'auto',
+      },
+      {
+        transform: 'translate(14px, 8px) rotate(4deg) scale(0.99)',
+        zIndex: '20',
+        opacity: '1',
+        pointerEvents: 'auto',
+      },
+      {
+        transform: 'translate(-14px, 14px) rotate(-5.5deg) scale(0.98)',
+        zIndex: '10',
+        opacity: '1',
+        pointerEvents: 'auto',
+      },
+      {
+        transform: 'translate(4px, 20px) rotate(2deg) scale(0.96)',
+        zIndex: '5',
+        opacity: '0.9',
+        pointerEvents: 'none',
+      },
+      {
+        transform: 'translate(0px, 16px) rotate(0deg) scale(0.92)',
+        zIndex: '1',
+        opacity: '0',
+        pointerEvents: 'none',
+      }
+    ];
+
+    function applyPositions(activeIdx: number) {
       slides.forEach((slide, i) => {
-        if (i === newIndex) {
-          const angle = angles[i % angles.length];
-          slide.classList.remove('opacity-0', 'scale-95', 'pointer-events-none', 'z-0');
-          slide.classList.add('opacity-100', 'scale-100', 'pointer-events-auto', 'z-10');
-          slide.style.transform = `rotate(${angle}deg)`;
-        } else {
-          slide.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto', 'z-10');
-          slide.classList.add('opacity-0', 'scale-95', 'pointer-events-none', 'z-0');
-          slide.style.transform = `rotate(0deg) scale(0.95)`;
-        }
+        const depth = (i - activeIdx + total) % total;
+        const cfg = depth < LAYERS.length ? LAYERS[depth] : LAYERS[LAYERS.length - 1];
+
+        slide.style.zIndex = cfg.zIndex;
+        slide.style.opacity = cfg.opacity;
+        slide.style.transform = cfg.transform;
+        slide.style.pointerEvents = cfg.pointerEvents;
       });
 
       dots.forEach((dot, i) => {
-        if (i === newIndex) {
+        if (i === activeIdx) {
           dot.className = 'polaroid-dot inline-block rounded-full transition-all duration-300 cursor-pointer w-4 h-1.5 bg-theme-rose';
         } else {
           dot.className = 'polaroid-dot inline-block rounded-full transition-all duration-300 cursor-pointer w-1.5 h-1.5 bg-theme-border-strong hover:bg-theme-text-muted';
         }
       });
+    }
 
-      currentIndex = newIndex;
+    function goToPhoto(newIndex: number, peelTop = false) {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      const topCard = slides[currentIndex];
+
+      if (peelTop && topCard) {
+        // Peel animation: slide the top card away, then place it at the back of the stack
+        topCard.style.transition = 'transform 0.32s cubic-bezier(0.2, 0.8, 0.25, 1), opacity 0.32s ease';
+        topCard.style.transform = 'translate(45px, -18px) rotate(16deg) scale(0.96)';
+        topCard.style.opacity = '0';
+
+        setTimeout(() => {
+          topCard.style.transition = 'all 0.35s ease-out';
+          applyPositions(newIndex);
+          currentIndex = newIndex;
+          setTimeout(() => {
+            isAnimating = false;
+          }, 250);
+        }, 160);
+      } else {
+        applyPositions(newIndex);
+        currentIndex = newIndex;
+        setTimeout(() => {
+          isAnimating = false;
+        }, 320);
+      }
     }
 
     function next() {
-      showPhoto((currentIndex + 1) % total);
+      goToPhoto((currentIndex + 1) % total, true);
     }
 
     function prev() {
-      showPhoto((currentIndex - 1 + total) % total);
+      goToPhoto((currentIndex - 1 + total) % total, false);
     }
 
-    deck?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      next();
+    // Clicking top card flips to next; clicking an edge underneath jumps to that card!
+    slides.forEach((slide, idx) => {
+      slide.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (idx === currentIndex) {
+          next();
+        } else {
+          goToPhoto(idx, false);
+        }
+      });
     });
 
     nextBtn?.addEventListener('click', (e) => {
@@ -160,7 +258,7 @@ const photos: PhotoItem[] = [
     dots.forEach((dot, idx) => {
       dot.addEventListener('click', (e) => {
         e.stopPropagation();
-        showPhoto(idx);
+        goToPhoto(idx, false);
       });
     });
   }
