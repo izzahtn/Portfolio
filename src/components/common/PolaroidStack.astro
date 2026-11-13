@@ -22,7 +22,7 @@ const photos: PhotoItem[] = [
 ];
 ---
 
-<div class="polaroid-widget relative select-none w-full max-w-[280px] sm:max-w-[310px] mx-auto py-2">
+<div class="polaroid-widget relative select-none w-full max-w-[270px] sm:max-w-[290px] mx-auto py-2">
   <!-- Washi tape at top -->
   <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-20 h-6 bg-[#e3d081]/75 backdrop-blur-xs -rotate-2 z-40 shadow-xs border-y border-white/40 pointer-events-none"></div>
 
@@ -38,13 +38,13 @@ const photos: PhotoItem[] = [
     class="relative w-full cursor-pointer py-1 px-3"
     title="Click photo to flip to next"
   >
-    <!-- In-flow sizer to establish exact deck dimensions -->
-    <div class="invisible pointer-events-none p-3 pb-7 rounded-xs border select-none opacity-0" aria-hidden="true">
-      <div class="w-full aspect-square"></div>
-      <div class="h-3.5"></div>
+    <!-- In-flow sizer to establish exact elongated deck dimensions -->
+    <div class="invisible pointer-events-none p-3 pb-8 rounded-xs border select-none opacity-0" aria-hidden="true">
+      <div class="w-full aspect-[4/5]"></div>
+      <div class="h-6"></div>
     </div>
 
-    <!-- Visible Layered Stack of Real Polaroid Cards -->
+    <!-- Visible Layered Stack of Real Elongated Polaroid Cards -->
     {photos.map((photo, index) => {
       // Server-side initial stack classes
       const initialTransform =
@@ -64,12 +64,12 @@ const photos: PhotoItem[] = [
 
       return (
         <div
-          class="polaroid-slide absolute inset-0 bg-[#ffffff] dark:bg-[#fbfbf9] text-[#2b2426] p-3 pb-7 rounded-xs shadow-[0_14px_32px_-6px_rgba(0,0,0,0.24),0_4px_14px_rgba(0,0,0,0.08)] border border-[#e5dfd8] transition-all duration-350 ease-out"
+          class="polaroid-slide absolute inset-0 bg-[#ffffff] dark:bg-[#fbfbf9] text-[#2b2426] p-3 pb-8 rounded-xs shadow-[0_14px_32px_-6px_rgba(0,0,0,0.24),0_4px_14px_rgba(0,0,0,0.08)] border border-[#e5dfd8] transition-all duration-350 ease-out"
           data-index={index}
           style={`transform: ${initialTransform}; z-index: ${initialZIndex}; opacity: ${initialOpacity}; pointer-events: ${initialPointerEvents};`}
         >
-          <!-- Square Photo Window -->
-          <div class="relative w-full aspect-square overflow-hidden bg-[#1c1819] rounded-[1px] shadow-inner border border-black/10">
+          <!-- Elongated Photo Window -->
+          <div class="relative w-full aspect-[4/5] overflow-hidden bg-[#1c1819] rounded-[1px] shadow-inner border border-black/10">
             <img
               src={photo.src}
               alt={photo.alt}
@@ -80,8 +80,8 @@ const photos: PhotoItem[] = [
             <div class="absolute inset-0 bg-gradient-to-tr from-black/15 via-transparent to-white/10 pointer-events-none"></div>
           </div>
           
-          <!-- Authentic Polaroid chin label -->
-          <div class="pt-2 text-center">
+          <!-- Authentic elongated Polaroid chin label -->
+          <div class="pt-2.5 text-center">
             <p class="font-figtree text-[11px] text-[#786a6e] font-medium tracking-tight">
               {photo.caption}
             </p>
