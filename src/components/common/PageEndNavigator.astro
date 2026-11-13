@@ -146,15 +146,18 @@ const targetDesc = Astro.props.nextDescription || next.desc;
       let isNavigating = false;
       let holdStartTime = 0;
       let animId: number | null = null;
-      const HOLD_DURATION = 380; // 380ms smooth progression before route change
+      const HOLD_DURATION = 350; // Smooth progression before route change
+      const WHEEL_PULL_THRESHOLD = 200; // Requires a decent, deliberate pull (not a hair-trigger single tick)
+      const TOUCH_PULL_THRESHOLD = 110; // Substantial touch drag distance
 
       // Two-phase pull logic:
-      // Phase 1: Reaching bottom does NOT trigger. Arms the "at bottom" state once initial scroll momentum settles.
-      // Phase 2: A deliberate subsequent pull down triggers navigation.
+      // Phase 1: Reaching bottom does NOT trigger. Page lands at bottom; momentum settles during a quiet period.
+      // Phase 2: A deliberate subsequent pull down (with visual charge-up bar) triggers navigation.
       let hasLandedAtBottom = false;
       let bottomLandedTime = 0;
       let armedForSecondPull = false;
       let settleTimeout: any = null;
+      let pullDecayTimeout: any = null;
       let accumulatedPull = 0;
 
       const isScrolledToBottom = () => {
@@ -163,8 +166,8 @@ const targetDesc = Astro.props.nextDescription || next.desc;
           document.body.scrollHeight,
           document.documentElement.scrollHeight
         );
-        // Within 40px of bottom
-        return scrollPosition >= totalHeight - 40;
+        // Within 35px of bottom
+        return scrollPosition >= totalHeight - 35;
       };
 
       const checkScrollPosition = () => {
@@ -176,15 +179,15 @@ const targetDesc = Astro.props.nextDescription || next.desc;
             armedForSecondPull = false;
             accumulatedPull = 0;
 
-            // Wait for initial scroll momentum to settle (at least 320ms quiet period)
+            // Wait for initial scroll momentum to settle (480ms quiet period)
             clearTimeout(settleTimeout);
             settleTimeout = setTimeout(() => {
               if (hasLandedAtBottom && !isNavigating) {
                 armedForSecondPull = true;
-                if (statusHint) statusHint.textContent = 'Pull down again to continue ↓';
+                if (statusHint) statusHint.textContent = 'Pull down to continue ↓';
                 if (arrowBadge) arrowBadge.classList.add('animate-bounce');
               }
-            }, 320);
+            }, 480);
           }
         } else {
           // Scrolled back up away from bottom
@@ -192,6 +195,7 @@ const targetDesc = Astro.props.nextDescription || next.desc;
           armedForSecondPull = false;
           accumulatedPull = 0;
           clearTimeout(settleTimeout);
+          clearTimeout(pullDecayTimeout);
           if (arrowBadge) arrowBadge.classList.remove('animate-bounce');
           cancelNavigation();
         }
@@ -202,7 +206,7 @@ const targetDesc = Astro.props.nextDescription || next.desc;
       const triggerNavigation = () => {
         if (isNavigating) return;
         isNavigating = true;
-        if (statusHint) statusHint.textContent = 'Swapping to next page...';
+        if (statusHint) statusHint.textContent = 'Continuing to next page...';
 
         holdStartTime = performance.now();
         const step = (time: number) => {
@@ -223,12 +227,12 @@ const targetDesc = Astro.props.nextDescription || next.desc;
         if (isNavigating) {
           isNavigating = false;
           if (animId) cancelAnimationFrame(animId);
-          if (progressBar) progressBar.style.transform = 'scaleX(0)';
-          if (statusHint) {
-            statusHint.textContent = armedForSecondPull
-              ? 'Pull down again to continue ↓'
-              : 'Pull down to continue or click';
-          }
+        }
+        if (progressBar) progressBar.style.transform = 'scaleX(0)';
+        if (statusHint) {
+          statusHint.textContent = armedForSecondPull
+            ? 'Pull down to continue ↓'
+            : 'Pull down to continue or click';
         }
       };
 
@@ -240,14 +244,14 @@ const targetDesc = Astro.props.nextDescription || next.desc;
         }
       });
 
-      // Mouse wheel / Trackpad detection
+      // Mouse wheel / Trackpad detection with progressive charge-up
       window.addEventListener(
         'wheel',
         (e) => {
           if (isNavigating) return;
 
           // If scrolling up, cancel and reset pull
-          if (e.deltaY < -10) {
+          if (e.deltaY < -8) {
             accumulatedPull = 0;
             cancelNavigation();
             return;
@@ -260,12 +264,35 @@ const targetDesc = Astro.props.nextDescription || next.desc;
 
           // Check if armed (meaning they arrived, paused, and are now pulling AGAIN)
           const timeSinceLanding = performance.now() - bottomLandedTime;
-          if (hasLandedAtBottom && (armedForSecondPull || timeSinceLanding > 380)) {
+          if (hasLandedAtBottom && (armedForSecondPull || timeSinceLanding > 500)) {
             armedForSecondPull = true;
-            if (e.deltaY > 12) {
+            if (e.deltaY > 8) {
               accumulatedPull += e.deltaY;
-              // Once they make a second deliberate downward flick/scroll:
-              if (accumulatedPull >= 25) {
+
+              // Visual charge-up progress
+              const pullRatio = Math.min(accumulatedPull / WHEEL_PULL_THRESHOLD, 1);
+              if (progressBar) progressBar.style.transform = `scaleX(${pullRatio * 0.95})`;
+
+              if (statusHint) {
+                statusHint.textContent =
+                  pullRatio >= 1
+                    ? 'Release to continue ↓'
+                    : `Pull down to continue (${Math.round(pullRatio * 100)}%)`;
+              }
+
+              // Auto-decay if user stops pulling without reaching threshold
+              clearTimeout(pullDecayTimeout);
+              pullDecayTimeout = setTimeout(() => {
+                if (!isNavigating) {
+                  accumulatedPull = 0;
+                  if (progressBar) progressBar.style.transform = 'scaleX(0)';
+                  if (statusHint) statusHint.textContent = 'Pull down to continue ↓';
+                }
+              }, 700);
+
+              // Require a substantial, decent pull before triggering
+              if (accumulatedPull >= WHEEL_PULL_THRESHOLD) {
+                clearTimeout(pullDecayTimeout);
                 triggerNavigation();
               }
             }
@@ -282,7 +309,7 @@ const targetDesc = Astro.props.nextDescription || next.desc;
         'touchstart',
         (e) => {
           // Only arm if user was ALREADY at the bottom before starting the touch gesture
-          touchStartedAtBottom = isScrolledToBottom() && hasLandedAtBottom;
+          touchStartedAtBottom = isScrolledToBottom() && hasLandedAtBottom && armedForSecondPull;
           touchStartY = e.touches[0].clientY;
         },
         { passive: true }
@@ -294,11 +321,15 @@ const targetDesc = Astro.props.nextDescription || next.desc;
           if (!touchStartedAtBottom || isNavigating) return;
           const currentY = e.touches[0].clientY;
           const pullDistance = Math.max(0, touchStartY - currentY);
-          if (pullDistance > 10 && progressBar) {
-            // Visual feedback as user pulls down
-            const pullRatio = Math.min(pullDistance / 80, 0.95);
+          if (pullDistance > 8 && progressBar) {
+            const pullRatio = Math.min(pullDistance / TOUCH_PULL_THRESHOLD, 0.95);
             progressBar.style.transform = `scaleX(${pullRatio})`;
-            if (statusHint) statusHint.textContent = 'Release to continue ↓';
+            if (statusHint) {
+              statusHint.textContent =
+                pullDistance >= TOUCH_PULL_THRESHOLD
+                  ? 'Release to continue ↓'
+                  : `Pull down to continue (${Math.round(pullRatio * 100)}%)`;
+            }
           }
         },
         { passive: true }
@@ -315,11 +346,12 @@ const targetDesc = Astro.props.nextDescription || next.desc;
 
           const touchEndY = e.changedTouches[0].clientY;
           const deltaY = touchStartY - touchEndY;
-          if (deltaY > 45) {
+          // Decent pull threshold required
+          if (deltaY >= TOUCH_PULL_THRESHOLD) {
             triggerNavigation();
           } else {
             if (progressBar) progressBar.style.transform = 'scaleX(0)';
-            if (statusHint) statusHint.textContent = 'Pull down again to continue ↓';
+            if (statusHint) statusHint.textContent = 'Pull down to continue ↓';
           }
         },
         { passive: true }

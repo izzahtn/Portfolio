@@ -149,15 +149,18 @@ const targetTitle = Astro.props.prevTitle || prev.title;
     let isNavigating = false;
     let holdStartTime = 0;
     let animId: number | null = null;
-    const HOLD_DURATION = 380; // 380ms smooth progression before route change
+    const HOLD_DURATION = 350; // Smooth progression before route change
+    const WHEEL_PULL_THRESHOLD = 200; // Requires a decent, deliberate pull up
+    const TOUCH_PULL_THRESHOLD = 110; // Substantial touch drag distance
 
     // Two-phase upward pull logic:
-    // Phase 1: Reaching top does NOT trigger. Page lands at top. Initial upward scroll momentum settles.
-    // Phase 2: A deliberate subsequent pull up (wheel deltaY < -12 or touch pull down from top) triggers navigation.
+    // Phase 1: Reaching top does NOT trigger. Page lands at top; momentum settles during a quiet period.
+    // Phase 2: A deliberate subsequent pull up (with visual charge-up bar) triggers navigation.
     let hasLandedAtTop = false;
     let topLandedTime = 0;
     let armedForSecondPull = false;
     let settleTimeout: any = null;
+    let pullDecayTimeout: any = null;
     let accumulatedPull = 0;
     let hideBannerTimeout: any = null;
 
@@ -187,13 +190,13 @@ const targetTitle = Astro.props.prevTitle || prev.title;
           armedForSecondPull = false;
           accumulatedPull = 0;
 
-          // Settle quiet period (~320ms)
+          // Settle quiet period (480ms)
           clearTimeout(settleTimeout);
           settleTimeout = setTimeout(() => {
             if (hasLandedAtTop && !isNavigating) {
               armedForSecondPull = true;
             }
-          }, 320);
+          }, 480);
         }
       } else {
         // Scrolled down away from top
@@ -201,6 +204,7 @@ const targetTitle = Astro.props.prevTitle || prev.title;
         armedForSecondPull = false;
         accumulatedPull = 0;
         clearTimeout(settleTimeout);
+        clearTimeout(pullDecayTimeout);
         hideBanner();
         cancelNavigation();
       }
@@ -248,14 +252,14 @@ const targetTitle = Astro.props.prevTitle || prev.title;
       }
     });
 
-    // Mouse wheel / Trackpad upward detection
+    // Mouse wheel / Trackpad upward detection with progressive charge-up
     window.addEventListener(
       'wheel',
       (e) => {
         if (isNavigating) return;
 
         // If scrolling down, hide banner and reset
-        if (e.deltaY > 10) {
+        if (e.deltaY > 8) {
           accumulatedPull = 0;
           cancelNavigation();
           hideBanner();
@@ -268,20 +272,41 @@ const targetTitle = Astro.props.prevTitle || prev.title;
         }
 
         const timeSinceLanding = performance.now() - topLandedTime;
-        if (hasLandedAtTop && (armedForSecondPull || timeSinceLanding > 380)) {
+        if (hasLandedAtTop && (armedForSecondPull || timeSinceLanding > 500)) {
           armedForSecondPull = true;
-          if (e.deltaY < -12) {
+          if (e.deltaY < -8) {
             showBanner();
             accumulatedPull += Math.abs(e.deltaY);
-            if (statusHint) statusHint.textContent = 'Pull up again to go back ↑';
+
+            // Visual charge-up progress
+            const pullRatio = Math.min(accumulatedPull / WHEEL_PULL_THRESHOLD, 1);
+            if (progressBar) progressBar.style.transform = `scaleX(${pullRatio * 0.95})`;
+
+            if (statusHint) {
+              statusHint.textContent =
+                pullRatio >= 1
+                  ? 'Release to go back ↑'
+                  : `Pull up to go back (${Math.round(pullRatio * 100)}%)`;
+            }
 
             clearTimeout(hideBannerTimeout);
             hideBannerTimeout = setTimeout(() => {
               if (!isNavigating) hideBanner();
-            }, 1800);
+            }, 2200);
 
-            // Once deliberate pull threshold met:
-            if (accumulatedPull >= 25) {
+            // Auto-decay if user stops pulling without reaching threshold
+            clearTimeout(pullDecayTimeout);
+            pullDecayTimeout = setTimeout(() => {
+              if (!isNavigating) {
+                accumulatedPull = 0;
+                if (progressBar) progressBar.style.transform = 'scaleX(0)';
+                if (statusHint) statusHint.textContent = 'Pull up to go back';
+              }
+            }, 700);
+
+            // Require substantial deliberate pull before triggering
+            if (accumulatedPull >= WHEEL_PULL_THRESHOLD) {
+              clearTimeout(pullDecayTimeout);
               triggerNavigation();
             }
           }
@@ -297,7 +322,7 @@ const targetTitle = Astro.props.prevTitle || prev.title;
     window.addEventListener(
       'touchstart',
       (e) => {
-        touchStartedAtTop = isScrolledToTop() && hasLandedAtTop;
+        touchStartedAtTop = isScrolledToTop() && hasLandedAtTop && armedForSecondPull;
         touchStartY = e.touches[0].clientY;
       },
       { passive: true }
@@ -309,11 +334,16 @@ const targetTitle = Astro.props.prevTitle || prev.title;
         if (!touchStartedAtTop || isNavigating) return;
         const currentY = e.touches[0].clientY;
         const pullDistance = Math.max(0, currentY - touchStartY); // Dragging down at top
-        if (pullDistance > 10) {
+        if (pullDistance > 8) {
           showBanner();
-          const pullRatio = Math.min(pullDistance / 80, 0.95);
+          const pullRatio = Math.min(pullDistance / TOUCH_PULL_THRESHOLD, 0.95);
           if (progressBar) progressBar.style.transform = `scaleX(${pullRatio})`;
-          if (statusHint) statusHint.textContent = 'Release to go back ↑';
+          if (statusHint) {
+            statusHint.textContent =
+              pullDistance >= TOUCH_PULL_THRESHOLD
+                ? 'Release to go back ↑'
+                : `Pull down to go back (${Math.round(pullRatio * 100)}%)`;
+          }
         }
       },
       { passive: true }
@@ -330,7 +360,7 @@ const targetTitle = Astro.props.prevTitle || prev.title;
 
         const touchEndY = e.changedTouches[0].clientY;
         const deltaY = touchEndY - touchStartY; // Dragging down at top
-        if (deltaY > 45) {
+        if (deltaY >= TOUCH_PULL_THRESHOLD) {
           triggerNavigation();
         } else {
           hideBanner();
